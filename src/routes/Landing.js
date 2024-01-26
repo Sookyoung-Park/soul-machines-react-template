@@ -25,13 +25,13 @@ function Landing({ className }) {
             <div className="col-12 col-lg-6">
               <div className="row" style={{ marginBottom: '9px' }}>
                 <div>
-                  <h1 className="fw-bol">Meet Digital Person A.</h1>
+                  <h1 className="fw-bol">Meet Noah!</h1>
                 </div>
               </div>
               <div className="row">
                 <div>
                   <h4 className="fw-light" style={{ marginBottom: '31px' }}>
-                    Briefly describe how your Digital Person can help users.
+                    Talk with Noah about your life or problems. He will be your amazing buddy!
                   </h4>
                 </div>
               </div>
@@ -53,7 +53,7 @@ function Landing({ className }) {
                         checked={mic}
                       />
                       <div className="d-block ms-2">
-                        Use your microphone so I can hear you.
+                        Use your microphone so Noah can hear you.
                       </div>
                     </label>
                   </div>
@@ -90,7 +90,7 @@ function Landing({ className }) {
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >
-                    Chat with Digital Person A
+                    Chat with Noah
                   </Link>
                 </div>
               </div>
@@ -118,7 +118,7 @@ function Landing({ className }) {
               <span className="ps-1">+</span>
               <MicFill size={26} />
             </div>
-            <div className="text-center fst-italic">
+            <div className="text-left fst-italic">
               Enable your camera and mic to optimize our interaction.
             </div>
           </div>
