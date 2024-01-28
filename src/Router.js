@@ -11,6 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
 import DPChat from './routes/DPChat';
+import DPChat2 from './routes/DPChat2';
 import Landing from './routes/Landing';
 import Loading from './routes/Loading';
 import Feedback from './routes/FeedbackRoute';
@@ -81,6 +82,9 @@ function App() {
         </Route>
         <Route path="/loading">
           <Loading />
+        </Route>
+        <Route path="/chat">
+          <DPChat2 />
         </Route>
         <Route path="/video">
           <DPChat />

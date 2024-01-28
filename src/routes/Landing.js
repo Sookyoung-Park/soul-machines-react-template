@@ -90,7 +90,7 @@ function Landing({ className }) {
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >
-                    Chat with Noah
+                    Chat with Noah - ai character
                   </Link>
                 </div>
               </div>

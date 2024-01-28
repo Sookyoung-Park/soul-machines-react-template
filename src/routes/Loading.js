@@ -152,13 +152,21 @@ function Loading({
   ];
 
   const [skip, setSkip] = useState(false);
+  const [skipT, setSkipT] = useState(false);
   const redirectToVideoOnConnect = () => {
     setSkip(true);
   };
+  const redirectToChatOnConnect = () => {
+    setSkipT(true);
+  };
+
   const history = useHistory();
   useEffect(() => {
     if (skip === true && connected === true) history.push('/video');
   }, [connected, skip]);
+  useEffect(() => {
+    if (skipT === true && connected === true) history.push('/chat');
+  }, [connected, skipT]);
 
   return (
     <div className={className}>
@@ -196,6 +204,23 @@ function Loading({
                   onClick={redirectToVideoOnConnect}
                 >
                   { connected || page >= pages.length - 1 ? 'Chat Now' : 'S K I P' }
+                  { !connected && skip
+                    ? (
+                      <div className="ms-1 spinner-border spinner-border-sm text-secondary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    )
+                    : null }
+                </button>
+              </div>
+              <div>
+                <button
+                  className={`${connected || page >= pages.length - 1 ? 'btn btn-dark connected-button' : 'btn-unstyled unconnected-button'} m-2`}
+                  type="button"
+                  disabled={skip}
+                  onClick={redirectToChatOnConnect}
+                >
+                  { connected || page >= pages.length - 1 ? 'Text Now' : 'S K I P' }
                   { !connected && skip
                     ? (
                       <div className="ms-1 spinner-border spinner-border-sm text-secondary" role="status">
