@@ -78,10 +78,8 @@ function Loading({
               ? (
                 <div>
                   <p>
-                    Conversation works best in a quiet environment with your microphone and camera on!
-                  </p>
-                  <p>
-                    Speak clearly, and in short responses.
+                    Conversation works best in a quiet environment
+                    with your microphone and camera on!
                   </p>
                 </div>
               )
@@ -121,6 +119,7 @@ function Loading({
         </div>
         <div className="mt-0 mb-2">
           Noah will listen to whatever you say.
+          Speak clearly, and in short responses.
           {/* Other options, like typing or choosing your responses, are also available. */}
         </div>
       </div>
@@ -137,16 +136,14 @@ function Loading({
             <ArrowLeftCircleFill size={32} />
           </button>
           <h4>
-            What you can talk about.
+            Have Fun with Noah!
           </h4>
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
           </button>
         </div>
         <div className="mt-0 mb-2">
-          You can explore the features of my UI, see examples of the different
-          supporting content I can show, or hear about the latest updates to
-          the UI template that I&apos;m using.
+          Feel free to talk to Noah about your life, problems or any questions!
         </div>
       </div>
     </div>,
@@ -179,7 +176,7 @@ function Loading({
               {pages[page]}
             </div>
             <div className="row justify-content-center">
-              <div>
+              {/* <div>
                 {
                   page < pages.length - 1
                     ? (
@@ -194,7 +191,7 @@ function Loading({
                     )
                     : null
                 }
-              </div>
+              </div> */}
             </div>
             <div className="row">
               <div>
