@@ -1,12 +1,14 @@
 /* eslint-disable import/prefer-default-export */
-import smLogo from './img/sm-logo-retina.webp';
-import placeholder from './img/placeholder-headshot.png';
+// import smLogo from './img/sm-logo-retina.webp';
+import noLogo from './img/no-logo.png';
+// import placeholder from './img/placeholder-headshot.png';
+import NoahHeadshot from './img/noah-headshot.png';
 
 // header will not take up vertical height when transparent, so you need to be mindful of overlap
 export const transparentHeader = true;
 export const headerHeight = '4.2rem';
-export const logo = smLogo;
-export const logoAltText = 'Soul Machines logo';
+export const logo = noLogo;
+export const logoAltText = 'Soo-Experiment logo';
 export const logoLink = '/';
 
 // background image is positioned in a way that is best for pictures of the persona's face.
@@ -14,7 +16,7 @@ export const logoLink = '/';
 // if you want just a color, set landingBackgroundImage to null
 // if desired, a gradient can also be added to landingBackgroundColor
 export const landingBackgroundColor = '#FFF';
-export const landingBackgroundImage = placeholder;
+export const landingBackgroundImage = NoahHeadshot;
 
 // if set to true, on disconnect, the app will redirect to the specified route.
 // if false, it will redirect to /

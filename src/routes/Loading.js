@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { ArrowLeftCircleFill, ArrowRightCircleFill, MicFill } from 'react-bootstrap-icons';
+import {
+  ArrowLeftCircleFill, ArrowRightCircleFill, BodyText, ChatLeftQuoteFill, MicFill,
+} from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
 import Header from '../components/Header';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
@@ -25,9 +27,9 @@ function Loading({
   } = connectionState;
 
   const stateNameMap = {
-    SearchingForDigitalPerson: 'Searching For Digital Person',
+    SearchingForDigitalPerson: 'Searching For Noah',
     DownloadingAssets: 'Downloading Assets',
-    ConnectingToDigitalPerson: 'Connecting To Digital Person',
+    ConnectingToDigitalPerson: 'Connecting To Noah',
   };
   // map name vals to plain english if we know the state name, otherwise just display the name as is
   const stateName = (name in stateNameMap) ? stateNameMap[name] : name;
@@ -63,7 +65,7 @@ function Loading({
             {' '}
           </button>
           <h4>
-            Before you begin.
+            Before You Begin
           </h4>
           <button className="btn-unstyled" type="button" onClick={() => setPage(page + 1)}>
             <ArrowRightCircleFill size={32} />
@@ -76,8 +78,7 @@ function Loading({
               ? (
                 <div>
                   <p>
-                    The Digital Person works best in a quiet environment, when you&apos;re close to
-                    your microphone, and your camera is on.
+                    Conversation works best in a quiet environment with your microphone and camera on!
                   </p>
                   <p>
                     Speak clearly, and in short responses.
@@ -87,7 +88,7 @@ function Loading({
               : (
                 <div>
                   <p>
-                    The Digital Person works best with your microphone on. Enable your microphone
+                    Noah works best with your microphone on. Enable your microphone
                     at any point during the experience by clicking the microphone icon & allowing
                     the permissions.
                   </p>
@@ -103,9 +104,7 @@ function Loading({
     <div>
       <div className="row justify-content-center">
         <div className="tutorial-icon mb-2">
-          <div className="fs-4 fw-bold mt-2">
-            &ldquo;hi, how are you?&rdquo;
-          </div>
+          <BodyText size={iconSize} />
         </div>
       </div>
       <div className="row">
@@ -121,14 +120,16 @@ function Loading({
           </button>
         </div>
         <div className="mt-0 mb-2">
-          Cory will listen to whatever you say.
-          Other options, like typing or choosing your responses, are also available.
+          Noah will listen to whatever you say.
+          {/* Other options, like typing or choosing your responses, are also available. */}
         </div>
       </div>
     </div>,
     <div>
       <div className="row justify-content-center">
-        <div className="tutorial-icon tutorial-icon-dp mb-2" />
+        <div className="tutorial-icon mb-2">
+          <ChatLeftQuoteFill size={iconSize} />
+        </div>
       </div>
       <div className="row">
         <div className="d-flex align-items-center justify-content-between">
