@@ -94,14 +94,6 @@ function Landing({ className }) {
                   </Link>
                 </div>
               </div>
-              {/* <div className="row">
-                <div>
-                  Link terms & conditions or company website here:
-                  {' '}
-                  <a href="https://example.com">www.example.com</a>
-                  .
-                </div>
-              </div> */}
               <div className="col" />
             </div>
           </div>

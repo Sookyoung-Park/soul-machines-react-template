@@ -86,12 +86,8 @@ function Loading({
               : (
                 <div>
                   <p>
-                    Noah works best with your microphone on. Enable your microphone
-                    at any point during the experience by clicking the microphone icon & allowing
-                    the permissions.
-                  </p>
-                  <p>
-                    Remember to speak clearly, and in short responses.
+                    Conversation works best in a quiet environment
+                    with your microphone and camera on!
                   </p>
                 </div>
               )
@@ -201,7 +197,7 @@ function Loading({
                   disabled={skip}
                   onClick={redirectToVideoOnConnect}
                 >
-                  { connected || page >= pages.length - 1 ? 'Chat Now' : 'S K I P' }
+                  { connected || page >= pages.length - 1 ? 'Text with Noah' : 'S K I P' }
                   { !connected && skip
                     ? (
                       <div className="ms-1 spinner-border spinner-border-sm text-secondary" role="status">
@@ -218,7 +214,7 @@ function Loading({
                   disabled={skip}
                   onClick={redirectToChatOnConnect}
                 >
-                  { connected || page >= pages.length - 1 ? 'Text Now' : 'S K I P' }
+                  { connected || page >= pages.length - 1 ? 'Chat with Noah' : 'S K I P' }
                   { !connected && skip
                     ? (
                       <div className="ms-1 spinner-border spinner-border-sm text-secondary" role="status">

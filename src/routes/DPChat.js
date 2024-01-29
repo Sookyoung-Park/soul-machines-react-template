@@ -1,9 +1,10 @@
+// personaVideo comment => Only Chat
 import React, { createRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import PersonaVideo from '../components/PersonaVideo';
+// import PersonaVideo from '../components/PersonaVideo';
 import Captions from '../components/Captions';
 import ContentCardDisplay from '../components/ContentCardDisplay';
 import {
@@ -41,6 +42,7 @@ function DPChat({
   // usually this will be triggered when the user refreshes
   else if (connected !== true) history.push('/');
 
+  // window resize handling function
   const handleResize = () => {
     if (connected) {
       dispatch(setVideoDimensions({
@@ -141,7 +143,7 @@ function DPChat({
           ) : null}
         </div>
       </div>
-      {connected ? <PersonaVideo /> : null}
+      {/* {connected ? <PersonaVideo /> : null} */}
     </div>
   );
 }

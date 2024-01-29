@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
-  logo, logoAltText, transparentHeader, headerHeight, logoLink,
+  transparentHeader, headerHeight,
 } from '../config';
 import Controls from './Controls';
 
@@ -18,12 +18,6 @@ function Header({
       <div className="container">
         <div className="row">
           <div className="d-flex align-items-center justify-content-between">
-            <div>
-              {/* left align */}
-              <Link to={logoLink}>
-                <img src={logo} className="logo position-relative" alt={logoAltText} />
-              </Link>
-            </div>
             <div>
               {/* middle align */}
             </div>
