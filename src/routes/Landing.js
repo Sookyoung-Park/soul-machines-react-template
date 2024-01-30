@@ -23,7 +23,7 @@ function Landing({ className }) {
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-6">
-              <div className="row" style={{ marginBottom: '9px' }}>
+              <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
                   <h1 className="fw-bol">Meet Noah!</h1>
                 </div>
@@ -83,6 +83,18 @@ function Landing({ className }) {
                   </div>
                 </div>
               </div>
+              <div className="row" style={{ marginBottom: '52px' }}>
+                <div>
+                  <div className="d-flex align-items-center justify-content-center fs-4">
+                    <CameraVideoFill size={26} />
+                    <span className="ps-1">+</span>
+                    <MicFill size={26} />
+                    <div className="text-left fst-italic" style={{ marginLeft: '20px', fontSize: '1.5rem' }}>
+                      Enable your camera and mic to optimize a conversation.
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
@@ -97,7 +109,7 @@ function Landing({ className }) {
               <div className="col" />
             </div>
           </div>
-          <div
+          {/* <div
             className="d-none d-lg-block"
             style={{
               width: '250px',
@@ -113,7 +125,7 @@ function Landing({ className }) {
             <div className="text-left fst-italic">
               Enable your camera and mic to optimize our interaction.
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
