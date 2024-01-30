@@ -1,21 +1,40 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// Scene, Persona class from smwebsdk to interact with ai character
 import { Scene, Persona } from '@soulmachines/smwebsdk';
+// 비동기 작업에서 에러 처리를 간단하게 하기 위해 사용디는 라이브러리, Promise와 함께 사용
 import to from 'await-to-js';
+// process video 외부 모듈이나 함수
 import proxyVideo, { mediaStreamProxy } from '../../proxyVideo';
+// 객체 속성을 반올림하는 유틸리티 함수
 import roundObject from '../../utils/roundObject';
 import { meatballString } from './meatball';
 
+// here : loading page에 들어오자마자 API키가 결정되고 PERSONA_ID가 1로 지정됨
+// bring variables from .env file
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
-const API_KEY = process.env.REACT_APP_API_KEY || '';
+const API_KEY_NOAH = process.env.REACT_APP_API_KEY || '';
+const API_KEY_ELLA = process.env.REACT_APP_API_KEY_ELLA || '';
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
-const PERSONA_ID = '1';
-// CAMERA_ID commented out because CUE manages camera
-// const CAMERA_ID = 'CloseUp';
+// const PERSONA_ID = '1';
 
+// 현재 파일이 어떤 파일인지에 따라 사용할 API 키를 선택합니다.
+const isFileNoah = window.location.pathname.includes('/video');
+const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
+// const PERSONA_ID = isFileNoah ? 1 : 2;
+const PERSONA_ID = API_KEY === API_KEY_NOAH ? 1 : 2;
+
+if (API_KEY === API_KEY_ELLA) {
+  console.log('ella api!', API_KEY);
+} else {
+  console.log('noah api!', API_KEY);
+}
+console.log('PSA ID : ', PERSONA_ID);
+
+// api키가 정의되지 않은 경우에 대한 예외 처리
 let startupErr = null;
-
 if (AUTH_MODE === 0 && API_KEY === '') startupErr = { msg: 'REACT_APP_API_KEY not defined!' };
 
+// redux 초기상태 정의 : 어플리케이션이 시작될 때 Redux에서 로드되는 values
 const initialState = {
   requestedMediaPerms: sessionStorage.getItem('requestedMediaPerms')
     ? {
@@ -121,17 +140,8 @@ let actions;
 let persona = null;
 let scene = null;
 
-/**
- * Animate the camera to the desired settings.
- * See utils/camera.js for help with calculating these.
- *
- * options {
- *   tiltDeg: 0,
- *   orbitDegX: 0,
- *   orbitDegY: 0,
- *   panDeg: 0,
- * }
- */
+// scene이 초기화 된 상태에서 카메라 애니메이션을 처리하는 기능을 구현하기 위한 코드
+// if scene is not initialized, activated autonomous animation => return false
 export const animateCamera = createAsyncThunk('sm/animateCamera', (/* { options, duration } */) => {
   if (!scene) return console.error('cannot animate camera, scene not initiated!');
 
@@ -139,13 +149,6 @@ export const animateCamera = createAsyncThunk('sm/animateCamera', (/* { options,
   if (serverControlledCameras) return console.warn('autonomous animation is active, manual camera animations are disabled!');
 
   return false;
-  // const CAMERA_ID = 1;
-  // return scene.sendRequest('animateToNamedCamera', {
-  //   cameraName: CAMERA_ID,
-  //   personaId: PERSONA_ID,
-  //   time: duration || 1,
-  //   ...options,
-  // });
 });
 
 // handles both manual disconnect or automatic timeout due to inactivity
@@ -158,8 +161,9 @@ export const disconnect = createAsyncThunk('sm/disconnect', async (args, thunk) 
   }, 1);
 });
 
+// create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
-  /* CREATE SCENE */
+  // if scene is already existes -> console.error
   if (scene !== null) {
     return console.error('warning! you attempted to create a new scene, when one already exists!');
   }
@@ -176,7 +180,9 @@ export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) =
     REACT_APP_SMWEBSDK_CONTENT_AWARENESS_LOGGING_LEVEL: cueLoggingLevel,
   } = process.env;
 
+  // try to create a new scene struct and catch error
   try {
+    // 만드려는 객체, scene을 초기화하는데 필요한 여러 옵션을 설정
     const sceneOpts = {
       videoElement: proxyVideo,
       // audio only toggle, but this is set automatically if user denies camera permissions.
@@ -251,6 +257,7 @@ export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) =
     },
   );
   // disconnect handler
+  // 연결이 끊어졌을 때 호출되는 콜백함수
   scene.onDisconnected = () => thunk.dispatch(disconnect());
   // store a ref to the smwebsdk onmessage so that we can
   // use the callback while also calling the internal version
