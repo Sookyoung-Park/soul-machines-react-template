@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-// import smLogo from './img/sm-logo-retina.webp';
 import noLogo from './img/no-logo.png';
 // import placeholder from './img/placeholder-headshot.png';
 import NoahHeadshot from './img/noah-headshot.png';

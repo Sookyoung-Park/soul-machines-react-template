@@ -209,6 +209,7 @@ export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) =
       stopSpeakingWhenNotVisible: false,
     };
     if (AUTH_MODE === 0) sceneOpts.apiKey = API_KEY;
+    // console.log('HERE');
     scene = new Scene(sceneOpts);
   } catch (e) {
     return thunk.rejectWithValue(e);
