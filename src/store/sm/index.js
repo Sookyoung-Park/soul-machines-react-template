@@ -11,24 +11,45 @@ import { meatballString } from './meatball';
 
 // here : loading page에 들어오자마자 API키가 결정되고 PERSONA_ID가 1로 지정됨
 // bring variables from .env file
-const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const API_KEY_NOAH = process.env.REACT_APP_API_KEY || '';
 const API_KEY_ELLA = process.env.REACT_APP_API_KEY_ELLA || '';
+const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
-// const PERSONA_ID = '1';
+
+// variables for user input
+let API_KEY = 0;
+let PERSONA_ID = 0;
+
+// const API_KEY = API_KEY_ELLA;
+// const PERSONA_ID = 1;
+
+const GENDER = ['Male', 'Female'];
+const RACE = ['Caucasian', 'African', 'East Asian'];
+
+// const userSelectedAPI = prompt('API를 선택해 : Noah or Ella :');
+const selectedGender = prompt(`Choose your gender: \n${GENDER.join(', ')}`);
+const selectedRace = prompt(`Choose your enthicity: \n${RACE.join(', ')}`);
+
+if (selectedGender === 'Female' || selectedRace === 'Caucasian') {
+  API_KEY = API_KEY_ELLA;
+  PERSONA_ID = 2;
+} else if (selectedGender === 'Male' || selectedRace === 'East Asian') {
+  API_KEY = API_KEY_NOAH;
+  PERSONA_ID = 1;
+}
 
 // 현재 파일이 어떤 파일인지에 따라 사용할 API 키를 선택합니다.
-const isFileNoah = window.location.pathname.includes('/video');
-const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
-// const PERSONA_ID = isFileNoah ? 1 : 2;
-const PERSONA_ID = API_KEY === API_KEY_NOAH ? 1 : 2;
+// const isFileNoah = window.location.pathname.includes('/video');
+// const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
+// // const PERSONA_ID = isFileNoah ? 1 : 2;
+// const PERSONA_ID = API_KEY === API_KEY_NOAH ? 1 : 2;
 
-if (API_KEY === API_KEY_ELLA) {
-  console.log('ella api!', API_KEY);
-} else {
-  console.log('noah api!', API_KEY);
-}
-console.log('PSA ID : ', PERSONA_ID);
+// if (API_KEY === API_KEY_ELLA) {
+//   console.log('ella api!', API_KEY);
+// } else {
+//   console.log('noah api!', API_KEY);
+// }
+// console.log('PSA ID : ', PERSONA_ID);
 
 // api키가 정의되지 않은 경우에 대한 예외 처리
 let startupErr = null;
@@ -215,7 +236,6 @@ export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) =
       stopSpeakingWhenNotVisible: false,
     };
     if (AUTH_MODE === 0) sceneOpts.apiKey = API_KEY;
-    // console.log('HERE');
     scene = new Scene(sceneOpts);
   } catch (e) {
     return thunk.rejectWithValue(e);

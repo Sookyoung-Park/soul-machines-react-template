@@ -10,9 +10,8 @@ import { createScene } from '../store/sm';
 import Header from '../components/Header';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
 
-function Loading({
-  className,
-}) {
+function Loading({ className }) {
+  // 리덕스 조회해서 상태 가져옴
   const {
     connected,
     loading,
@@ -20,6 +19,8 @@ function Loading({
     requestedMediaPerms,
     connectionState,
   } = useSelector(({ sm }) => (sm));
+
+  // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
   const dispatch = useDispatch();
 
   const {
@@ -27,9 +28,9 @@ function Loading({
   } = connectionState;
 
   const stateNameMap = {
-    SearchingForDigitalPerson: 'Searching For Noah',
+    SearchingForDigitalPerson: 'Searching For Digital Influencers',
     DownloadingAssets: 'Downloading Assets',
-    ConnectingToDigitalPerson: 'Connecting To Noah',
+    ConnectingToDigitalPerson: 'Connecting To Digital Influencers',
   };
   // map name vals to plain english if we know the state name, otherwise just display the name as is
   const stateName = (name in stateNameMap) ? stateNameMap[name] : name;

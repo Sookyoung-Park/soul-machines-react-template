@@ -15,7 +15,6 @@ import videoFill from '../img/camera-video-fill.svg';
 function Landing({ className }) {
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const dispatch = useDispatch();
-
   return (
     <div className={className}>
       <div className="landing-wrapper">
