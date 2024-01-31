@@ -13,6 +13,7 @@ function Header({
 }) {
   const { pathname } = useLocation();
   const { connected, loading } = useSelector(({ sm }) => ({ ...sm }));
+
   return (
     <div className={`${className}`}>
       <div className="container">

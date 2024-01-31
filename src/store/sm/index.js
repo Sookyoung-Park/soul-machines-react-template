@@ -10,46 +10,38 @@ import roundObject from '../../utils/roundObject';
 import { meatballString } from './meatball';
 
 // here : loading page에 들어오자마자 API키가 결정되고 PERSONA_ID가 1로 지정됨
-// bring variables from .env file
-const API_KEY_NOAH = process.env.REACT_APP_API_KEY || '';
+// const API_KEY_NOAH = process.env.REACT_APP_API_KEY || '';
 const API_KEY_ELLA = process.env.REACT_APP_API_KEY_ELLA || '';
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 
 // variables for user input
-let API_KEY = 0;
-let PERSONA_ID = 0;
+// let API_KEY = 0;
+// let PERSONA_ID = 0;
 
-// const API_KEY = API_KEY_ELLA;
-// const PERSONA_ID = 1;
+const API_KEY = API_KEY_ELLA;
+const PERSONA_ID = 1;
 
-const GENDER = ['Male', 'Female'];
-const RACE = ['Caucasian', 'African', 'East Asian'];
+// const GENDER = ['Male', 'Female'];
+// const RACE = ['Caucasian', 'African', 'East Asian'];
 
-// const userSelectedAPI = prompt('API를 선택해 : Noah or Ella :');
-const selectedGender = prompt(`Choose your gender: \n${GENDER.join(', ')}`);
-const selectedRace = prompt(`Choose your enthicity: \n${RACE.join(', ')}`);
+// // const userSelectedAPI = prompt('API를 선택해 : Noah or Ella :');
+// const selectedGender = prompt(`Choose your gender: \n${GENDER.join(', ')}`);
+// const selectedRace = prompt(`Choose your enthicity: \n${RACE.join(', ')}`);
 
-if (selectedGender === 'Female' || selectedRace === 'Caucasian') {
-  API_KEY = API_KEY_ELLA;
-  PERSONA_ID = 2;
-} else if (selectedGender === 'Male' || selectedRace === 'East Asian') {
-  API_KEY = API_KEY_NOAH;
-  PERSONA_ID = 1;
-}
+// if (selectedGender === 'Female' || selectedRace === 'Caucasian') {
+//   API_KEY = API_KEY_ELLA;
+//   PERSONA_ID = 2;
+// } else if (selectedGender === 'Male' || selectedRace === 'East Asian') {
+//   API_KEY = API_KEY_NOAH;
+//   PERSONA_ID = 1;
+// }
 
 // 현재 파일이 어떤 파일인지에 따라 사용할 API 키를 선택합니다.
 // const isFileNoah = window.location.pathname.includes('/video');
 // const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
 // // const PERSONA_ID = isFileNoah ? 1 : 2;
 // const PERSONA_ID = API_KEY === API_KEY_NOAH ? 1 : 2;
-
-// if (API_KEY === API_KEY_ELLA) {
-//   console.log('ella api!', API_KEY);
-// } else {
-//   console.log('noah api!', API_KEY);
-// }
-// console.log('PSA ID : ', PERSONA_ID);
 
 // api키가 정의되지 않은 경우에 대한 예외 처리
 let startupErr = null;
@@ -98,6 +90,12 @@ const initialState = {
   lastUserUtterance: '',
   lastPersonaUtterance: '',
   user: {
+    // test
+    info: {
+      gender: 'test-gender',
+      race: 'test-race',
+    },
+    // test end
     activity: {
       isAttentive: 0,
       isTalking: 0,
@@ -155,6 +153,25 @@ const initialState = {
   highlightSkip: false,
 };
 
+// test user info
+// export const updateGenderAndRace = createAsyncThunk(
+//   'sm/updateGenderAndRace',
+//   async ({ gender, race }, { dispatch }) => {
+//     try {
+//       // 여기에서 비동기 작업 수행 (API 호출 등)
+
+//       // 비동기 작업 성공 시 Redux 스토어 업데이트
+//       dispatch(updateUserInfo({ gender, race }));
+
+//       // 성공적인 응답이 있다면 원하는 데이터를 반환
+//       return { success: true, message: 'User info updated successfully' };
+//     } catch (error) {
+//       // 에러가 발생한 경우 에러를 반환
+//       return { success: false, message: 'Failed to update user info', error };
+//     }
+//   },
+// );
+
 // host actions object since we need the types to be available for
 // async calls later, e.g. handling messages from persona
 let actions;
@@ -182,8 +199,18 @@ export const disconnect = createAsyncThunk('sm/disconnect', async (args, thunk) 
   }, 1);
 });
 
+// user info action
+// test
+// export const setUserInfoState = createAsyncThunk('sm/setUserInfoState', async (_, thunk) => {
+//   thunk.dispatch(actions.setUserInfoState());
+// });
+export const setUserInfoState = (gender, race) => (dispatch) => {
+  dispatch(actions.setUserInfoState({ gender, race }));
+};
+
 // create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
+// export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
   // if scene is already existes -> console.error
   if (scene !== null) {
     return console.error('warning! you attempted to create a new scene, when one already exists!');
@@ -769,6 +796,38 @@ const smSlice = createSlice({
         activity: payload.activity,
       },
     }),
+    // test
+    setUserInfoState: (state, { payload }) => {
+      console.log('Reducer received setUserInfoState with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          info: {
+            race: payload.race,
+            gender: payload.gender,
+          }
+          ,
+        },
+      };
+
+      console.log('New state:', newState);
+
+      return newState;
+    },
+    // setUserInfoState: (state, { payload }) => {
+    //   console.log('Reducer received setUserInfoState with payload:', payload);
+    //   return {
+    //     ...state,
+    //     user: {
+    //       ...state.user,
+    //       race: payload.race,
+    //       gender: payload.gender,
+    //     },
+    //   };
+    // },
+    // test ends
     setCallQuality: (state, { payload }) => ({
       ...state,
       callQuality: payload.callQuality,

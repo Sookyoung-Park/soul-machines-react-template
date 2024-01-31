@@ -41,6 +41,7 @@ function Loading({ className }) {
   // const query = useQuery();
 
   // create persona scene on button press on on mount, depending on device size
+  // connected with api
   const createSceneIfNotStarted = () => {
     if (loading === false && connected === false && error === null) {
       dispatch(createScene());
