@@ -796,7 +796,7 @@ const smSlice = createSlice({
         activity: payload.activity,
       },
     }),
-    // test
+    // user info
     setUserInfoState: (state, { payload }) => {
       console.log('Reducer received setUserInfoState with payload:', payload);
 
@@ -811,23 +811,10 @@ const smSlice = createSlice({
           ,
         },
       };
-
-      console.log('New state:', newState);
-
+      // console.log('New state:', newState);
       return newState;
     },
-    // setUserInfoState: (state, { payload }) => {
-    //   console.log('Reducer received setUserInfoState with payload:', payload);
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...state.user,
-    //       race: payload.race,
-    //       gender: payload.gender,
-    //     },
-    //   };
-    // },
-    // test ends
+    // user info end
     setCallQuality: (state, { payload }) => ({
       ...state,
       callQuality: payload.callQuality,

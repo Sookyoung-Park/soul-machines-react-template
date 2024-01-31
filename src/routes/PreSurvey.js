@@ -12,14 +12,15 @@ import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
 function PreSurvey({ className }) {
+  // redux store values
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
 
-  const [userGender, setUserGender] = useState(''); // 'F' for female, 'M' for male
+  const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
   const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
 
   const dispatch = useDispatch();
-
+ß
   const handleGenderChange = (selectedGender) => {
     setUserGender(selectedGender);
   };
@@ -29,17 +30,14 @@ function PreSurvey({ className }) {
   };
 
   const handleSubmit = () => {
-    console.log('before dispatch', userGender, userRace);
     dispatch(setUserInfoState(userGender, userRace));
   };
 
-  console.log('Gender:', userGender);
-  console.log('Race:', userRace);
+  // console.log('Gender:', userGender);
+  // console.log('Race:', userRace);
   console.log('ReduxGender', gender);
   console.log('ReduxRace ', race);
 
-  // const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
-  // const dispatch = useDispatch();
   return (
     <div className={className}>
       <div className="landing-wrapper">
@@ -54,25 +52,25 @@ function PreSurvey({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <div className="form-check">
+                  <div className={`form-check ${setUserGender === 'Female' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       id="genderFemale"
                       name="gender"
                       value="F"
-                      checked={gender === 'F'}
-                      onChange={() => handleGenderChange('F')}
+                      checked={gender === 'Female'}
+                      onChange={() => handleGenderChange('Female')}
                     />
                     Female
                   </div>
-                  <div className="form-check">
+                  <div className={`form-check ${setUserGender === 'Male' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       id="genderMale"
                       name="gender"
                       value="M"
-                      checked={gender === 'M'}
-                      onChange={() => handleGenderChange('M')}
+                      checked={gender === 'Male'}
+                      onChange={() => handleGenderChange('Male')}
                     />
                     Male
                   </div>
@@ -177,6 +175,13 @@ export default styled(PreSurvey)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+  .form-check.selected {
+    background-color:  #0062ff; /* 선택된 상태의 배경색을 원하는 색상으로 지정하세요. */
+    color: #0062ff; /* 선택된 상태의 텍스트 색상을 원하는 색상으로 지정하세요. */
+    border-radius: 50%; /* 동그라미 형태로 만들기 */
+    padding: 5px; /* 여백 추가 */
+  }
 
 
     &.mic-switch::before, &.mic-switch.status-checked::after {
