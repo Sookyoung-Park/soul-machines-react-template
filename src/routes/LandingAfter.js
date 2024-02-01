@@ -12,7 +12,7 @@ import { setRequestedMediaPerms } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
-function Landing({ className }) {
+function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
   console.log(gender, race);
@@ -46,19 +46,6 @@ function Landing({ className }) {
                   </h4>
                 </div>
               </div>
-              {/* test - pre-survey */}
-              <div className="row" style={{ marginBottom: '60px' }}>
-                <div>
-                  <Link
-                    to="/pre-survey"
-                    className="shadow btn primary-accent fs-3"
-                    type="button"
-                  >
-                    Before Experiment
-                  </Link>
-                </div>
-              </div>
-              {/* test end */}
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
                   <div className="form-check form-switch">
@@ -156,11 +143,11 @@ function Landing({ className }) {
   );
 }
 
-Landing.propTypes = {
+LandingAfter.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default styled(Landing)`
+export default styled(LandingAfter)`
   .landing-wrapper {
     min-height: 100vh;
 
