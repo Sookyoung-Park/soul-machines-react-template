@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Color from 'color';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
 import { landingBackgroundImage, landingBackgroundColor } from '../config';
@@ -20,7 +21,7 @@ function PreSurvey({ className }) {
   const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
 
   const dispatch = useDispatch();
-ß
+
   const handleGenderChange = (selectedGender) => {
     setUserGender(selectedGender);
   };
@@ -52,33 +53,86 @@ function PreSurvey({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <div className={`form-check ${setUserGender === 'Female' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      id="genderFemale"
-                      name="gender"
-                      value="F"
-                      checked={gender === 'Female'}
-                      onChange={() => handleGenderChange('Female')}
-                    />
-                    Female
-                  </div>
-                  <div className={`form-check ${setUserGender === 'Male' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      id="genderMale"
-                      name="gender"
-                      value="M"
-                      checked={gender === 'Male'}
-                      onChange={() => handleGenderChange('Male')}
-                    />
-                    Male
-                  </div>
+                  {/* TEST */}
+                  {/* <Form>
+                    {['radio'].map((type) => (
+                      <div key={`default-${type}`} className="mb-3">
+                        <Form.Check // prettier-ignore
+                          type={type}
+                          id={`default-${type}`}
+                          label={`default ${type}`}
+                          name="test"
+                        />
+
+                        <Form.Check
+                          // disabled
+                          type={type}
+                          label={`disabled ${type}`}
+                          id={`disabled-default-${type}`}
+                          name="test"
+                        />
+                      </div>
+                    ))}
+                  </Form> */}
+                  <Form>
+                    <div key="default-radio" className="mb-3">
+                      <Form.Check
+                        type="radio"
+                        id="genderMale"
+                        label="Male"
+                        name="test"
+                        // checked={gender === 'Female'}
+                        onChange={() => handleGenderChange('Male')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="genderFemale"
+                        label="Female"
+                        name="test"
+                        // checked={gender === 'Female'}
+                        onChange={() => handleGenderChange('Female')}
+                      />
+                    </div>
+                  </Form>
                 </div>
               </div>
+              {/* test */}
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <div className="form-check">
+                  <Form>
+                    <div key="default-radio" className="mb-3">
+                      <Form.Check
+                        type="radio"
+                        id="raceAsian"
+                        label="Asian"
+                        name="test1"
+                        // checked={gender === 'Female'}
+                        onChange={() => handleRaceChange('Asian')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceAfrican"
+                        label="African"
+                        name="test1"
+                        // checked={gender === 'Female'}
+                        onChange={() => handleRaceChange('African')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceCaucasian"
+                        label="Caucasian"
+                        name="test1"
+                        // checked={gender === 'Female'}
+                        onChange={() => handleRaceChange('Caucasian')}
+                      />
+                    </div>
+                  </Form>
+                </div>
+              </div>
+              {/* test */}
+              {/* <div className="row" style={{ marginBottom: '36px' }}>
+                <div>
+                  <div className={`form-check ${race === 'Caucasian' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       id="raceCaucasian"
@@ -89,7 +143,7 @@ function PreSurvey({ className }) {
                     />
                     Caucasian
                   </div>
-                  <div className="form-check">
+                  <div className={`form-check ${race === 'Caucasian' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       id="raceAfrican"
@@ -100,7 +154,7 @@ function PreSurvey({ className }) {
                     />
                     African
                   </div>
-                  <div className="form-check">
+                  <div className={`form-check ${race === 'Caucasian' ? 'selected' : ''}`}>
                     <input
                       type="radio"
                       id="raceAsian"
@@ -112,8 +166,7 @@ function PreSurvey({ className }) {
                     Asian
                   </div>
                 </div>
-                {/* <button type="button" onClick={handleSubmit}>Submit</button> */}
-              </div>
+              </div> */}
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
