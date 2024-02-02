@@ -15,6 +15,9 @@ const API_KEY_ELLA = process.env.REACT_APP_API_KEY_ELLA || '';
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 
+// for tmr : createScene에서 api를 받아서 그 api로 씬을 연결하는걸로 코드를 바꾸기
+// 그리고 각각 버튼 4개 조건부 걸어서 적절한 api와 연결시키기
+
 // variables for user input
 // let API_KEY = 0;
 // let PERSONA_ID = 0;
@@ -37,7 +40,7 @@ const PERSONA_ID = 1;
 //   PERSONA_ID = 1;
 // }
 
-// 현재 파일이 어떤 파일인지에 따라 사용할 API 키를 선택합니다.
+// 현재 파일이 어떤 파일인지에 따라 사용할 키를 선택합니다.
 // const isFileNoah = window.location.pathname.includes('/video');
 // const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
 // // const PERSONA_ID = isFileNoah ? 1 : 2;
