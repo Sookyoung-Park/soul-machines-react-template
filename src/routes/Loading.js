@@ -42,9 +42,11 @@ function Loading({ className }) {
 
   // create persona scene on button press on on mount, depending on device size
   // connected with api
+  const apiKey = process.env.REACT_APP_API_KEY_EA_MALE || '';
+  console.log('loading apiKey: ', apiKey);
   const createSceneIfNotStarted = () => {
     if (loading === false && connected === false && error === null) {
-      dispatch(createScene());
+      dispatch(createScene(apiKey));
     }
   };
 

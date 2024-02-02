@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
@@ -19,11 +19,11 @@ function LandingAfter({ className }) {
 
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
 
-  useEffect(() => {
-    console.log('ReduxGender', gender);
-    console.log('ReduxRace ', race);
-    // 여기서 userGender와 userRace를 업데이트하는 로직 추가
-  }, [gender, race]);
+  // useEffect(() => {
+  //   console.log('ReduxGender', gender);
+  //   console.log('ReduxRace ', race);
+  //   // 여기서 userGender와 userRace를 업데이트하는 로직 추가
+  // }, [gender, race]);
 
   const dispatch = useDispatch();
 

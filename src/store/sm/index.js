@@ -17,6 +17,9 @@ const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 
 // for tmr : createScene에서 api를 받아서 그 api로 씬을 연결하는걸로 코드를 바꾸기
 // 그리고 각각 버튼 4개 조건부 걸어서 적절한 api와 연결시키기
+// 1. api 변수로 받아서 api연동하는 createScene 만들기
+// 2. 변수별로 잘 들어가는지 확인하기
+// 3. 인종, 성별 별 api 로직짜서 버튼이랑 매치시키기
 
 // variables for user input
 // let API_KEY = 0;
@@ -212,9 +215,9 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 };
 
 // create a new scene
-export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
-// export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
-  // if scene is already existes -> console.error
+// export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
+export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
+  console.log('createScene apiKey : ', apiKey);
   if (scene !== null) {
     return console.error('warning! you attempted to create a new scene, when one already exists!');
   }
@@ -265,7 +268,9 @@ export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) =
       },
       stopSpeakingWhenNotVisible: false,
     };
-    if (AUTH_MODE === 0) sceneOpts.apiKey = API_KEY;
+    // test
+    // if (AUTH_MODE === 0) sceneOpts.apiKey = API_KEY;
+    if (AUTH_MODE === 0) sceneOpts.apiKey = apiKey;
     scene = new Scene(sceneOpts);
   } catch (e) {
     return thunk.rejectWithValue(e);
