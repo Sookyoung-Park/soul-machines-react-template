@@ -12,19 +12,21 @@ import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
+import eaMale from '../img/EA_Male.png';
+import eaFemale from '../img/EA_Female.png';
+import afMale from '../img/AF_Male.png';
+import afFemale from '../img/AF_Female.png';
+import csMale from '../img/CS_Male.png';
+import csFemale from '../img/CS_Female.png';
+
 function PreSurvey2({ className }) {
   // redux store values
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
 
-  // const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
   const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
 
   const dispatch = useDispatch();
-
-  // const handleGenderChange = (selectedGender) => {
-  //   setUserGender(selectedGender);
-  // };
 
   const handleRaceChange = (selectedRace) => {
     setUserRace(selectedRace);
@@ -59,26 +61,47 @@ function PreSurvey2({ className }) {
                       <Form.Check
                         type="radio"
                         id="raceAsian"
-                        label="Asian"
                         name="race-selection"
-                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('Asian')}
+                        label={(
+                          <div>
+                            {gender === 'Male' ? (
+                              <img src={eaMale} alt="Asian" style={{ width: '200px', height: '160px' }} />
+                            ) : (
+                              <img src={eaFemale} alt="Other" style={{ width: '200px', height: '160px' }} />
+                            )}
+                          </div>
+                        )}
                       />
                       <Form.Check
                         type="radio"
                         id="raceAfrican"
-                        label="African"
                         name="race-selection"
-                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('African')}
+                        label={(
+                          <div>
+                            {gender === 'Male' ? (
+                              <img src={afMale} alt="African" style={{ width: '200px', height: '160px' }} />
+                            ) : (
+                              <img src={afFemale} alt="African" style={{ width: '200px', height: '160px' }} />
+                            )}
+                          </div>
+                        )}
                       />
                       <Form.Check
                         type="radio"
                         id="raceCaucasian"
-                        label="Caucasian"
                         name="race-selection"
-                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('Caucasian')}
+                        label={(
+                          <div>
+                            {gender === 'Male' ? (
+                              <img src={csMale} alt="Caucasian" style={{ width: '200px', height: '160px' }} />
+                            ) : (
+                              <img src={csFemale} alt="Caucasian" style={{ width: '200px', height: '160px' }} />
+                            )}
+                          </div>
+                        )}
                       />
                     </div>
                   </Form>
