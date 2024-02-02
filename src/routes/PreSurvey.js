@@ -53,7 +53,7 @@ function PreSurvey({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h5>---experiment description ---</h5>
+                  <h5 style={{ marginBottom: '48px' }}>---experiment description ---</h5>
                   <h4>Select your Gender</h4>
                   <Form>
                     <div key="default-radio" className="mb-3">
@@ -62,6 +62,7 @@ function PreSurvey({ className }) {
                         id="genderMale"
                         label="Male"
                         name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleGenderChange('Male')}
                       />
                       <Form.Check
@@ -69,6 +70,7 @@ function PreSurvey({ className }) {
                         id="genderFemale"
                         label="Female"
                         name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleGenderChange('Female')}
                       />
                     </div>
@@ -85,6 +87,7 @@ function PreSurvey({ className }) {
                         id="raceAsian"
                         label="Asian"
                         name="race-selection"
+                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('Asian')}
                       />
                       <Form.Check
@@ -92,6 +95,7 @@ function PreSurvey({ className }) {
                         id="raceAfrican"
                         label="African"
                         name="race-selection"
+                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('African')}
                       />
                       <Form.Check
@@ -99,6 +103,7 @@ function PreSurvey({ className }) {
                         id="raceCaucasian"
                         label="Caucasian"
                         name="race-selection"
+                        style={{ fontSize: '1.5rem' }}
                         onChange={() => handleRaceChange('Caucasian')}
                       />
                     </div>

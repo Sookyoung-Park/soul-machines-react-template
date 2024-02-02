@@ -34,7 +34,7 @@ function LandingAfter({ className }) {
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-6">
-              <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
+              <div className="row" style={{ marginBottom: '9px', marginTop: '120px' }}>
                 <div>
                   <h1 className="fw-bol">Meet Noah!</h1>
                 </div>
@@ -106,14 +106,47 @@ function LandingAfter({ className }) {
                   </div>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '60px' }}>
+              <div className="row" style={{ marginBottom: '24px' }}>
                 <div>
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >
-                    Chat with Noah
+                    Chat with A
+                  </Link>
+                </div>
+              </div>
+              <div className="row" style={{ marginBottom: '24px' }}>
+                <div>
+                  <Link
+                    to="/loading"
+                    className="shadow btn primary-accent fs-3"
+                    type="button"
+                  >
+                    Chat with B
+                  </Link>
+                </div>
+              </div>
+              <div className="row" style={{ marginBottom: '24px' }}>
+                <div>
+                  <Link
+                    to="/loading"
+                    className="shadow btn primary-accent fs-3"
+                    type="button"
+                  >
+                    Chat with C
+                  </Link>
+                </div>
+              </div>
+              <div className="row" style={{ marginBottom: '24px' }}>
+                <div>
+                  <Link
+                    to="/loading"
+                    className="shadow btn primary-accent fs-3"
+                    type="button"
+                  >
+                    Chat with D
                   </Link>
                 </div>
               </div>
