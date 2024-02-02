@@ -62,7 +62,7 @@ function PreSurvey2({ className }) {
                         type="radio"
                         id="raceAsian"
                         name="race-selection"
-                        onChange={() => handleRaceChange('Asian')}
+                        onChange={() => handleRaceChange('EA')}
                         label={(
                           <div>
                             {gender === 'Male' ? (
@@ -77,7 +77,7 @@ function PreSurvey2({ className }) {
                         type="radio"
                         id="raceAfrican"
                         name="race-selection"
-                        onChange={() => handleRaceChange('African')}
+                        onChange={() => handleRaceChange('AF')}
                         label={(
                           <div>
                             {gender === 'Male' ? (
@@ -92,7 +92,7 @@ function PreSurvey2({ className }) {
                         type="radio"
                         id="raceCaucasian"
                         name="race-selection"
-                        onChange={() => handleRaceChange('Caucasian')}
+                        onChange={() => handleRaceChange('CS')}
                         label={(
                           <div>
                             {gender === 'Male' ? (

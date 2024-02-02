@@ -214,6 +214,10 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
   dispatch(actions.setUserInfoState({ gender, race }));
 };
 
+export const setChatTypeState = (chatType) => (dispatch) => {
+  dispatch(actions.setChatTypeState({ chatType }));
+};
+
 // create a new scene
 // export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
@@ -815,8 +819,23 @@ const smSlice = createSlice({
           info: {
             race: payload.race,
             gender: payload.gender,
-          }
-          ,
+          },
+        },
+      };
+      // console.log('New state:', newState);
+      return newState;
+    },
+    // chatType test
+    setChatTypeState: (state, { payload }) => {
+      console.log('Reducer received setUserInfoState with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          chatType: {
+            chatType: payload.chatType,
+          },
         },
       };
       // console.log('New state:', newState);

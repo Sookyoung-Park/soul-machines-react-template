@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
@@ -8,24 +8,33 @@ import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
 import { landingBackgroundImage, landingBackgroundColor } from '../config';
-import { setRequestedMediaPerms } from '../store/sm';
+import { setRequestedMediaPerms, setChatTypeState } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
+
+  const [chatType, setChatType] = useState(''); // 'Caucasian', 'African', 'Asian'
+  console.log(chatType, 'for trash');
+
   console.log(gender, race);
 
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
+
+  const dispatch = useDispatch();
+
+  const handleChatTypeChange = (type) => {
+    setChatType(type);
+    dispatch(setChatTypeState(type));
+  };
 
   // useEffect(() => {
   //   console.log('ReduxGender', gender);
   //   console.log('ReduxRace ', race);
   //   // 여기서 userGender와 userRace를 업데이트하는 로직 추가
   // }, [gender, race]);
-
-  const dispatch = useDispatch();
 
   return (
     <div className={className}>
@@ -112,6 +121,7 @@ function LandingAfter({ className }) {
                     to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={() => handleChatTypeChange('A')}
                   >
                     Chat with A
                   </Link>
@@ -123,6 +133,7 @@ function LandingAfter({ className }) {
                     to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={() => handleChatTypeChange('B')}
                   >
                     Chat with B
                   </Link>
@@ -134,6 +145,7 @@ function LandingAfter({ className }) {
                     to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={() => handleChatTypeChange('C')}
                   >
                     Chat with C
                   </Link>
@@ -145,6 +157,7 @@ function LandingAfter({ className }) {
                     to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={() => handleChatTypeChange('D')}
                   >
                     Chat with D
                   </Link>

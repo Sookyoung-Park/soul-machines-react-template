@@ -18,17 +18,12 @@ function PreSurvey1({ className }) {
   const { gender, race } = user.info;
 
   const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
-  // const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
 
   const dispatch = useDispatch();
 
   const handleGenderChange = (selectedGender) => {
     setUserGender(selectedGender);
   };
-
-  // const handleRaceChange = (selectedRace) => {
-  //   setUserRace(selectedRace);
-  // };
 
   const handleSubmit = () => {
     dispatch(setUserInfoState(userGender, ''));
@@ -63,7 +58,7 @@ function PreSurvey1({ className }) {
                         label="Male"
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('Male')}
+                        onChange={() => handleGenderChange('MALE')}
                       />
                       <Form.Check
                         type="radio"
@@ -71,7 +66,7 @@ function PreSurvey1({ className }) {
                         label="Female"
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('Female')}
+                        onChange={() => handleGenderChange('FEMALE')}
                       />
                     </div>
                   </Form>
