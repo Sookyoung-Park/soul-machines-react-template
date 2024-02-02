@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
 import { landingBackgroundImage, landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
+import { setUserInfoState } from '../store/sm';
 
-function LandingBefore({ className }) {
+function PreSurvey1({ className }) {
+  // redux store values
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
-  console.log(gender, race);
 
-  // useEffect(() => {
-  //   console.log('ReduxGender', gender);
-  //   console.log('ReduxRace ', race);
-  // }, [gender, race]);
+  const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
+  // const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
+
+  const dispatch = useDispatch();
+
+  const handleGenderChange = (selectedGender) => {
+    setUserGender(selectedGender);
+  };
+
+  // const handleRaceChange = (selectedRace) => {
+  //   setUserRace(selectedRace);
+  // };
+
+  const handleSubmit = () => {
+    dispatch(setUserInfoState(userGender, ''));
+  };
+
+  // console.log('Gender:', userGender);
+  // console.log('Race:', userRace);
+  console.log('ReduxGender', gender);
+  console.log('ReduxRace ', race);
 
   return (
     <div className={className}>
@@ -29,24 +48,44 @@ function LandingBefore({ className }) {
             <div className="col-12 col-lg-6">
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
-                  <h1 className="fw-bol">Meet Noah!</h1>
+                  <h1 className="fw-bol">Pre-Survey</h1>
                 </div>
               </div>
-              <div className="row">
+              <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h4 className="fw-light" style={{ marginBottom: '31px' }}>
-                    Talk with Noah about your life or problems. He will be your amazing buddy!
-                  </h4>
+                  <h5 style={{ marginBottom: '48px' }}>---experiment description ---</h5>
+                  <h4>Select your Gender</h4>
+                  <Form>
+                    <div key="default-radio" className="mb-3">
+                      <Form.Check
+                        type="radio"
+                        id="genderMale"
+                        label="Male"
+                        name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
+                        onChange={() => handleGenderChange('Male')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="genderFemale"
+                        label="Female"
+                        name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
+                        onChange={() => handleGenderChange('Female')}
+                      />
+                    </div>
+                  </Form>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '60px', marginTop: '40px' }}>
+              <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/presurvey1"
+                    to="/presurvey2"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={handleSubmit}
                   >
-                    Before Experiment
+                    Next
                   </Link>
                 </div>
               </div>
@@ -59,11 +98,11 @@ function LandingBefore({ className }) {
   );
 }
 
-LandingBefore.propTypes = {
+PreSurvey1.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default styled(LandingBefore)`
+export default styled(PreSurvey1)`
   .landing-wrapper {
     min-height: 100vh;
 
@@ -99,6 +138,13 @@ export default styled(LandingBefore)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+  .form-check.selected {
+    background-color:  #0062ff; /* 선택된 상태의 배경색을 원하는 색상으로 지정하세요. */
+    color: #0062ff; /* 선택된 상태의 텍스트 색상을 원하는 색상으로 지정하세요. */
+    border-radius: 50%; /* 동그라미 형태로 만들기 */
+    padding: 5px; /* 여백 추가 */
+  }
 
 
     &.mic-switch::before, &.mic-switch.status-checked::after {

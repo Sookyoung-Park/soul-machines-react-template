@@ -17,7 +17,8 @@ import LandingAfter from './routes/LandingAfter';
 import Loading from './routes/Loading';
 import Feedback from './routes/FeedbackRoute';
 import ContentCardTest from './routes/ContentCardTest';
-import PreSurvey from './routes/PreSurvey';
+import PreSurvey1 from './routes/PreSurvey1';
+import PreSurvey2 from './routes/PreSurvey2';
 
 // only init google analytics if a tracking ID is defined in env
 const { REACT_APP_GA_TRACKING_ID } = process.env;
@@ -94,8 +95,11 @@ function App() {
         <Route path="/feedback">
           <Feedback />
         </Route>
-        <Route path="/pre-survey">
-          <PreSurvey />
+        <Route path="/presurvey1">
+          <PreSurvey1 />
+        </Route>
+        <Route path="/presurvey2">
+          <PreSurvey2 />
         </Route>
         <Route path="/landingafter">
           <LandingAfter />

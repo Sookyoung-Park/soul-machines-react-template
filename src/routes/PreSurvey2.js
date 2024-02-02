@@ -12,26 +12,26 @@ import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
-function PreSurvey({ className }) {
+function PreSurvey2({ className }) {
   // redux store values
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { gender, race } = user.info;
 
-  const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
+  // const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
   const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
 
   const dispatch = useDispatch();
 
-  const handleGenderChange = (selectedGender) => {
-    setUserGender(selectedGender);
-  };
+  // const handleGenderChange = (selectedGender) => {
+  //   setUserGender(selectedGender);
+  // };
 
   const handleRaceChange = (selectedRace) => {
     setUserRace(selectedRace);
   };
 
   const handleSubmit = () => {
-    dispatch(setUserInfoState(userGender, userRace));
+    dispatch(setUserInfoState(gender, userRace));
   };
 
   // console.log('Gender:', userGender);
@@ -49,32 +49,6 @@ function PreSurvey({ className }) {
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
                   <h1 className="fw-bol">Pre-Survey</h1>
-                </div>
-              </div>
-              <div className="row" style={{ marginBottom: '36px' }}>
-                <div>
-                  <h5 style={{ marginBottom: '48px' }}>---experiment description ---</h5>
-                  <h4>Select your Gender</h4>
-                  <Form>
-                    <div key="default-radio" className="mb-3">
-                      <Form.Check
-                        type="radio"
-                        id="genderMale"
-                        label="Male"
-                        name="gender-selection"
-                        style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('Male')}
-                      />
-                      <Form.Check
-                        type="radio"
-                        id="genderFemale"
-                        label="Female"
-                        name="gender-selection"
-                        style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('Female')}
-                      />
-                    </div>
-                  </Form>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
@@ -131,11 +105,11 @@ function PreSurvey({ className }) {
   );
 }
 
-PreSurvey.propTypes = {
+PreSurvey2.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default styled(PreSurvey)`
+export default styled(PreSurvey2)`
   .landing-wrapper {
     min-height: 100vh;
 
