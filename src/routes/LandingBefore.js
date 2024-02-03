@@ -24,13 +24,14 @@ function LandingBefore({ className }) {
             <div className="col-12 col-lg-6">
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
-                  <h1 className="fw-bol">Meet Noah!</h1>
+                  <h1 className="fw-bol">Chat with Digital Influencers!</h1>
                 </div>
               </div>
               <div className="row">
                 <div>
                   <h4 className="fw-light" style={{ marginBottom: '31px' }}>
-                    Talk with Noah about your life or problems. He will be your amazing buddy!
+                    Talk with digital influencers about your life or problems.
+                    They will be your amazing buddy!
                   </h4>
                 </div>
               </div>

@@ -1,54 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
-import { landingBackgroundImage, landingBackgroundColor } from '../config';
+import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
-import { setUserInfoState } from '../store/sm';
 
-function PreSurvey1({ className }) {
-  // redux store values
-  const { user } = useSelector(({ sm }) => ({ ...sm }));
-  const { gender, race } = user.info;
-
-  const [userGender, setUserGender] = useState(''); // 'Female' for Female, 'Male' for Male
-
-  const dispatch = useDispatch();
-
-  const handleGenderChange = (selectedGender) => {
-    setUserGender(selectedGender);
-  };
-
-  const handleSubmit = () => {
-    dispatch(setUserInfoState(userGender, ''));
-  };
-
-  // console.log('Gender:', userGender);
-  // console.log('Race:', userRace);
-  console.log('ReduxGender', gender);
-  console.log('ReduxRace ', race);
-
+function PreSurvey({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
         <Header />
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-8">
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
-                  <h1 className="fw-bol">Pre-Survey</h1>
+                  <h1 className="fw-bol">Before Experiment</h1>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h5 style={{ marginBottom: '48px' }}>
+                  <p className="description">
                     This experiment is an research study currently being conducted
                     at Dartmouth College. It involves conversations with AI digital
                     influencers that apply slightly different thresholds. The goal
@@ -56,38 +32,15 @@ function PreSurvey1({ className }) {
                     performs best in the role of a conversational agent. Although
                     they may feel similar, please participate in this survey after
                     engaging in comfortable conversations with digital influencers.
-
-                  </h5>
-                  <h4>Select your Gender</h4>
-                  <Form>
-                    <div key="default-radio" className="mb-3">
-                      <Form.Check
-                        type="radio"
-                        id="genderMale"
-                        label="Male"
-                        name="gender-selection"
-                        style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('MALE')}
-                      />
-                      <Form.Check
-                        type="radio"
-                        id="genderFemale"
-                        label="Female"
-                        name="gender-selection"
-                        style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('FEMALE')}
-                      />
-                    </div>
-                  </Form>
+                  </p>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/presurvey2"
+                    to="/presurvey1"
                     className="shadow btn primary-accent fs-3"
                     type="button"
-                    onClick={handleSubmit}
                   >
                     Next
                   </Link>
@@ -102,15 +55,14 @@ function PreSurvey1({ className }) {
   );
 }
 
-PreSurvey1.propTypes = {
+PreSurvey.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default styled(PreSurvey1)`
+export default styled(PreSurvey)`
   .landing-wrapper {
     min-height: 100vh;
 
-    background: ${landingBackgroundImage ? `url(${landingBackgroundImage})` : ''} ${landingBackgroundColor ? `${landingBackgroundColor};` : ''};
     background-size: auto 60%;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -123,6 +75,7 @@ export default styled(PreSurvey1)`
   .landing-container {
     padding-top: 1rem;
     display: flex;
+    justify-content: center;
 
     &>div {
       background-color: ${Color(landingBackgroundColor).alpha(0.5)};
@@ -130,6 +83,7 @@ export default styled(PreSurvey1)`
       border: 1px solid rgba(0,0,0,0.1);
       padding: 1rem;
       border-radius: 5px;
+      text-align: center;
 
       @media (min-width: ${breakpoints.lg}px) {
         border: none;
@@ -207,6 +161,16 @@ export default styled(PreSurvey1)`
         float: right;
       }
     }
+  }
+  .row{
+    align-tiems: center;
+
+  }
+
+  .description{
+    font-size: 1.2rem;
+    line-height: 150%;
+    margin-top: 24px;
   }
 
 `;

@@ -12,11 +12,12 @@ import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
 import DPChat from './routes/DPChat';
 import DPChat2 from './routes/DPChat2';
-import LandingBefore from './routes/LandingBefore';
+// import LandingBefore from './routes/LandingBefore';
 import LandingAfter from './routes/LandingAfter';
 import Loading from './routes/Loading';
 import Feedback from './routes/FeedbackRoute';
 import ContentCardTest from './routes/ContentCardTest';
+import PreSurvey from './routes/PreSurvey';
 import PreSurvey1 from './routes/PreSurvey1';
 import PreSurvey2 from './routes/PreSurvey2';
 
@@ -106,7 +107,7 @@ function App() {
         </Route>
         {/* / goes at the bottom */}
         <Route path="/">
-          <LandingBefore />
+          <PreSurvey />
         </Route>
       </Switch>
       <LinkGAtoRouter />

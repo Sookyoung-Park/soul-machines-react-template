@@ -14,6 +14,7 @@ export default createGlobalStyle`
     border: 1px solid ${primaryAccent};
     background: ${primaryAccent};
     color: #FFF;
+    
   }
   .form-check-input:checked {
     background-color: ${primaryAccent};
