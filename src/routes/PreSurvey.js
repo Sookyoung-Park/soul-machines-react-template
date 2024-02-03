@@ -33,6 +33,12 @@ function PreSurvey({ className }) {
                     they may feel similar, please participate in this survey after
                     engaging in comfortable conversations with digital influencers.
                   </p>
+                  <p className="noted">
+                    Noted that the experiment is still in its early stages and may
+                    lack inclusivity for various races and genders. However, as part
+                    of future works, efforts will be made to expand and include as
+                    many races and genders as possible in the research
+                  </p>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '60px' }}>
@@ -164,13 +170,18 @@ export default styled(PreSurvey)`
   }
   .row{
     align-tiems: center;
-
   }
 
   .description{
     font-size: 1.2rem;
     line-height: 150%;
     margin-top: 24px;
+  }
+
+  .noted{
+    font-size: 1.1rem;
+    margin-top: 20px;
+    font-weight: 600;
   }
 
 `;

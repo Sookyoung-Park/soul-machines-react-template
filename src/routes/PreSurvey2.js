@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
-import { landingBackgroundImage, landingBackgroundColor } from '../config';
+import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
@@ -25,21 +25,19 @@ function PreSurvey2({ className }) {
   const { gender, race } = user.info;
 
   const [userRace, setUserRace] = useState(''); // 'Caucasian', 'African', 'Asian'
+  const [isSelectionMade, setIsSelectionMade] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleRaceChange = (selectedRace) => {
     setUserRace(selectedRace);
+    setIsSelectionMade(true);
   };
 
   const handleSubmit = () => {
     dispatch(setUserInfoState(gender, userRace));
+    console.log(race, 'has been saved in the redux');
   };
-
-  // console.log('Gender:', userGender);
-  // console.log('Race:', userRace);
-  console.log('ReduxGender', gender);
-  console.log('ReduxRace ', race);
 
   return (
     <div className={className}>
@@ -47,7 +45,7 @@ function PreSurvey2({ className }) {
         <Header />
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-10 survey-container">
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
                   <h1 className="fw-bol">Pre-Survey</h1>
@@ -55,20 +53,25 @@ function PreSurvey2({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h4>Select your Race</h4>
+                  <h4 style={{ marginBottom: '24px' }}>
+                    Please choose the digital influencer
+                    whose physical appearance is most similar to yours.
+
+                  </h4>
                   <Form>
-                    <div key="default-radio" className="mb-3">
+                    <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
                       <Form.Check
                         type="radio"
                         id="raceAsian"
                         name="race-selection"
+                        style={{ marginRight: '24px' }}
                         onChange={() => handleRaceChange('EA')}
                         label={(
                           <div>
                             {gender === 'MALE' ? (
-                              <img src={eaMale} alt="Asian" style={{ width: '200px', height: '160px' }} />
+                              <img src={eaMale} alt="Asian" style={{ width: '260px', height: '220px' }} />
                             ) : (
-                              <img src={eaFemale} alt="Other" style={{ width: '200px', height: '160px' }} />
+                              <img src={eaFemale} alt="Other" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -77,13 +80,14 @@ function PreSurvey2({ className }) {
                         type="radio"
                         id="raceAfrican"
                         name="race-selection"
+                        style={{ marginRight: '24px' }}
                         onChange={() => handleRaceChange('AF')}
                         label={(
                           <div>
                             {gender === 'MALE' ? (
-                              <img src={afMale} alt="African" style={{ width: '200px', height: '160px' }} />
+                              <img src={afMale} alt="African" style={{ width: '260px', height: '220px' }} />
                             ) : (
-                              <img src={afFemale} alt="African" style={{ width: '200px', height: '160px' }} />
+                              <img src={afFemale} alt="African" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -92,13 +96,14 @@ function PreSurvey2({ className }) {
                         type="radio"
                         id="raceCaucasian"
                         name="race-selection"
+                        style={{ marginRight: '24px' }}
                         onChange={() => handleRaceChange('CS')}
                         label={(
                           <div>
                             {gender === 'MALE' ? (
-                              <img src={csMale} alt="Caucasian" style={{ width: '200px', height: '160px' }} />
+                              <img src={csMale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
                             ) : (
-                              <img src={csFemale} alt="Caucasian" style={{ width: '200px', height: '160px' }} />
+                              <img src={csFemale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -109,14 +114,16 @@ function PreSurvey2({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
+                  {isSelectionMade && (
                   <Link
                     to="/landingafter"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                     onClick={handleSubmit}
                   >
-                    Submit
+                    Start
                   </Link>
+                  )}
                 </div>
               </div>
               <div className="col" />
@@ -136,7 +143,6 @@ export default styled(PreSurvey2)`
   .landing-wrapper {
     min-height: 100vh;
 
-    background: ${landingBackgroundImage ? `url(${landingBackgroundImage})` : ''} ${landingBackgroundColor ? `${landingBackgroundColor};` : ''};
     background-size: auto 60%;
     background-repeat: no-repeat;
     background-position: bottom center;
@@ -233,6 +239,19 @@ export default styled(PreSurvey2)`
         float: right;
       }
     }
+  }
+
+
+  .row{
+    align-tiems: center;
+  }
+
+  .fw-bol{
+    margin-bottom: 32px;
+  }
+
+  .survey-container{
+    align-items: cneter;
   }
 
 `;
