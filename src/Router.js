@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
 import DPChat from './routes/DPChat';
 import DPChat2 from './routes/DPChat2';
-// import LandingBefore from './routes/LandingBefore';
 import LandingAfter from './routes/LandingAfter';
 import Loading from './routes/Loading';
 import Feedback from './routes/FeedbackRoute';

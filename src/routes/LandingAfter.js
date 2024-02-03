@@ -7,23 +7,23 @@ import { Link } from 'react-router-dom';
 import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import Header from '../components/Header';
-import { landingBackgroundImage, landingBackgroundColor } from '../config';
+import { landingBackgroundColor } from '../config';
 import { setRequestedMediaPerms, setChatTypeState } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const { gender, race } = user.info;
 
-  const [chatType, setChatType] = useState(''); // 'Caucasian', 'African', 'Asian'
-  console.log(chatType, 'for trash');
-
-  console.log(gender, race);
-
-  const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
-
   const dispatch = useDispatch();
+
+  console.log('user information:', gender, race);
+
+  const [chatType, setChatType] = useState(''); // 'Caucasian', 'African', 'Asian'
+  // for eslint
+  console.log(chatType, 'for trash');
 
   const handleChatTypeChange = (type) => {
     setChatType(type);
@@ -36,20 +36,21 @@ function LandingAfter({ className }) {
         <Header />
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
-            <div className="col-12 col-lg-6">
+            <div className="col-12 col-lg-10">
               <div className="row" style={{ marginBottom: '9px', marginTop: '120px' }}>
                 <div>
-                  <h1 className="fw-bol">Meet Noah!</h1>
+                  <h1 className="fw-bol">Chat with Digital Influencers!</h1>
                 </div>
               </div>
               <div className="row">
                 <div>
-                  <h4 className="fw-light" style={{ marginBottom: '31px' }}>
-                    Talk with Noah about your life or problems. He will be your amazing buddy!
+                  <h4 className="fw-light" style={{ marginBottom: '32px' }}>
+                    Talk with 4 different digital influencers
+                    about your life or problems. They will be your amazing buddy!
                   </h4>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '36px' }}>
+              <div className="row" style={{ marginBottom: '28px' }}>
                 <div>
                   <div className="form-check form-switch">
                     <label
@@ -66,8 +67,8 @@ function LandingAfter({ className }) {
                         onChange={() => dispatch(setRequestedMediaPerms({ mic: !mic }))}
                         checked={mic}
                       />
-                      <div className="d-block ms-2">
-                        Use your microphone so Noah can hear you.
+                      <div className="d-block ms-2" style={{ marginLeft: '12px' }}>
+                        Use your microphone so digital influencers can hear you.
                       </div>
                     </label>
                   </div>
@@ -91,65 +92,59 @@ function LandingAfter({ className }) {
                         checked={camera}
                       />
                       <div className="d-block ms-2">
-                        Use your camera so we can chat face-to-face.
+                        Use your camera so you can chat face-to-face.
                       </div>
                     </label>
                   </div>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '52px' }}>
+              <div className="row" style={{ marginBottom: '48px' }}>
                 <div>
-                  <div className="d-flex align-items-center justify-content-center fs-4">
+                  <div className="d-flex fs-4">
                     <CameraVideoFill size={26} />
                     <span className="ps-1">+</span>
                     <MicFill size={26} />
-                    <div className="text-left fst-italic" style={{ marginLeft: '20px', fontSize: '1.5rem' }}>
+                    <div className="text-left fst-italic-bold" style={{ fontSize: '1.3rem', marginLeft: '12px' }}>
                       Enable your camera and mic to optimize a conversation.
                     </div>
                   </div>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '24px' }}>
-                <div>
+                <div className="col-lg-6 mb-2">
                   <Link
                     to="/loading"
-                    className="shadow btn primary-accent fs-3"
+                    className="shadow btn primary-accent fs-3 w-100"
                     type="button"
                     onClick={() => handleChatTypeChange('A')}
                   >
                     Chat with A
                   </Link>
                 </div>
-              </div>
-              <div className="row" style={{ marginBottom: '24px' }}>
-                <div>
+                <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
                   <Link
                     to="/loading"
-                    className="shadow btn primary-accent fs-3"
+                    className="shadow btn primary-accent fs-3 w-100"
                     type="button"
                     onClick={() => handleChatTypeChange('B')}
                   >
                     Chat with B
                   </Link>
                 </div>
-              </div>
-              <div className="row" style={{ marginBottom: '24px' }}>
-                <div>
+                <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
                   <Link
                     to="/loading"
-                    className="shadow btn primary-accent fs-3"
+                    className="shadow btn primary-accent fs-3 w-100"
                     type="button"
                     onClick={() => handleChatTypeChange('C')}
                   >
                     Chat with C
                   </Link>
                 </div>
-              </div>
-              <div className="row" style={{ marginBottom: '24px' }}>
-                <div>
+                <div className="col-lg-6 mb-2">
                   <Link
                     to="/loading"
-                    className="shadow btn primary-accent fs-3"
+                    className="shadow btn primary-accent fs-3 w-100"
                     type="button"
                     onClick={() => handleChatTypeChange('D')}
                   >
@@ -160,23 +155,6 @@ function LandingAfter({ className }) {
               <div className="col" />
             </div>
           </div>
-          {/* <div
-            className="d-none d-lg-block"
-            style={{
-              width: '250px',
-              position: 'fixed',
-              right: '20px',
-            }}
-          >
-            <div className="d-flex align-items-center justify-content-center fs-4">
-              <CameraVideoFill size={26} />
-              <span className="ps-1">+</span>
-              <MicFill size={26} />
-            </div>
-            <div className="text-left fst-italic">
-              Enable your camera and mic to optimize our interaction.
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
@@ -191,7 +169,6 @@ export default styled(LandingAfter)`
   .landing-wrapper {
     min-height: 100vh;
 
-    background: ${landingBackgroundImage ? `url(${landingBackgroundImage})` : ''} ${landingBackgroundColor ? `${landingBackgroundColor};` : ''};
     background-size: auto 60%;
     background-repeat: no-repeat;
     background-position: bottom center;
