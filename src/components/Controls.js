@@ -7,12 +7,12 @@ import {
   CameraVideoOffFill,
   ChatSquareTextFill,
   Escape,
-  Link45deg,
-  Megaphone,
+  // Link45deg,
+  // Megaphone,
   MicFill,
   MicMuteFill,
-  Share,
-  SkipEndFill,
+  // Share,
+  // SkipEndFill,
   ThreeDotsVertical,
   VolumeMuteFill,
   VolumeUpFill,
@@ -20,7 +20,7 @@ import {
 } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
 import {
-  stopSpeaking,
+  // stopSpeaking,
   setShowTranscript,
   disconnect,
   setOutputMute,
@@ -45,7 +45,7 @@ function Controls({
     micOn,
     cameraOn,
     isOutputMuted,
-    speechState,
+    // speechState,
     showTranscript,
     transcript,
     requestedMediaPerms,
@@ -53,7 +53,7 @@ function Controls({
     highlightMute,
     highlightChat,
     highlightCamera,
-    highlightSkip,
+    // highlightSkip,
     highlightMenu,
   } = useSelector((state) => ({ ...state.sm }));
 
@@ -134,22 +134,22 @@ function Controls({
 
   const [showContextMenu, setShowContextMenu] = useState(false);
 
-  const originalShareCopy = 'Share Experience';
-  const [shareCopy, setShareCopy] = useState(originalShareCopy);
+  // const originalShareCopy = 'Share Experience';
+  // const [shareCopy, setShareCopy] = useState(originalShareCopy);
 
-  const shareDP = async () => {
-    const url = window.location;
-    try {
-      await navigator.share({ url });
-    } catch {
-      const type = 'text/plain';
-      const blob = new Blob([url], { type });
-      const data = [new window.ClipboardItem({ [type]: blob })];
-      navigator.clipboard.write(data);
-      setShareCopy('Link copied!');
-      setTimeout(() => setShareCopy(originalShareCopy), 3000);
-    }
-  };
+  // const shareDP = async () => {
+  //   const url = window.location;
+  //   try {
+  //     await navigator.share({ url });
+  //   } catch {
+  //     const type = 'text/plain';
+  //     const blob = new Blob([url], { type });
+  //     const data = [new window.ClipboardItem({ [type]: blob })];
+  //     navigator.clipboard.write(data);
+  //     // setShareCopy('Link copied!');
+  //     // setTimeout(() => setShareCopy(originalShareCopy), 3000);
+  //   }
+  // };
 
   return (
     <div className={className}>
@@ -186,8 +186,8 @@ function Controls({
             )}
           </button>
         </div>
-        <div>
-          {/* skip through whatever dp is currently speaking */}
+        {/* skip through whatever dp is currently speaking */}
+        {/* <div>
           <button
             type="button"
             className="control-icon"
@@ -198,7 +198,7 @@ function Controls({
           >
             <SkipEndFill size={iconSize} style={{ border: highlightSkip ? 'red 2px solid' : '' }} />
           </button>
-        </div>
+        </div> */}
         <div>
           {/* show transcript */}
           <button
@@ -284,7 +284,7 @@ function Controls({
                       Exit Session
                     </button>
                   </li>
-                  <li>
+                  {/* <li>
                     <button
                       className="btn-unstyled"
                       type="button"
@@ -297,8 +297,8 @@ function Controls({
                       {' '}
                       Give Feedback
                     </button>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <button
                       className="btn-unstyled"
                       type="button"
@@ -308,8 +308,8 @@ function Controls({
                       {' '}
                       {shareCopy}
                     </button>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a
                       target="_blank"
                       href="https://soulmachines.com"
@@ -320,7 +320,7 @@ function Controls({
                       {' '}
                       Visit Soul Machines
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

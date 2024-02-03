@@ -30,12 +30,6 @@ function LandingAfter({ className }) {
     dispatch(setChatTypeState(type));
   };
 
-  // useEffect(() => {
-  //   console.log('ReduxGender', gender);
-  //   console.log('ReduxRace ', race);
-  //   // 여기서 userGender와 userRace를 업데이트하는 로직 추가
-  // }, [gender, race]);
-
   return (
     <div className={className}>
       <div className="landing-wrapper">

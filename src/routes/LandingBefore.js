@@ -15,11 +15,6 @@ function LandingBefore({ className }) {
   const { gender, race } = user.info;
   console.log(gender, race);
 
-  // useEffect(() => {
-  //   console.log('ReduxGender', gender);
-  //   console.log('ReduxRace ', race);
-  // }, [gender, race]);
-
   return (
     <div className={className}>
       <div className="landing-wrapper">

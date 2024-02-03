@@ -1,57 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // Scene, Persona class from smwebsdk to interact with ai character
 import { Scene, Persona } from '@soulmachines/smwebsdk';
-// 비동기 작업에서 에러 처리를 간단하게 하기 위해 사용디는 라이브러리, Promise와 함께 사용
 import to from 'await-to-js';
-// process video 외부 모듈이나 함수
 import proxyVideo, { mediaStreamProxy } from '../../proxyVideo';
-// 객체 속성을 반올림하는 유틸리티 함수
 import roundObject from '../../utils/roundObject';
 import { meatballString } from './meatball';
 
 // here : loading page에 들어오자마자 API키가 결정되고 PERSONA_ID가 1로 지정됨
-// const API_KEY_NOAH = process.env.REACT_APP_API_KEY || '';
-const API_KEY_ELLA = process.env.REACT_APP_API_KEY_ELLA || '';
+const API_KEY_TEMP = process.env.REACT_APP_API_KEY_ELLA || '';
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 
-// for tmr : createScene에서 api를 받아서 그 api로 씬을 연결하는걸로 코드를 바꾸기
-// 그리고 각각 버튼 4개 조건부 걸어서 적절한 api와 연결시키기
-// 1. api 변수로 받아서 api연동하는 createScene 만들기
-// 2. 변수별로 잘 들어가는지 확인하기
-// 3. 인종, 성별 별 api 로직짜서 버튼이랑 매치시키기
-
-// variables for user input
-// let API_KEY = 0;
-// let PERSONA_ID = 0;
-
-const API_KEY = API_KEY_ELLA;
 const PERSONA_ID = 1;
-
-// const GENDER = ['Male', 'Female'];
-// const RACE = ['Caucasian', 'African', 'East Asian'];
-
-// // const userSelectedAPI = prompt('API를 선택해 : Noah or Ella :');
-// const selectedGender = prompt(`Choose your gender: \n${GENDER.join(', ')}`);
-// const selectedRace = prompt(`Choose your enthicity: \n${RACE.join(', ')}`);
-
-// if (selectedGender === 'Female' || selectedRace === 'Caucasian') {
-//   API_KEY = API_KEY_ELLA;
-//   PERSONA_ID = 2;
-// } else if (selectedGender === 'Male' || selectedRace === 'East Asian') {
-//   API_KEY = API_KEY_NOAH;
-//   PERSONA_ID = 1;
-// }
-
-// 현재 파일이 어떤 파일인지에 따라 사용할 키를 선택합니다.
-// const isFileNoah = window.location.pathname.includes('/video');
-// const API_KEY = isFileNoah ? API_KEY_NOAH : API_KEY_ELLA;
-// // const PERSONA_ID = isFileNoah ? 1 : 2;
-// const PERSONA_ID = API_KEY === API_KEY_NOAH ? 1 : 2;
 
 // api키가 정의되지 않은 경우에 대한 예외 처리
 let startupErr = null;
-if (AUTH_MODE === 0 && API_KEY === '') startupErr = { msg: 'REACT_APP_API_KEY not defined!' };
+if (AUTH_MODE === 0 && API_KEY_TEMP === '') startupErr = { msg: 'REACT_APP_API_KEY not defined!' };
 
 // redux 초기상태 정의 : 어플리케이션이 시작될 때 Redux에서 로드되는 values
 const initialState = {
@@ -96,12 +60,10 @@ const initialState = {
   lastUserUtterance: '',
   lastPersonaUtterance: '',
   user: {
-    // test
     info: {
-      gender: 'test-gender',
-      race: 'test-race',
+      gender: '',
+      race: '',
     },
-    // test end
     activity: {
       isAttentive: 0,
       isTalking: 0,
@@ -159,25 +121,6 @@ const initialState = {
   highlightSkip: false,
 };
 
-// test user info
-// export const updateGenderAndRace = createAsyncThunk(
-//   'sm/updateGenderAndRace',
-//   async ({ gender, race }, { dispatch }) => {
-//     try {
-//       // 여기에서 비동기 작업 수행 (API 호출 등)
-
-//       // 비동기 작업 성공 시 Redux 스토어 업데이트
-//       dispatch(updateUserInfo({ gender, race }));
-
-//       // 성공적인 응답이 있다면 원하는 데이터를 반환
-//       return { success: true, message: 'User info updated successfully' };
-//     } catch (error) {
-//       // 에러가 발생한 경우 에러를 반환
-//       return { success: false, message: 'Failed to update user info', error };
-//     }
-//   },
-// );
-
 // host actions object since we need the types to be available for
 // async calls later, e.g. handling messages from persona
 let actions;
@@ -205,21 +148,16 @@ export const disconnect = createAsyncThunk('sm/disconnect', async (args, thunk) 
   }, 1);
 });
 
-// user info action
-// test
-// export const setUserInfoState = createAsyncThunk('sm/setUserInfoState', async (_, thunk) => {
-//   thunk.dispatch(actions.setUserInfoState());
-// });
+// update user info actions
 export const setUserInfoState = (gender, race) => (dispatch) => {
   dispatch(actions.setUserInfoState({ gender, race }));
 };
-
+// update chatType actions
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
 };
 
 // create a new scene
-// export const createScene = createAsyncThunk('sm/createScene', async (_, thunk) => {
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
   console.log('createScene apiKey : ', apiKey);
   if (scene !== null) {
@@ -272,8 +210,6 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       },
       stopSpeakingWhenNotVisible: false,
     };
-    // test
-    // if (AUTH_MODE === 0) sceneOpts.apiKey = API_KEY;
     if (AUTH_MODE === 0) sceneOpts.apiKey = apiKey;
     scene = new Scene(sceneOpts);
   } catch (e) {
@@ -825,7 +761,7 @@ const smSlice = createSlice({
       // console.log('New state:', newState);
       return newState;
     },
-    // chatType test
+    // chatType State
     setChatTypeState: (state, { payload }) => {
       console.log('Reducer received setUserInfoState with payload:', payload);
 
