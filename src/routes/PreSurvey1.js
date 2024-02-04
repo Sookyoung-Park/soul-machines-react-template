@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
@@ -35,7 +35,7 @@ function PreSurvey1({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        <Header />
+        {/* <Header /> */}
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-8 survey-container">

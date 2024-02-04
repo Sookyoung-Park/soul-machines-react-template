@@ -9,7 +9,7 @@ import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
-function PreSurvey({ className }) {
+function NextConversation({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
@@ -17,38 +17,14 @@ function PreSurvey({ className }) {
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-8">
-              <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
-                <div>
-                  <h1 className="fw-bol">Before Experiment</h1>
-                </div>
-              </div>
-              <div className="row" style={{ marginBottom: '36px' }}>
-                <div>
-                  <p className="description">
-                    This experiment is an research study currently being conducted
-                    at Dartmouth College. It involves conversations with AI digital
-                    influencers that apply slightly different thresholds. The goal
-                    is to determine which threshold is most suitable for users and
-                    performs best in the role of a conversational agent. Although
-                    they may feel similar, please participate in this survey after
-                    engaging in comfortable conversations with digital influencers.
-                  </p>
-                  <p className="noted">
-                    Noted that the experiment is still in its early stages and may
-                    lack inclusivity for various races and genders. However, as part
-                    of future works, efforts will be made to expand and include as
-                    many races and genders as possible in the research
-                  </p>
-                </div>
-              </div>
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/presurvey1"
+                    to="/loading"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >
-                    Next
+                    Chat with Next Influencer
                   </Link>
                 </div>
               </div>
@@ -61,11 +37,11 @@ function PreSurvey({ className }) {
   );
 }
 
-PreSurvey.propTypes = {
+NextConversation.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default styled(PreSurvey)`
+export default styled(NextConversation)`
   .landing-wrapper {
     min-height: 100vh;
 

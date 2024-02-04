@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import { landingBackgroundColor } from '../config';
-import { setRequestedMediaPerms, setChatTypeState } from '../store/sm';
+import {
+  setRequestedMediaPerms, setChatTypeState,
+} from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
@@ -21,7 +23,7 @@ function LandingAfter({ className }) {
 
   console.log('user information:', gender, race);
 
-  const [chatType, setChatType] = useState(''); // 'Caucasian', 'African', 'Asian'
+  const [chatType, setChatType] = useState(''); // 'A B C D'
   // for eslint
   console.log(chatType, 'for trash');
 
@@ -33,7 +35,7 @@ function LandingAfter({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        <Header />
+        {/* <Header /> */}
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-10">

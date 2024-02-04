@@ -66,10 +66,11 @@ function Controls({
   });
 
   // 2min after timeout => show ExitSession Button
+  // 2 min = 120000
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 120000);
+    }, 10000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -77,12 +78,13 @@ function Controls({
   }, []);
 
   // redirect to feedback page after 3min 30sec
+  // 3min30sec = 210000
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
       history.push('/feedback');
-    }, 210000);
-    // 210000
+    }, 15000);
+
     return () => {
       clearTimeout(timeoutId);
     };
@@ -184,7 +186,7 @@ function Controls({
           className="btn btn-dark connected-button"
           onClick={() => {
             dispatch(disconnect());
-            history.push('/feedback');
+            history.push('/next-conversation');
           }}
         >
           Exit Conversation

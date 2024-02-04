@@ -8,7 +8,7 @@ import {
   ArrowLeftCircleFill, ArrowRightCircleFill, BodyText, ChatLeftQuoteFill, MicFill,
 } from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
 
 function Loading({ className }) {
@@ -25,7 +25,7 @@ function Loading({ className }) {
   const { gender, race } = user.info;
   const { chatType } = user.chatType;
 
-  console.log(chatType);
+  console.log(chatType, ': saved ChatType in Loading.js');
 
   // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
   const dispatch = useDispatch();
@@ -255,7 +255,7 @@ function Loading({ className }) {
 
   return (
     <div className={className}>
-      <Header />
+      {/* <Header /> */}
       <div className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-11 col-md-6 text-center mobile">

@@ -63,6 +63,7 @@ const initialState = {
     info: {
       gender: '',
       race: '',
+      // ABCD 중 어디인지
     },
     activity: {
       isAttentive: 0,
@@ -156,6 +157,11 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
 };
+
+// update user state actions
+// export const setUserConversationState = (conversation) => (dispatch) => {
+//   dispatch(actions.setUserInfoState({ conversation }));
+// };
 
 // create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
