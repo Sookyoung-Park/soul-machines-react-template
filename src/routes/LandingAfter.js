@@ -6,22 +6,90 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
-// import Header from '../components/Header';
 import { landingBackgroundColor } from '../config';
 import {
-  setRequestedMediaPerms, setChatTypeState,
+  setRequestedMediaPerms, setChatTypeState, setApiKeysState,
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
-  const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const { gender, race } = user.info;
+  const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
 
   const dispatch = useDispatch();
 
-  console.log('user information:', gender, race);
+  // api key condition
+  const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
+  const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
+  const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
+  const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
+  const API_CS_MALE = process.env.REACT_APP_API_KEY_CS_MALE;
+  const API_CS_FEMALE = process.env.REACT_APP_API_KEY_CS_FEMALE;
+
+  // infoString : EA_FEMALE, AF_MALE etc
+  const infoString = `_${race}_${gender}`;
+  console.log('info string : ', infoString);
+
+  let apiA;
+  let apiB;
+  let apiC;
+  let apiD;
+
+  function getRandomApiKey(api1, api2) {
+    const randomIndex = Math.random() < 0.5 ? 0 : 1;
+    return randomIndex === 0 ? api1 : api2;
+  }
+
+  // api allocation logic
+  // ApiKey_A = same race, same gender
+  // ApiKey_B = different race, same gender
+  // ApiKey_C = different race, different gender
+  // ApiKey_D = same race, different gender
+  switch (infoString) {
+    case '_EA_MALE':
+      apiA = API_EA_MALE;
+      apiB = getRandomApiKey(API_AF_MALE, API_CS_MALE);
+      apiC = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
+      apiD = API_EA_FEMALE;
+      break;
+    case '_EA_FEMALE':
+      apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
+      apiB = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
+      apiC = getRandomApiKey(API_AF_MALE, API_CS_MALE);
+      apiD = API_EA_MALE;
+      break;
+    case '_AF_MALE':
+      apiA = process.env.REACT_APP_API_KEY_AF_MALE;
+      apiB = getRandomApiKey(API_EA_MALE, API_CS_MALE);
+      apiC = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
+      apiD = API_AF_FEMALE;
+      break;
+    case '_AF_FEMALE':
+      apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
+      apiB = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
+      apiC = getRandomApiKey(API_EA_MALE, API_CS_MALE);
+      apiD = API_AF_MALE;
+      break;
+    case '_CS_MALE':
+      apiA = process.env.REACT_APP_API_KEY_CS_MALE;
+      apiB = getRandomApiKey(API_EA_MALE, API_AF_MALE);
+      apiC = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
+      apiD = API_CS_FEMALE;
+      break;
+    case '_CS_FEMALE':
+      apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
+      apiB = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
+      apiC = getRandomApiKey(API_EA_MALE, API_AF_MALE);
+      apiD = API_CS_MALE;
+      break;
+    default:
+      break;
+  }
+  console.log('A', apiA, apiB, apiC, apiD);
+
+  // dispatch(setApiKeysState(apiA, apiB, apiC, apiD));
 
   const [chatType, setChatType] = useState(''); // 'A B C D'
   // for eslint
@@ -32,10 +100,13 @@ function LandingAfter({ className }) {
     dispatch(setChatTypeState(type));
   };
 
+  const handleApiKeysUpdate = () => {
+    dispatch(setApiKeysState(apiA, apiB, apiC, apiD));
+  };
+
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        {/* <Header /> */}
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-10">
@@ -177,7 +248,10 @@ function LandingAfter({ className }) {
                 to="/loading"
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
-                onClick={() => handleChatTypeChange('A')}
+                onClick={() => {
+                  handleApiKeysUpdate();
+                  handleChatTypeChange('A');
+                }}
               >
                 Start
               </Link>

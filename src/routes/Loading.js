@@ -8,7 +8,6 @@ import {
   ArrowLeftCircleFill, ArrowRightCircleFill, BodyText, ChatLeftQuoteFill, MicFill,
 } from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
-// import Header from '../components/Header';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
 
 function Loading({ className }) {
@@ -22,9 +21,13 @@ function Loading({ className }) {
     user,
   } = useSelector(({ sm }) => (sm));
 
-  const { gender, race } = user.info;
+  // const { gender, race } = user.info;
   const { chatType } = user.chatType;
+  const {
+    apiA, apiB, apiC, apiD,
+  } = user.apiKey;
 
+  console.log('apiC', apiC);
   console.log(chatType, ': saved ChatType in Loading.js');
 
   // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
@@ -49,75 +52,75 @@ function Loading({ className }) {
   // const useQuery = () => new URLSearchParams(useLocation().search);
   // const query = useQuery();
 
-  // api key condition
-  const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
-  const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
-  const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
-  const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
-  const API_CS_MALE = process.env.REACT_APP_API_KEY_CS_MALE;
-  const API_CS_FEMALE = process.env.REACT_APP_API_KEY_CS_FEMALE;
+  // // api key condition
+  // const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
+  // const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
+  // const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
+  // const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
+  // const API_CS_MALE = process.env.REACT_APP_API_KEY_CS_MALE;
+  // const API_CS_FEMALE = process.env.REACT_APP_API_KEY_CS_FEMALE;
 
-  // extract user info
-  const infoString = `_${race}_${gender}`;
-  console.log('info string : ', infoString);
+  // // extract user info
+  // const infoString = `_${race}_${gender}`;
+  // console.log('info string : ', infoString);
 
-  let apiA;
-  let apiB;
-  let apiC;
-  let apiD;
+  // let apiA;
+  // let apiB;
+  // let apiC;
+  // let apiD;
 
-  function getRandomApiKey(api1, api2) {
-    const randomIndex = Math.random() < 0.5 ? 0 : 1;
-    return randomIndex === 0 ? api1 : api2;
-  }
+  // function getRandomApiKey(api1, api2) {
+  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
+  //   return randomIndex === 0 ? api1 : api2;
+  // }
 
-  // api allocation logic
-  // ApiKey_A = same race, same gender
-  // ApiKey_B = different race, same gender
-  // ApiKey_C = different race, different gender
-  // ApiKey_D = same race, different gender
-  switch (infoString) {
-    case '_EA_MALE':
-      apiA = API_EA_MALE;
-      apiB = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-      apiC = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
-      apiD = API_EA_FEMALE;
-      break;
-    case '_EA_FEMALE':
-      apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
-      apiB = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
-      apiC = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-      apiD = API_EA_MALE;
-      break;
-    case '_AF_MALE':
-      apiA = process.env.REACT_APP_API_KEY_AF_MALE;
-      apiB = getRandomApiKey(API_EA_MALE, API_CS_MALE);
-      apiC = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
-      apiD = API_AF_FEMALE;
-      break;
-    case '_AF_FEMALE':
-      apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
-      apiB = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
-      apiC = getRandomApiKey(API_EA_MALE, API_CS_MALE);
-      apiD = API_AF_MALE;
-      break;
-    case '_CS_MALE':
-      apiA = process.env.REACT_APP_API_KEY_CS_MALE;
-      apiB = getRandomApiKey(API_EA_MALE, API_AF_MALE);
-      apiC = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
-      apiD = API_CS_FEMALE;
-      break;
-    case '_CS_FEMALE':
-      apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
-      apiB = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
-      apiC = getRandomApiKey(API_EA_MALE, API_AF_MALE);
-      apiD = API_CS_MALE;
-      break;
-    default:
-      break;
-  }
+  // // api allocation logic
+  // // ApiKey_A = same race, same gender
+  // // ApiKey_B = different race, same gender
+  // // ApiKey_C = different race, different gender
+  // // ApiKey_D = same race, different gender
+  // switch (infoString) {
+  //   case '_EA_MALE':
+  //     apiA = API_EA_MALE;
+  //     apiB = getRandomApiKey(API_AF_MALE, API_CS_MALE);
+  //     apiC = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
+  //     apiD = API_EA_FEMALE;
+  //     break;
+  //   case '_EA_FEMALE':
+  //     apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
+  //     apiB = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
+  //     apiC = getRandomApiKey(API_AF_MALE, API_CS_MALE);
+  //     apiD = API_EA_MALE;
+  //     break;
+  //   case '_AF_MALE':
+  //     apiA = process.env.REACT_APP_API_KEY_AF_MALE;
+  //     apiB = getRandomApiKey(API_EA_MALE, API_CS_MALE);
+  //     apiC = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
+  //     apiD = API_AF_FEMALE;
+  //     break;
+  //   case '_AF_FEMALE':
+  //     apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
+  //     apiB = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
+  //     apiC = getRandomApiKey(API_EA_MALE, API_CS_MALE);
+  //     apiD = API_AF_MALE;
+  //     break;
+  //   case '_CS_MALE':
+  //     apiA = process.env.REACT_APP_API_KEY_CS_MALE;
+  //     apiB = getRandomApiKey(API_EA_MALE, API_AF_MALE);
+  //     apiC = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
+  //     apiD = API_CS_FEMALE;
+  //     break;
+  //   case '_CS_FEMALE':
+  //     apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
+  //     apiB = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
+  //     apiC = getRandomApiKey(API_EA_MALE, API_AF_MALE);
+  //     apiD = API_CS_MALE;
+  //     break;
+  //   default:
+  //     break;
+  // }
 
-  console.log(apiA, apiB, apiC, apiD);
+  // console.log(apiA, apiB, apiC, apiD);
 
   // create persona scene on button press on on mount, depending on device size
   // connected with api

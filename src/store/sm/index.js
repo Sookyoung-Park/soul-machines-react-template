@@ -65,6 +65,15 @@ const initialState = {
       race: '',
       // ABCD 중 어디인지
     },
+    chatType: {
+      chatType: '',
+    },
+    apiKey: {
+      apiA: '',
+      apiB: '',
+      apiC: '',
+      apiD: '',
+    },
     activity: {
       isAttentive: 0,
       isTalking: 0,
@@ -157,11 +166,11 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
 };
-
-// update user state actions
-// export const setUserConversationState = (conversation) => (dispatch) => {
-//   dispatch(actions.setUserInfoState({ conversation }));
-// };
+export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {
+  dispatch(actions.setApiKeysState({
+    apiA, apiB, apiC, apiD,
+  }));
+};
 
 // create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
@@ -750,6 +759,10 @@ const smSlice = createSlice({
         activity: payload.activity,
       },
     }),
+    // 이 코드는 Redux 리듀서에서 setChatTypeState 액션이 디스패치되었을 때
+    // 호출되는 리듀서 함수입니다. 리듀서 함수는 현재 상태를 가져와서 새로운 상태를 반환하는 역할을 합니다.
+    // 여기서 setChatTypeState 리듀서 함수는 payload에서 전달된 chatType 값을 사용하여
+    // 상태를 업데이트합니다.
     // user info
     setUserInfoState: (state, { payload }) => {
       console.log('Reducer received setUserInfoState with payload:', payload);
@@ -769,7 +782,7 @@ const smSlice = createSlice({
     },
     // chatType State
     setChatTypeState: (state, { payload }) => {
-      console.log('Reducer received setUserInfoState with payload:', payload);
+      console.log('Reducer received setUserChatTypeState with payload:', payload);
 
       const newState = {
         ...state,
@@ -777,6 +790,25 @@ const smSlice = createSlice({
           ...state.user,
           chatType: {
             chatType: payload.chatType,
+          },
+        },
+      };
+      // console.log('New state:', newState);
+      return newState;
+    },
+    // set apiA B C D
+    setApiKeysState: (state, { payload }) => {
+      console.log('Reducer received setUserInfoState with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          apiKey: {
+            apiA: payload.apiA,
+            apiB: payload.apiB,
+            apiC: payload.apiC,
+            apiD: payload.apiD,
           },
         },
       };
