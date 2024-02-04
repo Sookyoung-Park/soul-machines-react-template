@@ -44,14 +44,33 @@ function LandingAfter({ className }) {
               </div>
               <div className="row">
                 <div>
-                  <h4 className="fw-light" style={{ marginBottom: '32px' }}>
-                    Talk with 4 different digital influencers
-                    about your life or problems. They will be your amazing buddy!
-                  </h4>
+                  <h5 className="fw-light" style={{ marginBottom: '32px' }}>
+                    You will talk with 4 different digital influencers.
+                    Feel free to chat about your interests, life or problems.
+                  </h5>
+                  <ul style={{ fontSize: '1.1rem' }}>
+                    <li>
+                      You have
+                      {' '}
+                      <strong>maximum three minutes</strong>
+                      {' '}
+                      for each digital influencer.
+                    </li>
+                    <li>
+                      You can leave the conversation
+                      {' '}
+                      <strong>once 2 minutes have passed</strong>
+                      , if you want.
+                    </li>
+                    <li>
+                      The record will be only used for data analysis and it will be
+                      discarded after the experiment.
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '28px' }}>
-                <div>
+              <div className="row" style={{ marginBottom: '16px' }}>
+                <div style={{ marginTop: '24px' }}>
                   <div className="form-check form-switch">
                     <label
                       className="form-check-label d-flex align-items-center"
@@ -104,14 +123,14 @@ function LandingAfter({ className }) {
                     <CameraVideoFill size={26} />
                     <span className="ps-1">+</span>
                     <MicFill size={26} />
-                    <div className="text-left fst-italic-bold" style={{ fontSize: '1.3rem', marginLeft: '12px' }}>
-                      Enable your camera and mic to optimize a conversation.
+                    <div className="text-left fst-italic-bold" style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
+                      Please Enable your camera and mic to optimize a conversation.
                     </div>
                   </div>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '24px' }}>
-                <div className="col-lg-6 mb-2">
+                <div className="col-lg-6 mb-2" style={{ marginBottom: '32px' }}>
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3 w-100"
@@ -152,6 +171,14 @@ function LandingAfter({ className }) {
                   </Link>
                 </div>
               </div>
+              <Link
+                to="/loading"
+                className="shadow btn primary-accent fs-3 w-100"
+                type="button"
+                onClick={() => handleChatTypeChange('A')}
+              >
+                Start
+              </Link>
               <div className="col" />
             </div>
           </div>

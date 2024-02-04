@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -6,21 +7,13 @@ import {
   CameraVideoFill,
   CameraVideoOffFill,
   ChatSquareTextFill,
-  Escape,
-  // Link45deg,
-  // Megaphone,
   MicFill,
   MicMuteFill,
-  // Share,
-  // SkipEndFill,
-  ThreeDotsVertical,
   VolumeMuteFill,
   VolumeUpFill,
-  X,
 } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
 import {
-  // stopSpeaking,
   setShowTranscript,
   disconnect,
   setOutputMute,
@@ -45,7 +38,6 @@ function Controls({
     micOn,
     cameraOn,
     isOutputMuted,
-    // speechState,
     showTranscript,
     transcript,
     requestedMediaPerms,
@@ -53,71 +45,16 @@ function Controls({
     highlightMute,
     highlightChat,
     highlightCamera,
-    // highlightSkip,
-    highlightMenu,
   } = useSelector((state) => ({ ...state.sm }));
 
   const dispatch = useDispatch();
 
   const [showFeedback, setShowFeedback] = useState(false);
 
-  // mic level visualizer
-  // TODO: fix this
-  // const typingOnly = requestedMediaPerms.mic !== true;
-  // const [volume, setVolume] = useState(0);
-  // useEffect(async () => {
-  //   if (connected && typingOnly === false) {
-  //     // credit: https://stackoverflow.com/a/64650826
-  //     let volumeCallback = null;
-  //     let audioStream;
-  //     let audioContext;
-  //     let audioSource;
-  //     let unmounted = false;
-  //     // Initialize
-  //     try {
-  //       audioStream = mediaStreamProxy.getUserMediaStream();
-  //       audioContext = new AudioContext();
-  //       audioSource = audioContext.createMediaStreamSource(audioStream);
-  //       const analyser = audioContext.createAnalyser();
-  //       analyser.fftSize = 512;
-  //       analyser.minDecibels = -127;
-  //       analyser.maxDecibels = 0;
-  //       analyser.smoothingTimeConstant = 0.4;
-  //       audioSource.connect(analyser);
-  //       const volumes = new Uint8Array(analyser.frequencyBinCount);
-  //       volumeCallback = () => {
-  //         analyser.getByteFrequencyData(volumes);
-  //         let volumeSum = 0;
-  //         volumes.forEach((v) => { volumeSum += v; });
-  //         // multiply value by 2 so the volume meter appears more responsive
-  //         // (otherwise the fill doesn't always show)
-  //         const averageVolume = (volumeSum / volumes.length) * 2;
-  //         // Value range: 127 = analyser.maxDecibels - analyser.minDecibels;
-  //         setVolume(averageVolume > 127 ? 127 : averageVolume);
-  //       };
-  //       // runs every time the window paints
-  //       const volumeDisplay = () => {
-  //         window.requestAnimationFrame(() => {
-  //           if (!unmounted) {
-  //             volumeCallback();
-  //             volumeDisplay();
-  //           }
-  //         });
-  //       };
-  //       volumeDisplay();
-  //     } catch (e) {
-  //       console.error('Failed to initialize volume visualizer!', e);
-  //     }
-
-  //     return () => {
-  //       console.log('closing down the audio stuff');
-  //       // FIXME: tracking #79
-  //       unmounted = true;
-  //       audioContext.close();
-  //       audioSource.close();
-  //     };
-  //   } return false;
-  // }, [connected]);
+  // const [redirectToFeedback, setRedirectToFeedback] = useState(false);
+  // track 2min for test=> show Exit Conversation
+  const [showExitButton, setShowExitButton] = useState(false);
+  const history = useHistory();
 
   // bind transcrpt open and mute func to each other, so that
   // when we open the transcript we mute the mic
@@ -130,26 +67,30 @@ function Controls({
     ReactTooltip.rebuild();
   });
 
+  // 2min after timeout => show ExitSession Button
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowExitButton(true);
+    }, 12000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  // redirect to feedback page after 3min 30sec
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      dispatch(disconnect());
+      history.push('/feedback');
+    }, 30000); // 3분 30초는 210000 밀리초입니다.
+    // 210000
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [dispatch, history]);
+
   const iconSize = 24;
-
-  const [showContextMenu, setShowContextMenu] = useState(false);
-
-  // const originalShareCopy = 'Share Experience';
-  // const [shareCopy, setShareCopy] = useState(originalShareCopy);
-
-  // const shareDP = async () => {
-  //   const url = window.location;
-  //   try {
-  //     await navigator.share({ url });
-  //   } catch {
-  //     const type = 'text/plain';
-  //     const blob = new Blob([url], { type });
-  //     const data = [new window.ClipboardItem({ [type]: blob })];
-  //     navigator.clipboard.write(data);
-  //     // setShareCopy('Link copied!');
-  //     // setTimeout(() => setShareCopy(originalShareCopy), 3000);
-  //   }
-  // };
 
   return (
     <div className={className}>
@@ -185,21 +126,6 @@ function Controls({
               <VolumeUpFill size={iconSize} color={primaryAccent} style={{ border: highlightMute ? 'red 2px solid' : '' }} />
             )}
           </button>
-        </div>
-        {/* skip through whatever dp is currently speaking */}
-        {/* <div>
-          <button
-            type="button"
-            className="control-icon"
-            disabled={speechState !== 'speaking'}
-            onClick={() => dispatch(stopSpeaking())}
-            data-tip="Skip Speech"
-            aria-label="Skip Speech"
-          >
-            <SkipEndFill size={iconSize} style={{ border: highlightSkip ? 'red 2px solid' : '' }} />
-          </button>
-        </div> */}
-        <div>
           {/* show transcript */}
           <button
             type="button"
@@ -254,78 +180,18 @@ function Controls({
             )}
           </button>
         </div>
-        <div className="context-control-parent">
-          <button
-            className="control-icon context-controls-trigger"
-            type="button"
-            aria-label="More Options"
-            data-tip="More Options"
-            id="dpChatDropdown"
-            onClick={() => setShowContextMenu(!showContextMenu)}
-          >
-            {showContextMenu ? (
-              <X size={iconSize} color="#fff" />
-            ) : (
-              <ThreeDotsVertical size={iconSize} style={{ border: highlightMenu ? 'red 2px solid' : '' }} />
-            )}
-          </button>
-          {showContextMenu ? (
-            <div className="context-controls shadow">
-              <div className="d-flex justify-content-end align-items-start">
-                <ul>
-                  <li>
-                    <button
-                      className="btn-unstyled "
-                      type="button"
-                      onClick={() => dispatch(disconnect())}
-                    >
-                      <Escape size={18} />
-                      {' '}
-                      Exit Session
-                    </button>
-                  </li>
-                  {/* <li>
-                    <button
-                      className="btn-unstyled"
-                      type="button"
-                      onClick={() => {
-                        setShowContextMenu(false);
-                        setShowFeedback(true);
-                      }}
-                    >
-                      <Megaphone size={18} />
-                      {' '}
-                      Give Feedback
-                    </button>
-                  </li> */}
-                  {/* <li>
-                    <button
-                      className="btn-unstyled"
-                      type="button"
-                      onClick={() => shareDP()}
-                    >
-                      <Share size={18} />
-                      {' '}
-                      {shareCopy}
-                    </button>
-                  </li> */}
-                  {/* <li>
-                    <a
-                      target="_blank"
-                      href="https://soulmachines.com"
-                      className="text-black text-decoration-none"
-                      rel="noreferrer"
-                    >
-                      <Link45deg size={18} />
-                      {' '}
-                      Visit Soul Machines
-                    </a>
-                  </li> */}
-                </ul>
-              </div>
-            </div>
-          ) : null}
-        </div>
+        {showExitButton && (
+        <button
+          type="button"
+          className="btn btn-dark connected-button"
+          onClick={() => {
+            dispatch(disconnect());
+            history.push('/feedback');
+          }}
+        >
+          Exit Conversation
+        </button>
+        )}
       </div>
     </div>
   );

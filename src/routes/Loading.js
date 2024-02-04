@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { useHistory, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -28,6 +29,8 @@ function Loading({ className }) {
 
   // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
   const dispatch = useDispatch();
+
+  const [isLoadingMade, setIsLoadingMade] = useState(false);
 
   const {
     percentageLoaded, name, currentStep, totalSteps,
@@ -122,17 +125,22 @@ function Loading({ className }) {
   const createSceneIfNotStarted = (apiKey) => {
     if (loading === false && connected === false && error === null) {
       dispatch(createScene(apiKey));
+      setIsLoadingMade(true);
     }
   };
 
   if (chatType === 'A') {
     createSceneIfNotStarted(apiA);
+    // setIsLoadingMade(true);
   } else if (chatType === 'B') {
     createSceneIfNotStarted(apiB);
+    // setIsLoadingMade(true);
   } else if (chatType === 'C') {
     createSceneIfNotStarted(apiC);
+    // setIsLoadingMade(true);
   } else if (chatType === 'D') {
     createSceneIfNotStarted(apiD);
+    // setIsLoadingMade(true);
   }
 
   useEffect(() => {
@@ -221,7 +229,7 @@ function Loading({ className }) {
             <ArrowLeftCircleFill size={32} />
           </button>
           <h4>
-            Have Fun with Noah!
+            Have Fun with Digital People!
           </h4>
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
@@ -237,6 +245,7 @@ function Loading({ className }) {
   const [skip, setSkip] = useState(false);
   const redirectToVideoOnConnect = () => {
     setSkip(true);
+    // setIsLoadingMade(true);
   };
 
   const history = useHistory();
@@ -255,21 +264,37 @@ function Loading({ className }) {
             </div>
             <div className="row">
               <div>
-                <button
-                  className={`${connected || page >= pages.length - 1 ? 'btn btn-dark connected-button' : 'btn-unstyled unconnected-button'} m-2`}
+                {/* {isLoadingMade && (
+                <Link
+                  to="/presurvey2"
+                  className="btn btn-dark connected-button"
                   type="button"
                   disabled={skip}
                   onClick={redirectToVideoOnConnect}
                 >
-                  { connected || page >= pages.length - 1 ? 'Chat with Noah' : 'S K I P' }
-                  { !connected && skip
+                  Next
+                </Link>
+                )} */}
+                {isLoadingMade && (
+                <button
+                  className={`${connected ? 'btn btn-dark connected-button' : 'btn-unstyled unconnected-button'} m-2`}
+                  type="button"
+                  disabled={skip}
+                  onClick={redirectToVideoOnConnect}
+                >
+                  { connected ? 'Chat with Digital Influencer' : 'Please wait for the loading ...' }
+                  {/* { !connected && skip
                     ? (
-                      <div className="ms-1 spinner-border spinner-border-sm text-secondary" role="status">
+                      <div
+                        className="ms-1 spinner-border spinner-border-sm text-secondary"
+                        role="status"
+                      >
                         <span className="visually-hidden">Loading...</span>
                       </div>
                     )
-                    : null }
+                    : null } */}
                 </button>
+                )}
               </div>
             </div>
             <div className="row justify-content-center">
