@@ -50,8 +50,6 @@ function Controls({
   const dispatch = useDispatch();
 
   const [showFeedback, setShowFeedback] = useState(false);
-
-  // const [redirectToFeedback, setRedirectToFeedback] = useState(false);
   // track 2min for test=> show Exit Conversation
   const [showExitButton, setShowExitButton] = useState(false);
   const history = useHistory();
@@ -71,7 +69,7 @@ function Controls({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 12000);
+    }, 120000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -83,7 +81,7 @@ function Controls({
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
       history.push('/feedback');
-    }, 30000); // 3분 30초는 210000 밀리초입니다.
+    }, 210000);
     // 210000
     return () => {
       clearTimeout(timeoutId);
