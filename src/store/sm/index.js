@@ -832,7 +832,7 @@ const smSlice = createSlice({
     disconnect: (state) => {
       scene = null;
       persona = null;
-      const { error } = state;
+      const { error, user } = state;
       // pull last timestamp from transcript
       const { transcript, startedAt } = state;
       // on disconnect the persona will add additional entries to the transcript.
@@ -850,6 +850,7 @@ const smSlice = createSlice({
         error,
         presumeTimeout,
         startedAt,
+        user,
       };
     },
     keepAlive: () => {
