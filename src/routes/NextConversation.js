@@ -20,7 +20,7 @@ function NextConversation({ className }) {
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/loading"
+                    to="/landingafter"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >

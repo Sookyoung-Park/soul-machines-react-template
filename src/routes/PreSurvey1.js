@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import breakpoints from '../utils/breakpoints';
-// import Header from '../components/Header';
 import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
@@ -14,9 +14,9 @@ import { setUserInfoState } from '../store/sm';
 
 function PreSurvey1({ className }) {
   // redux store values
-  const { user } = useSelector(({ sm }) => ({ ...sm }));
-  const { gender, race } = user.info;
-  console.log('user info', gender, race);
+  // const { user } = useSelector(({ sm }) => ({ ...sm }));
+  // const { gender, race } = user.info;
+  // console.log('user info', gender, race);
 
   const [userGender, setUserGender] = useState(''); // 'Female' for FEMALE, 'Male' for MALE
   const [isSelectionMade, setIsSelectionMade] = useState(false);
@@ -35,7 +35,6 @@ function PreSurvey1({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        {/* <Header /> */}
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-8 survey-container">
