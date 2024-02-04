@@ -1,15 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
 import { Link } from 'react-router-dom';
 import breakpoints from '../utils/breakpoints';
-// import Header from '../components/Header';
 import { landingBackgroundColor } from '../config';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
+import {
+  setNextChatType,
+} from '../store/sm';
 
 function NextConversation({ className }) {
+  const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { chatType } = user.chatType;
+
+  const dispatch = useDispatch();
+
+  // onclick event for change chatType
+  const handleChatTypeChange = () => {
+    dispatch(setNextChatType());
+    console.log('new chatType', chatType);
+  };
+
   return (
     <div className={className}>
       <div className="landing-wrapper">
@@ -23,6 +37,7 @@ function NextConversation({ className }) {
                     to="/landingafter"
                     className="shadow btn primary-accent fs-3"
                     type="button"
+                    onClick={() => handleChatTypeChange()}
                   >
                     Chat with Next Influencer
                   </Link>

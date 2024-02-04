@@ -15,6 +15,7 @@ import videoFill from '../img/camera-video-fill.svg';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { chatType } = user.chatType;
   const { gender, race } = user.info;
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
 
@@ -91,13 +92,28 @@ function LandingAfter({ className }) {
 
   // dispatch(setApiKeysState(apiA, apiB, apiC, apiD));
 
-  const [chatType, setChatType] = useState(''); // 'A B C D'
+  const [userChatType, setChatType] = useState(''); // 'A B C D'
   // for eslint
-  console.log(chatType, 'for trash');
+  console.log(userChatType, 'for trash');
 
-  const handleChatTypeChange = (type) => {
-    setChatType(type);
-    dispatch(setChatTypeState(type));
+  // const handleChatTypeChange = (type) => {
+  //   setChatType(type);
+  //   dispatch(setChatTypeState(type));
+  // };
+  const handleChatTypeChange = () => {
+    if (chatType === 'A') {
+      setChatType('A');
+      dispatch(setChatTypeState('A'));
+    } else if (chatType === 'B') {
+      setChatType('B');
+      dispatch(setChatTypeState('B'));
+    } else if (chatType === 'C') {
+      setChatType('C');
+      dispatch(setChatTypeState('C'));
+    } else if (chatType === 'D') {
+      setChatType('D');
+      dispatch(setChatTypeState('D'));
+    }
   };
 
   const handleApiKeysUpdate = () => {
@@ -250,7 +266,7 @@ function LandingAfter({ className }) {
                 type="button"
                 onClick={() => {
                   handleApiKeysUpdate();
-                  handleChatTypeChange('A');
+                  handleChatTypeChange();
                 }}
               >
                 Start

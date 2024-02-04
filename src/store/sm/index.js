@@ -66,7 +66,7 @@ const initialState = {
       // ABCD 중 어디인지
     },
     chatType: {
-      chatType: '',
+      chatType: 'A',
     },
     apiKey: {
       apiA: '',
@@ -165,6 +165,16 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 // update chatType actions
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
+};
+
+export const setNextChatType = () => (dispatch, getState) => {
+  const currentChatType = getState().sm.user.chatType.chatType; // getState에서 user 속성 참조
+  let nextChatType = String.fromCharCode(currentChatType.charCodeAt(0) + 1);
+  if (nextChatType > 'D') {
+    nextChatType = 'A';
+  }
+
+  dispatch(setChatTypeState(nextChatType));
 };
 export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {
   dispatch(actions.setApiKeysState({
