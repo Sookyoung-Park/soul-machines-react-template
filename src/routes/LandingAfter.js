@@ -269,7 +269,7 @@ function LandingAfter({ className }) {
                   handleChatTypeChange();
                 }}
               >
-                Start here
+                Start here test
               </Link>
               <div className="col" />
             </div>
