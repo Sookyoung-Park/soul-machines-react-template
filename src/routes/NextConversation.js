@@ -27,7 +27,6 @@ function NextConversation({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        {/* <Header /> */}
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-8">

@@ -171,7 +171,7 @@ export const setNextChatType = () => (dispatch, getState) => {
   const currentChatType = getState().sm.user.chatType.chatType; // getState에서 user 속성 참조
   let nextChatType = String.fromCharCode(currentChatType.charCodeAt(0) + 1);
   if (nextChatType > 'D') {
-    nextChatType = 'A';
+    nextChatType = 'E';
   }
 
   dispatch(setChatTypeState(nextChatType));

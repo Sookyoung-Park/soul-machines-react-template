@@ -32,6 +32,7 @@ function LandingAfter({ className }) {
   // infoString : EA_FEMALE, AF_MALE etc
   const infoString = `_${race}_${gender}`;
   console.log('info string : ', infoString);
+  console.log('landingAfter chatType : ', chatType);
 
   let apiA;
   let apiB;
@@ -261,7 +262,7 @@ function LandingAfter({ className }) {
                 </div>
               </div>
               <Link
-                to="/loading"
+                to={chatType === 'E' ? '/feedback' : '/loading'}
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
                 onClick={() => {
@@ -269,7 +270,7 @@ function LandingAfter({ className }) {
                   handleChatTypeChange();
                 }}
               >
-                Start here test
+                {chatType === 'E' ? 'Go to Survey' : 'Start here test'}
               </Link>
               <div className="col" />
             </div>
