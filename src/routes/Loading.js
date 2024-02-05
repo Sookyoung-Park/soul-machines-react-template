@@ -285,17 +285,7 @@ function Loading({ className }) {
                   disabled={skip}
                   onClick={redirectToVideoOnConnect}
                 >
-                  { connected ? 'Chat with Digital Influencer' : 'Please wait for the loading ...' }
-                  {/* { !connected && skip
-                    ? (
-                      <div
-                        className="ms-1 spinner-border spinner-border-sm text-secondary"
-                        role="status"
-                      >
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
-                    )
-                    : null } */}
+                  { connected ? `Chat with Influencer ${chatType}` : 'Please wait for the loading ...' }
                 </button>
                 )}
               </div>

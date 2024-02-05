@@ -220,7 +220,7 @@ function LandingAfter({ className }) {
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '24px' }}>
-                <div className="col-lg-6 mb-2" style={{ marginBottom: '32px' }}>
+                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '32px' }}>
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3 w-100"
@@ -229,8 +229,8 @@ function LandingAfter({ className }) {
                   >
                     Chat with A
                   </Link>
-                </div>
-                <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
+                </div> */}
+                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3 w-100"
@@ -239,8 +239,8 @@ function LandingAfter({ className }) {
                   >
                     Chat with B
                   </Link>
-                </div>
-                <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
+                </div> */}
+                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3 w-100"
@@ -249,8 +249,8 @@ function LandingAfter({ className }) {
                   >
                     Chat with C
                   </Link>
-                </div>
-                <div className="col-lg-6 mb-2">
+                </div> */}
+                {/* <div className="col-lg-6 mb-2">
                   <Link
                     to="/loading"
                     className="shadow btn primary-accent fs-3 w-100"
@@ -259,8 +259,19 @@ function LandingAfter({ className }) {
                   >
                     Chat with D
                   </Link>
-                </div>
+                </div> */}
               </div>
+              {/* <Link
+                to="/loading"
+                className="shadow btn primary-accent fs-3 w-100"
+                type="button"
+                onClick={() => {
+                  handleApiKeysUpdate();
+                  handleChatTypeChange();
+                }}
+              >
+                Start here test
+              </Link> */}
               <Link
                 to={chatType === 'E' ? '/feedback' : '/loading'}
                 className="shadow btn primary-accent fs-3 w-100"
@@ -270,7 +281,7 @@ function LandingAfter({ className }) {
                   handleChatTypeChange();
                 }}
               >
-                {chatType === 'E' ? 'Go to Survey' : 'Start here test'}
+                {chatType === 'E' ? 'Start Survey' : `Chat with Influencer ${chatType}`}
               </Link>
               <div className="col" />
             </div>
