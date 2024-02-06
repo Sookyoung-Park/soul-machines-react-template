@@ -206,7 +206,7 @@ export default styled(PreSurvey1)`
   }
 
   .survey-container{
-    align-items: cneter;
+    align-items: center;
   }
 
 `;
