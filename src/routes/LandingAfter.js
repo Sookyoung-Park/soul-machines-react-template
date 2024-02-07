@@ -52,12 +52,6 @@ function LandingAfter({ className }) {
     }
   }
 
-  // function getRandomApiKey(api1, api2) {
-  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
-  //   return randomIndex === 0 ? api1 : api2;
-  // }
-
-  // test
   function getRandomApiKeyB(api1, api2, txt1, txt2) {
     const randomIndex = Math.random() < 0.5 ? 0 : 1;
     if (randomIndex === 0) {
@@ -145,18 +139,11 @@ function LandingAfter({ className }) {
     default:
       break;
   }
-  console.log('A', apiA, apiB, apiC, apiD);
-
-  // dispatch(setApiKeysState(apiA, apiB, apiC, apiD));
 
   const [userChatType, setChatType] = useState(''); // 'A B C D'
   // for eslint
   console.log(userChatType, 'for trash');
 
-  // const handleChatTypeChange = (type) => {
-  //   setChatType(type);
-  //   dispatch(setChatTypeState(type));
-  // };
   const handleChatTypeChange = () => {
     if (chatType === 'A') {
       setChatType('A');
@@ -275,59 +262,7 @@ function LandingAfter({ className }) {
                   </div>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '24px' }}>
-                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '32px' }}>
-                  <Link
-                    to="/loading"
-                    className="shadow btn primary-accent fs-3 w-100"
-                    type="button"
-                    onClick={() => handleChatTypeChange('A')}
-                  >
-                    Chat with A
-                  </Link>
-                </div> */}
-                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
-                  <Link
-                    to="/loading"
-                    className="shadow btn primary-accent fs-3 w-100"
-                    type="button"
-                    onClick={() => handleChatTypeChange('B')}
-                  >
-                    Chat with B
-                  </Link>
-                </div> */}
-                {/* <div className="col-lg-6 mb-2" style={{ marginBottom: '24px' }}>
-                  <Link
-                    to="/loading"
-                    className="shadow btn primary-accent fs-3 w-100"
-                    type="button"
-                    onClick={() => handleChatTypeChange('C')}
-                  >
-                    Chat with C
-                  </Link>
-                </div> */}
-                {/* <div className="col-lg-6 mb-2">
-                  <Link
-                    to="/loading"
-                    className="shadow btn primary-accent fs-3 w-100"
-                    type="button"
-                    onClick={() => handleChatTypeChange('D')}
-                  >
-                    Chat with D
-                  </Link>
-                </div> */}
-              </div>
-              {/* <Link
-                to="/loading"
-                className="shadow btn primary-accent fs-3 w-100"
-                type="button"
-                onClick={() => {
-                  handleApiKeysUpdate();
-                  handleChatTypeChange();
-                }}
-              >
-                Start here test
-              </Link> */}
+              <div className="row" style={{ marginBottom: '24px' }} />
               <Link
                 to={chatType === 'E' ? '/feedback' : '/loading'}
                 className="shadow btn primary-accent fs-3 w-100"
