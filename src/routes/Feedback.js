@@ -10,6 +10,10 @@ import {
 import { headerHeight, landingBackgroundImage } from '../config';
 import { setChatTypeState } from '../store/sm';
 
+
+// collection : pre-survey, after survey, 아바타 순서
+// using firestore
+// 
 function Feedback({ className }) {
   const { presumeTimeout, user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
