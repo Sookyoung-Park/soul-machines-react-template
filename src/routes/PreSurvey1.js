@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -13,12 +12,7 @@ import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
 function PreSurvey1({ className }) {
-  // redux store values
-  // const { user } = useSelector(({ sm }) => ({ ...sm }));
-  // const { gender, race } = user.info;
-  // console.log('user info', gender, race);
-
-  const [userGender, setUserGender] = useState(''); // 'Female' for FEMALE, 'Male' for MALE
+  const [userGender, setUserGender] = useState(''); // 'Female' for FEMALE, 'Male' for MALE, 'Others' for OTHERS
   const [isSelectionMade, setIsSelectionMade] = useState(false);
 
   const dispatch = useDispatch();
@@ -45,7 +39,7 @@ function PreSurvey1({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h4 style={{ marginBottom: '24px' }}>Please Select Your Biological Gender</h4>
+                  <h4 style={{ marginBottom: '24px' }}>Please Select Your Gender Assigned at Birth</h4>
                   <Form>
                     <div key="default-radio" className="mb-3">
                       <Form.Check
@@ -63,6 +57,14 @@ function PreSurvey1({ className }) {
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
                         onChange={() => handleGenderChange('FEMALE')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="genderOthers"
+                        label="Others"
+                        name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
+                        onChange={() => handleGenderChange('OTHERS')}
                       />
                     </div>
                   </Form>

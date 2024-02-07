@@ -67,10 +67,14 @@ function PreSurvey2({ className }) {
                         onChange={() => handleRaceChange('EA')}
                         label={(
                           <div>
-                            {gender === 'MALE' ? (
-                              <img src={eaMale} alt="Asian" style={{ width: '260px', height: '220px' }} />
-                            ) : (
-                              <img src={eaFemale} alt="Other" style={{ width: '260px', height: '220px' }} />
+                            {gender === 'MALE' && (
+                            <img src={eaMale} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={eaFemale} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={afFemale} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -83,10 +87,14 @@ function PreSurvey2({ className }) {
                         onChange={() => handleRaceChange('AF')}
                         label={(
                           <div>
-                            {gender === 'MALE' ? (
-                              <img src={afMale} alt="African" style={{ width: '260px', height: '220px' }} />
-                            ) : (
-                              <img src={afFemale} alt="African" style={{ width: '260px', height: '220px' }} />
+                            {gender === 'MALE' && (
+                            <img src={afMale} alt="African" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={afFemale} alt="African" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={eaFemale} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -99,10 +107,14 @@ function PreSurvey2({ className }) {
                         onChange={() => handleRaceChange('CS')}
                         label={(
                           <div>
-                            {gender === 'MALE' ? (
-                              <img src={csMale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
-                            ) : (
-                              <img src={csFemale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                            {gender === 'MALE' && (
+                            <img src={csMale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={csFemale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={csMale} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
