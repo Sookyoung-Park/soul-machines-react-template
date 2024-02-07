@@ -7,6 +7,9 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './globalStyle';
 
+// test
+console.log('HERE');
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
