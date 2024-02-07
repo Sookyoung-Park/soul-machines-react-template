@@ -12,6 +12,7 @@ import {
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
+import { writeUserInfo, updateExperimentType } from '../store/firestore_functions';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
@@ -39,11 +40,42 @@ function LandingAfter({ className }) {
   let apiC;
   let apiD;
 
-  function getRandomApiKey(api1, api2) {
-    const randomIndex = Math.random() < 0.5 ? 0 : 1;
-    return randomIndex === 0 ? api1 : api2;
+  let fsA;
+  let fsB;
+  let fsC;
+  let fsD;
+
+  async function handleFirebaseUpdate() {
+    const docID = await writeUserInfo(gender, race);
+    if (docID) {
+      updateExperimentType(docID, fsA, fsB, fsC, fsD);
+    }
   }
 
+  // function getRandomApiKey(api1, api2) {
+  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
+  //   return randomIndex === 0 ? api1 : api2;
+  // }
+
+  // test
+  function getRandomApiKeyB(api1, api2, txt1, txt2) {
+    const randomIndex = Math.random() < 0.5 ? 0 : 1;
+    if (randomIndex === 0) {
+      fsB = txt1;
+      return api1;
+    }
+    fsB = txt2;
+    return api2;
+  }
+  function getRandomApiKeyC(api1, api2, txt1, txt2) {
+    const randomIndex = Math.random() < 0.5 ? 0 : 1;
+    if (randomIndex === 0) {
+      fsC = txt1;
+      return api1;
+    }
+    fsC = txt2;
+    return api2;
+  }
   // api allocation logic
   // ApiKey_A = same race, same gender
   // ApiKey_B = different race, same gender
@@ -52,39 +84,63 @@ function LandingAfter({ className }) {
   switch (infoString) {
     case '_EA_MALE':
       apiA = API_EA_MALE;
-      apiB = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-      apiC = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
+      apiB = getRandomApiKeyB(API_AF_MALE, API_CS_MALE, 'API_AF_MALE', 'API_CS_MALE');
+      apiC = getRandomApiKeyC(API_AF_FEMALE, API_CS_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE');
       apiD = API_EA_FEMALE;
+      // firestore
+      fsA = 'API_EA_MALE';
+      fsD = 'API_EA_FEMALE';
+      handleFirebaseUpdate();
       break;
     case '_EA_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
-      apiB = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
-      apiC = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-      apiD = API_EA_MALE;
+      apiB = getRandomApiKeyB(API_AF_FEMALE, API_CS_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE');
+      apiC = getRandomApiKeyC(API_AF_MALE, API_CS_MALE, 'API_AF_MALE', 'API_CS_MALE');
+      apiD = API_EA_FEMALE;
+      // firestore
+      fsA = 'API_EA_FEMALE';
+      fsD = 'API_EA_MALE';
+      handleFirebaseUpdate();
       break;
     case '_AF_MALE':
       apiA = process.env.REACT_APP_API_KEY_AF_MALE;
-      apiB = getRandomApiKey(API_EA_MALE, API_CS_MALE);
-      apiC = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
+      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE, 'API_EA_MALE', 'API_CS_MALE');
+      apiC = getRandomApiKeyC(API_EA_FEMALE, API_CS_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMALE');
       apiD = API_AF_FEMALE;
+      // firestore
+      fsA = 'API_AF_MALE';
+      fsD = 'API_AF_FEMALE';
+      handleFirebaseUpdate();
       break;
     case '_AF_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
-      apiB = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
-      apiC = getRandomApiKey(API_EA_MALE, API_CS_MALE);
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMLAE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_CS_MALE, 'API_EA_MALE', 'API_CS_MALE');
       apiD = API_AF_MALE;
+      // firestore
+      fsA = 'API_AF_FEMALE';
+      fsD = 'API_AF_MALE';
+      handleFirebaseUpdate();
       break;
     case '_CS_MALE':
       apiA = process.env.REACT_APP_API_KEY_CS_MALE;
-      apiB = getRandomApiKey(API_EA_MALE, API_AF_MALE);
-      apiC = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
+      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, 'API_EA_MALE', 'API_AF_MALE');
+      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE');
       apiD = API_CS_FEMALE;
+      // firebase
+      fsA = 'API_CS_MALE';
+      fsD = 'API_CS_FEMALE';
+      handleFirebaseUpdate();
       break;
     case '_CS_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
-      apiB = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
-      apiC = getRandomApiKey(API_EA_MALE, API_AF_MALE);
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, 'API_EA_MALE', 'API_AF_MALE');
       apiD = API_CS_MALE;
+      // firestore
+      fsA = 'API_CS_FEMALE';
+      fsD = 'API_CS_MALE';
+      handleFirebaseUpdate();
       break;
     default:
       break;
