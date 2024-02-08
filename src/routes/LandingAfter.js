@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
@@ -8,7 +8,7 @@ import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundColor } from '../config';
 import {
-  setRequestedMediaPerms, setChatTypeState, setApiKeysState,
+  setRequestedMediaPerms, setChatTypeState, setApiKeysState, setDocIDState,
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
@@ -49,8 +49,15 @@ function LandingAfter({ className }) {
     const docID = await writeUserInfo(gender, race);
     if (docID) {
       updateExperimentType(docID, fsA, fsB, fsC, fsD);
+      dispatch(setDocIDState(docID));
+      console.log('docID: ', docID);
     }
   }
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 한 번만 실행되도록 설정
+    handleFirebaseUpdate();
+  }, [fsD]); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
 
   function getRandomApiKeyB(api1, api2, txt1, txt2) {
     const randomIndex = Math.random() < 0.5 ? 0 : 1;
@@ -84,7 +91,7 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_EA_MALE';
       fsD = 'API_EA_FEMALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     case '_EA_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
@@ -94,7 +101,7 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_EA_FEMALE';
       fsD = 'API_EA_MALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     case '_AF_MALE':
       apiA = process.env.REACT_APP_API_KEY_AF_MALE;
@@ -104,7 +111,7 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_AF_MALE';
       fsD = 'API_AF_FEMALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     case '_AF_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
@@ -114,7 +121,7 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_AF_FEMALE';
       fsD = 'API_AF_MALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     case '_CS_MALE':
       apiA = process.env.REACT_APP_API_KEY_CS_MALE;
@@ -124,7 +131,7 @@ function LandingAfter({ className }) {
       // firebase
       fsA = 'API_CS_MALE';
       fsD = 'API_CS_FEMALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     case '_CS_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
@@ -134,7 +141,7 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_CS_FEMALE';
       fsD = 'API_CS_MALE';
-      handleFirebaseUpdate();
+      // handleFirebaseUpdate();
       break;
     default:
       break;
@@ -274,6 +281,19 @@ function LandingAfter({ className }) {
               >
                 {chatType === 'E' ? 'Start Survey' : `Chat with Influencer ${chatType}`}
               </Link>
+              {/* test */}
+              <Link
+                to="/aa"
+                className="shadow btn primary-accent fs-3 w-100"
+                type="button"
+                onClick={() => {
+                  handleApiKeysUpdate();
+                  handleChatTypeChange();
+                }}
+              >
+                TEST TO AA
+              </Link>
+              {/* test */}
               <div className="col" />
             </div>
           </div>

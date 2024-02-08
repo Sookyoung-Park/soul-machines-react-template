@@ -11,12 +11,12 @@ import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
-import eaMale from '../img/EA_Male.png';
-import eaFemale from '../img/EA_Female.png';
-import afMale from '../img/AF_Male.png';
-import afFemale from '../img/AF_Female.png';
-import csMale from '../img/CS_Male.png';
-import csFemale from '../img/CS_Female.png';
+import EA_MALE from '../img/EA_MALE.png';
+import EA_FEMALE from '../img/EA_FEMALE.png';
+import AF_MALE from '../img/AF_MALE.png';
+import AF_FEMALE from '../img/AF_FEMALE.png';
+import CS_MALE from '../img/CS_MALE.png';
+import CS_FEMALE from '../img/CS_FEMALE.png';
 
 function PreSurvey2({ className }) {
   // redux store values
@@ -68,13 +68,13 @@ function PreSurvey2({ className }) {
                         label={(
                           <div>
                             {gender === 'MALE' && (
-                            <img src={eaMale} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                            <img src={EA_MALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender === 'FEMALE' && (
-                            <img src={eaFemale} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                            <img src={EA_FEMALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender !== 'MALE' && gender !== 'FEMALE' && (
-                            <img src={afFemale} alt="none" style={{ width: '260px', height: '220px' }} />
+                            <img src={AF_FEMALE} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -88,13 +88,13 @@ function PreSurvey2({ className }) {
                         label={(
                           <div>
                             {gender === 'MALE' && (
-                            <img src={afMale} alt="African" style={{ width: '260px', height: '220px' }} />
+                            <img src={AF_MALE} alt="African" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender === 'FEMALE' && (
-                            <img src={afFemale} alt="African" style={{ width: '260px', height: '220px' }} />
+                            <img src={AF_FEMALE} alt="African" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender !== 'MALE' && gender !== 'FEMALE' && (
-                            <img src={eaFemale} alt="none" style={{ width: '260px', height: '220px' }} />
+                            <img src={EA_FEMALE} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}
@@ -108,13 +108,13 @@ function PreSurvey2({ className }) {
                         label={(
                           <div>
                             {gender === 'MALE' && (
-                            <img src={csMale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                            <img src={CS_MALE} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender === 'FEMALE' && (
-                            <img src={csFemale} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                            <img src={CS_FEMALE} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
                             )}
                             {gender !== 'MALE' && gender !== 'FEMALE' && (
-                            <img src={csMale} alt="none" style={{ width: '260px', height: '220px' }} />
+                            <img src={CS_MALE} alt="none" style={{ width: '260px', height: '220px' }} />
                             )}
                           </div>
                         )}

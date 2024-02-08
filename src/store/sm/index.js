@@ -74,6 +74,9 @@ const initialState = {
       apiC: '',
       apiD: '',
     },
+    firebase: {
+      docID: '',
+    },
     activity: {
       isAttentive: 0,
       isTalking: 0,
@@ -165,6 +168,11 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 // update chatType actions
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
+};
+
+// update firebase docID
+export const setDocIDState = (docID) => (dispatch) => {
+  dispatch(actions.setDocIDState({ docID }));
 };
 
 export const setNextChatType = () => (dispatch, getState) => {
@@ -804,6 +812,22 @@ const smSlice = createSlice({
         },
       };
       // console.log('New state:', newState);
+      return newState;
+    },
+    // set firebase docId
+    setDocIDState: (state, { payload }) => {
+      console.log('Reducer received firebase docId with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          firebase: {
+            docID: payload.docID,
+          },
+        },
+      };
+      console.log('New state setDocIDState:', newState);
       return newState;
     },
     // set apiA B C D
