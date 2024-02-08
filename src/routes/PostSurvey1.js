@@ -4,6 +4,14 @@ import { Survey } from 'survey-react-ui';
 import 'survey-core/defaultV2.min.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import eaMale from '../img/EA_Male.png';
+// import eaFemale from '../img/EA_Female.png';
+// import afMale from '../img/AF_Male.png';
+// import afFemale from '../img/AF_Female.png';
+// import csMale from '../img/CS_Male.png';
+// import csFemale from '../img/CS_Female.png';
 
 const json = {
   elements: [
@@ -24,6 +32,10 @@ const json = {
 };
 
 function PostSurvey1({ className }) {
+  // firestore experimentType A,B,C,D 가져와서 이미지 불러오기
+  // string 바꾸기 (이미지 타입으로)
+  // 조건부로 뿌리기 필요없는 이미지는 opacity100으로 만들어보기 ( 어떻게 안쓰는 파일 에러 안뜨게하는지 생각해보기)
+
   const survey = new Model(json);
   survey.onComplete.add((sender, options) => {
     console.log(options, 'for eslint');
@@ -67,6 +79,7 @@ function PostSurvey1({ className }) {
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div>
                   {/* <h1 className="fw-bol">After Survey</h1> */}
+                  <img src={eaMale} alt="Asian" style={{ width: '260px', height: '220px' }} />
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
