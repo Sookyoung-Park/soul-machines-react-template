@@ -44,7 +44,9 @@
     "rehype-sanitize": "^5.0.0",
     "remark-gfm": "^2.0.0",
     "styled-components": "^5.3.0",
+    "survey-core": "^1.9.129",
     "survey-react": "^1.9.129",
+    "survey-react-ui": "^1.9.129",
     "syllable": "^5.0.0",
     "web-vitals": "^1.1.2"
   },

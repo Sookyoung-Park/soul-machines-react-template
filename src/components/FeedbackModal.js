@@ -3,8 +3,40 @@ import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+// import { Model } from 'survey-core';
+// import { Survey } from 'survey-react-ui';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
+
+// const json = {
+//   elements: [
+//     {
+//       type: 'ranking',
+//       name: 'smartphone-features',
+//       title: 'rank the following smartphone features from the most important to the least',
+//       isRequired: true,
+//       choices: [
+//         'Long battery life',
+//         'Plenty of storage capacity',
+//         'High-quality camera',
+//         'Powerful CPU',
+//         'Large screen size',
+//         'High durability',
+//         'Low price',
+//       ],
+//     },
+//   ],
+//   showQuestionNumbers: false,
+// };
+
+// function SurveyComponent() {
+//   const survey = new Model(json);
+//   survey.onComplete.add((sender, options) => {
+//     console.log(options, 'for eslint');
+//     console.log(JSON.stringify(sender.data, null, 3));
+//   });
+//   return (<Survey model={survey} />);
+// }
 
 function FeedbackModal({
   className, onClose, closeText, denyFeedbackText, denyFeedback,
@@ -118,6 +150,9 @@ function FeedbackModal({
                   </button>
                 ))}
               </div>
+            </div>
+            <div className="mt-3">
+              {/* <SurveyComponent /> */}
             </div>
             <div className="row">
               <h3 style={{ marginTop: '10px' }}>Can you tell us more?</h3>

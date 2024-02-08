@@ -96,6 +96,9 @@ function App() {
         <Route path="/feedback">
           <Feedback />
         </Route>
+        <Route path="/test">
+          <afterSurvey1 />
+        </Route>
         <Route path="/next-conversation">
           <NextConversation />
         </Route>
