@@ -3,55 +3,33 @@ import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-// import { Model } from 'survey-core';
-// import { Survey } from 'survey-react-ui';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
-
-// const json = {
-//   elements: [
-//     {
-//       type: 'ranking',
-//       name: 'smartphone-features',
-//       title: 'rank the following smartphone features from the most important to the least',
-//       isRequired: true,
-//       choices: [
-//         'Long battery life',
-//         'Plenty of storage capacity',
-//         'High-quality camera',
-//         'Powerful CPU',
-//         'Large screen size',
-//         'High durability',
-//         'Low price',
-//       ],
-//     },
-//   ],
-//   showQuestionNumbers: false,
-// };
-
-// function SurveyComponent() {
-//   const survey = new Model(json);
-//   survey.onComplete.add((sender, options) => {
-//     console.log(options, 'for eslint');
-//     console.log(JSON.stringify(sender.data, null, 3));
-//   });
-//   return (<Survey model={survey} />);
-// }
 
 function FeedbackModal({
   className, onClose, closeText, denyFeedbackText, denyFeedback,
 }) {
-  const nStars = 5;
-  const [rating, setRating] = useState(-1);
-  const [ratingSelected, setRatingSelected] = useState(false);
+  const nStars = 7;
+  // I think A sympathize my feeling
+  const [ratingSympathizeFeeling, setRatingSympathizeFeeling] = useState(-1);
+  const [ratingSympathizeFeelingSelected, setRatingSympathizeFeelingSelected] = useState(false);
+
+  // I think DP could be a good friend with me
+  const [ratingGoodFriend, setRatingGoodFriend] = useState(-1);
+  const [ratingGoodFriendSelected, setRatingGoodFriendSelected] = useState(false);
+
+  // DP A provided a good service
+  const [ratingGoodService, setRatingGoodService] = useState(-1);
+  const [ratingGoodServiceSelected, setRatingGoodSerivceSelected] = useState(false);
+
   const [submitted, setSubmitted] = useState(false);
 
   const history = useHistory();
 
-  // generate array of clickable stars for rating
-  const stars = Array.from(Array(nStars)).map((_, i) => {
+  // generate array of clickable stars for ratingSympathizeFeeling
+  const starsSympathizeFeeling = Array.from(Array(nStars)).map((_, i) => {
     const handleHover = () => {
-      if (!ratingSelected) setRating(i);
+      if (!ratingSympathizeFeelingSelected) setRatingSympathizeFeeling(i);
     };
     return (
       <button
@@ -62,12 +40,12 @@ function FeedbackModal({
         onMouseOver={handleHover}
         onFocus={handleHover}
         onClick={() => {
-          setRating(i);
-          setRatingSelected(true);
+          setRatingSympathizeFeeling(i);
+          setRatingSympathizeFeelingSelected(true);
         }}
       >
         {
-        rating >= i
+        ratingSympathizeFeeling >= i
           ? <StarFill className="star star-fill" fill="#212529" />
           : <Star className="star star-outline" fill="#212529" />
       }
@@ -75,10 +53,64 @@ function FeedbackModal({
     );
   });
 
+  // generate array of clickable stars for ratingGoodFriend
+  const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingGoodFriendSelected) setRatingGoodFriend(i);
+    };
+    return (
+      <button
+          // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingGoodFriend(i);
+          setRatingGoodFriendSelected(true);
+        }}
+      >
+        {
+          ratingGoodFriend >= i
+            ? <StarFill className="star star-fill" fill="#212529" />
+            : <Star className="star star-outline" fill="#212529" />
+        }
+      </button>
+    );
+  });
+
+  // generate array of clickable stars for ratingGoodService
+  const starsRatingGoodService = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingGoodServiceSelected) setRatingGoodService(i);
+    };
+    return (
+      <button
+            // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingGoodService(i);
+          setRatingGoodSerivceSelected(true);
+        }}
+      >
+        {
+            ratingGoodService >= i
+              ? <StarFill className="star star-fill" fill="#212529" />
+              : <Star className="star star-outline" fill="#212529" />
+          }
+      </button>
+    );
+  });
+
   // allow for custom input
   const [customField, setCustomField] = useState('');
   // default tags
-  const tagItems = ['Easy', 'Intuitive', 'Slow', 'Helpful', 'Personable', 'Laggy'];
+  const tagItems = ['Cheerful', 'Friendly', 'Warm', 'Enjoyful', 'Empathic'];
   const [selectedTags, setSelectedTags] = useState([]);
   const handleSelectTag = (t) => {
     const tagIsSelected = selectedTags.indexOf(t) > -1;
@@ -115,21 +147,13 @@ function FeedbackModal({
           </div>
         ) : (
           <div>
+            <div className="row" />
             <div className="row">
               <h2 className="text-center">
                 Can you rate your experience with Digital Persona A?
               </h2>
             </div>
-            <div className="row">
-              <div
-                className="justify-content-center d-flex"
-                onMouseLeave={() => {
-                  if (!ratingSelected) setRating(-1);
-                }}
-              >
-                {stars}
-              </div>
-            </div>
+            <div className="row" />
             <hr />
             <div className="row">
               <h3>How would you describe your experience?</h3>
@@ -153,6 +177,51 @@ function FeedbackModal({
             </div>
             <div className="mt-3">
               {/* <SurveyComponent /> */}
+            </div>
+            <div className="row">
+              <div>
+                <h3>I think A sympathize my feeling</h3>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingSympathizeFeelingSelected) setRatingSympathizeFeeling(-1);
+                  }}
+                >
+                  {starsSympathizeFeeling}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div>
+                <h3>I think A could be your good friend with you</h3>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingGoodFriendSelected) setRatingGoodFriend(-1);
+                  }}
+                >
+                  {starsRatingGoodFriend}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div>
+                <h3>DP provided a good service</h3>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingGoodServiceSelected) setRatingGoodService(-1);
+                  }}
+                >
+                  {starsRatingGoodService}
+                </div>
+              </div>
             </div>
             <div className="row">
               <h3 style={{ marginTop: '10px' }}>Can you tell us more?</h3>
@@ -183,7 +252,7 @@ function FeedbackModal({
                   <button
                     type="button"
                     className="btn btn-dark"
-                    disabled={!ratingSelected}
+                    disabled={!ratingSympathizeFeelingSelected}
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
                       setSubmitted(true);

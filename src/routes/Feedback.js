@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Star, StarFill, XCircle,
 } from 'react-bootstrap-icons';
-// import Header from '../components/Header';
 import { headerHeight, landingBackgroundImage } from '../config';
 import { setChatTypeState } from '../store/sm';
 
@@ -162,7 +161,7 @@ function Feedback({ className }) {
               : (
                 <div>
                   <div className="row">
-                    <h2 className="text-center">Can you rate your experience with Digital Persona A?</h2>
+                    <h2 className="text-center">How was your experience with Digital Influencer A?</h2>
                   </div>
                   <div className="row">
                     <div
@@ -176,8 +175,12 @@ function Feedback({ className }) {
                   </div>
                   <hr />
                   <div className="row">
-                    <h3>How would you describe your experience?</h3>
-                    <div>Select all that apply or type your own</div>
+                    <h3>
+                      How would you describe your convertsation with A?
+                      If there are adjectives expressing DP A&apos;s personality traits
+                      please select all that apply.
+                    </h3>
+                    {/* <div>Select all that apply or type your own</div> */}
                     <div className="mt-3">
                       {/* combine default tags and custom ones to display as one list */}
                       {/* user can click on default tags to deselect and custom ones to edit */}
