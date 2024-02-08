@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Star, StarFill, XCircle,
 } from 'react-bootstrap-icons';
 import { headerHeight, landingBackgroundImage } from '../config';
-import { setChatTypeState } from '../store/sm';
+// import { setChatTypeState } from '../store/sm';
 
 function Feedback({ className }) {
   const { presumeTimeout, user } = useSelector(({ sm }) => ({ ...sm }));
@@ -15,24 +15,22 @@ function Feedback({ className }) {
 
   console.log(chatType, ': saved ChatType in Feedback.js');
 
-  const [userChatType, setUserChatType] = useState(''); // 'A B C D'
-  // for eslint
-  console.log(userChatType, 'for trash');
+  // const [userChatType, setUserChatType] = useState(''); // 'A B C D'
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleChatTypeChange = () => {
-    if (chatType === 'A') {
-      setUserChatType('B');
-      dispatch(setChatTypeState('B'));
-    } else if (chatType === 'B') {
-      setUserChatType('C');
-      dispatch(setChatTypeState('C'));
-    } else if (chatType === 'C') {
-      setUserChatType('D');
-      dispatch(setChatTypeState('D'));
-    }
-  };
+  // const handleChatTypeChange = () => {
+  //   if (chatType === 'A') {
+  //     setUserChatType('B');
+  //     dispatch(setChatTypeState('B'));
+  //   } else if (chatType === 'B') {
+  //     setUserChatType('C');
+  //     dispatch(setChatTypeState('C'));
+  //   } else if (chatType === 'C') {
+  //     setUserChatType('D');
+  //     dispatch(setChatTypeState('D'));
+  //   }
+  // };
 
   const nStars = 5;
   const [rating, setRating] = useState(-1);
@@ -123,6 +121,7 @@ function Feedback({ className }) {
   }, [presumeTimeout]);
 
   const [submitted, setSubmitted] = useState(false);
+  console.log(setSubmitted);
   return (
     <div className={className}>
       {
@@ -134,7 +133,6 @@ function Feedback({ className }) {
           )
           : null
       }
-      {/* <Header /> */}
       <div className="container feedback-container d-flex justify-content-center align-items-center flex-column">
         <div className="container">
           <div className="row d-flex justify-content-center">
@@ -226,9 +224,10 @@ function Feedback({ className }) {
                       </form>
                     </div>
                   </div>
-                  <div className="row mt-3">
+                  {/* <div className="row mt-3">
                     <div className="justify-content-end d-flex">
-                      <Link to="/" type="button" className="btn btn-outline-dark me-2">No thanks</Link>
+                      <Link to="/" type="button"
+                      className="btn btn-outline-dark me-2">No thanks</Link>
                       <button
                         type="button"
                         className="btn btn-dark"
@@ -246,7 +245,7 @@ function Feedback({ className }) {
                         Next Influencer
                       </Link>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               )
           }

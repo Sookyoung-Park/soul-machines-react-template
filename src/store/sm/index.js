@@ -77,6 +77,9 @@ const initialState = {
     firebase: {
       docID: '',
     },
+    surveyProgress: {
+      surveyProgress: 'A',
+    },
     activity: {
       isAttentive: 0,
       isTalking: 0,
@@ -170,11 +173,6 @@ export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
 };
 
-// update firebase docID
-export const setDocIDState = (docID) => (dispatch) => {
-  dispatch(actions.setDocIDState({ docID }));
-};
-
 export const setNextChatType = () => (dispatch, getState) => {
   const currentChatType = getState().sm.user.chatType.chatType; // getState에서 user 속성 참조
   let nextChatType = String.fromCharCode(currentChatType.charCodeAt(0) + 1);
@@ -184,6 +182,27 @@ export const setNextChatType = () => (dispatch, getState) => {
 
   dispatch(setChatTypeState(nextChatType));
 };
+
+// update firebase docID
+export const setDocIDState = (docID) => (dispatch) => {
+  dispatch(actions.setDocIDState({ docID }));
+};
+
+// update surveyProgress
+export const setSurveyProgressState = (surveyProgress) => (dispatch) => {
+  dispatch(actions.setChatTypeState({ surveyProgress }));
+};
+
+export const setNextSurveyProgress = () => (dispatch, getState) => {
+  const currentSurveyProgressType = getState().sm.user.surveyProgress.surveyProgress;
+  let nextChatType = String.fromCharCode(currentSurveyProgressType.charCodeAt(0) + 1);
+  if (nextChatType > 'D') {
+    nextChatType = 'E';
+  }
+
+  dispatch(setChatTypeState(nextChatType));
+};
+
 export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {
   dispatch(actions.setApiKeysState({
     apiA, apiB, apiC, apiD,
@@ -812,6 +831,21 @@ const smSlice = createSlice({
         },
       };
       // console.log('New state:', newState);
+      return newState;
+    },
+    // surveyProgress State
+    setSurveyProgressState: (state, { payload }) => {
+      console.log('Reducer received setUserChatTypeState with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          surveyProgress: {
+            surveyProgress: payload.surveyProgress,
+          },
+        },
+      };
       return newState;
     },
     // set firebase docId

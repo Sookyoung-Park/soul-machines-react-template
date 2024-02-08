@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
-import { Link, useHistory } from 'react-router-dom';
+import {
+  Link,
+  // useHistory
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
+// import { setNextSurveyProgress } from '../store/sm';
+// import { setSurveyProgressState } from '../store/sm';
 
 function FeedbackModal({
-  className, onClose, closeText, denyFeedbackText, denyFeedback,
+  className, onClose, closeText,
+  // denyFeedbackText, denyFeedback,
 }) {
+  const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { surveyProgress } = user.surveyProgress;
+
+  console.log(surveyProgress, ': saved sP in Feedback.js');
+
+  // const dispatch = useDispatch();
+
+  // onclick event for change chatType
+  // const handleSurveyProgressChange = () => {
+  //   dispatch(setNextSurveyProgress());
+  //   console.log('new chatType', surveyProgress);
+  // };
+
+  // const [userChatType, setUserChatType] = useState(''); // 'A B C D'
+
   const nStars = 7;
   // I think A sympathize my feeling
   const [ratingSympathizeFeeling, setRatingSympathizeFeeling] = useState(-1);
@@ -24,7 +46,7 @@ function FeedbackModal({
 
   const [submitted, setSubmitted] = useState(false);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   // generate array of clickable stars for ratingSympathizeFeeling
   const starsSympathizeFeeling = Array.from(Array(nStars)).map((_, i) => {
@@ -242,17 +264,18 @@ function FeedbackModal({
               </div>
               <div className="row mt-3">
                 <div className="justify-content-end d-flex">
-                  <button
+                  {/* <button
                     onClick={() => (denyFeedback ? denyFeedback() : history.push('/'))}
                     type="button"
                     className="btn btn-outline-dark me-2"
                   >
                     { denyFeedbackText || 'No Thanks' }
-                  </button>
+                  </button> */}
                   <button
                     type="button"
                     className="btn btn-dark"
-                    disabled={!ratingSympathizeFeelingSelected}
+                    disabled={!ratingSympathizeFeelingSelected
+                      || !ratingGoodFriendSelected || !ratingGoodServiceSelected}
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
                       setSubmitted(true);
@@ -274,8 +297,8 @@ FeedbackModal.propTypes = {
   className: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   closeText: PropTypes.string,
-  denyFeedbackText: PropTypes.string.isRequired,
-  denyFeedback: PropTypes.string.isRequired,
+  // denyFeedbackText: PropTypes.string.isRequired,
+  // denyFeedback: PropTypes.string.isRequired,
 };
 
 FeedbackModal.defaultProps = {
