@@ -5,7 +5,7 @@ import 'survey-core/defaultV2.min.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { readAllExperimentTypes, updateTrustworthyRank } from '../store/firestore_functions';
+import { readAllExperimentTypes, updateIntelligenceRank } from '../store/firestore_functions';
 
 import EA_MALE from '../img/EA_MALE.png';
 import EA_FEMALE from '../img/EA_FEMALE.png';
@@ -18,8 +18,8 @@ const json = {
   elements: [
     {
       type: 'ranking',
-      name: 'rank-trustworthy',
-      title: 'Please rank the trustworthy conversation from the most important to the least',
+      name: 'rank-intelligent',
+      title: 'Which influncer did you feel the most intelligent from the most important to the least? ',
       isRequired: true,
       choices: [
         'DP A',
@@ -32,7 +32,7 @@ const json = {
   showQuestionNumbers: false,
 };
 
-function PostSurvey1({ className }) {
+function PostSurvey2({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
   const { gender, race } = user.info;
@@ -94,10 +94,10 @@ function PostSurvey1({ className }) {
     setSurveyCompleted(true);
 
     // 'Powerful CPU' 항목의 인덱스를 찾습니다.
-    const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');
-    const indexOfB = surveyData['rank-trustworthy'].indexOf('DP B');
-    const indexOfC = surveyData['rank-trustworthy'].indexOf('DP C');
-    const indexOfD = surveyData['rank-trustworthy'].indexOf('DP D');
+    const indexOfA = surveyData['rank-intelligent'].indexOf('DP A');
+    const indexOfB = surveyData['rank-intelligent'].indexOf('DP B');
+    const indexOfC = surveyData['rank-intelligent'].indexOf('DP C');
+    const indexOfD = surveyData['rank-intelligent'].indexOf('DP D');
 
     // 해당 인덱스에 할당된 값을 변수에 저장합니다.
     // indexOfPowerfulCPU !== -1: 이 조건은 'Powerful CPU'가 배열에 존재하는지 확인합니다.요소가 존재하지 않으면 -1을 반환
@@ -111,7 +111,7 @@ function PostSurvey1({ className }) {
     // console.log('DP B data:', dpBRank);
     // console.log('DP C data:', dpCRank);
     // console.log('DP D data:', dpDRank);
-    updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
+    updateIntelligenceRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
   };
 
   // on complete and console print
@@ -160,7 +160,7 @@ function PostSurvey1({ className }) {
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/ps2"
+                    to="/ps3"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                     onClick={handleNextButtonClick}
@@ -177,11 +177,11 @@ function PostSurvey1({ className }) {
     </div>
   );
 }
-PostSurvey1.propTypes = {
+PostSurvey2.propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-export default PostSurvey1;
+export default PostSurvey2;
 // export default styled(PostSurvey1)`
 //   .landing-wrapper {
 //     min-height: 100vh;

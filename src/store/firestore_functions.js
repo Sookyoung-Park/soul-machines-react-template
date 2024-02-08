@@ -68,6 +68,8 @@ export async function readAllExperimentTypes(docID) {
   }
 }
 
+// after survey
+
 // update TrustworthyRank
 export async function updateTrustworthyRank(docID, rankA, rankB, rankC, rankD) {
   const trustworthyRankData = {
@@ -81,6 +83,42 @@ export async function updateTrustworthyRank(docID, rankA, rankB, rankC, rankD) {
   try {
     await updateDoc(docRef, trustworthyRankData);
     console.log('trustworthy rank data updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// update intelligence rank
+export async function updateIntelligenceRank(docID, rankA, rankB, rankC, rankD) {
+  const intelligenceRankData = {
+    intelligence_rank_A: rankA,
+    intelligence_rank_B: rankB,
+    intelligence_rank_C: rankC,
+    intelligence_rank_D: rankD,
+
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, intelligenceRankData);
+    console.log('intelligence rank data updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// update engagement rank
+export async function updateEngagementRank(docID, rankA, rankB, rankC, rankD) {
+  const engagementRankData = {
+    engagemement_rank_A: rankA,
+    engagemement_rank_B: rankB,
+    engagemement_rank_C: rankC,
+    engagemement_rank_D: rankD,
+
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, engagementRankData);
+    console.log('engagement rank data updated. 문서 ID:', docRef.id);
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
   }

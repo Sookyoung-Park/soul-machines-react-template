@@ -283,7 +283,7 @@ function LandingAfter({ className }) {
               </Link>
               {/* test */}
               <Link
-                to="/aa"
+                to="/ps1"
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
                 onClick={() => {
