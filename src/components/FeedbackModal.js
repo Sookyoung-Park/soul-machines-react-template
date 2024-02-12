@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
-import {
-  Link,
-  // useHistory
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
-import { updateAdjectives } from '../store/firestore_functions';
-// import { setNextSurveyProgress } from '../store/sm';
-// import { setSurveyProgressState } from '../store/sm';
+import {
+  updateAdjectives, updateSympathizeMyFeelingScore, updateGoodFriendScore, updateGoodServiceScore,
+} from '../store/firestore_functions';
 
 function FeedbackModal({
   className, onClose, closeText,
-  // denyFeedbackText, denyFeedback,
 }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
@@ -38,11 +34,8 @@ function FeedbackModal({
 
   // adjectives
   const [selectedTags, setSelectedTags] = useState([]);
-  // const [adjectivesSelected, setAdjectivesSelected] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
-
-  // const history = useHistory();
 
   // generate array of clickable stars for ratingSympathizeFeeling
   const starsSympathizeFeeling = Array.from(Array(nStars)).map((_, i) => {
@@ -60,12 +53,13 @@ function FeedbackModal({
         onClick={() => {
           setRatingSympathizeFeeling(i);
           setRatingSympathizeFeelingSelected(true);
+          updateSympathizeMyFeelingScore(docID, i + 1);
         }}
       >
         {
         ratingSympathizeFeeling >= i
-          ? <StarFill className="star star-fill" fill="#212529" />
-          : <Star className="star star-outline" fill="#212529" />
+          ? <StarFill className="star star-fill" fill="#63c980" />
+          : <Star className="star star-outline" fill="#d5e3d9" />
       }
       </button>
     );
@@ -87,12 +81,13 @@ function FeedbackModal({
         onClick={() => {
           setRatingGoodFriend(i);
           setRatingGoodFriendSelected(true);
+          updateGoodFriendScore(docID, i + 1);
         }}
       >
         {
           ratingGoodFriend >= i
-            ? <StarFill className="star star-fill" fill="#212529" />
-            : <Star className="star star-outline" fill="#212529" />
+            ? <StarFill className="star star-fill" fill="#63c980" />
+            : <Star className="star star-outline" fill="#d5e3d9" />
         }
       </button>
     );
@@ -114,12 +109,13 @@ function FeedbackModal({
         onClick={() => {
           setRatingGoodService(i);
           setRatingGoodSerivceSelected(true);
+          updateGoodServiceScore(docID, i + 1);
         }}
       >
         {
             ratingGoodService >= i
-              ? <StarFill className="star star-fill" fill="#212529" />
-              : <Star className="star star-outline" fill="#212529" />
+              ? <StarFill className="star star-fill" fill="#63c980" />
+              : <Star className="star star-outline" fill="#d5e3d9" />
           }
       </button>
     );
@@ -176,10 +172,7 @@ function FeedbackModal({
             <div className="row" style={{ marginTop: '32px' }}>
               <h3>How would you describe your experience?</h3>
               <p> (Please Select All that Apply)</p>
-              {/* <div>(Select all that apply)</div> */}
               <div className="mt-3">
-                {/* combine default tags and custom ones to display as one list */}
-                {/* user can click on default tags to deselect and custom ones to edit */}
                 {tagItems.map((t) => (
                   <button
                     className={`rating-tag ${
@@ -198,7 +191,7 @@ function FeedbackModal({
               {/* <SurveyComponent /> */}
             </div>
             <div className="row">
-              <div>
+              <div style={{ marginTop: '16px' }}>
                 <h3>I think A sympathize my feeling</h3>
               </div>
               <div className="row">
@@ -213,7 +206,7 @@ function FeedbackModal({
               </div>
             </div>
             <div className="row">
-              <div>
+              <div style={{ marginTop: '32px' }}>
                 <h3>I think A could be your good friend with you</h3>
               </div>
               <div className="row">
@@ -228,7 +221,7 @@ function FeedbackModal({
               </div>
             </div>
             <div className="row">
-              <div>
+              <div style={{ marginTop: '32px' }}>
                 <h3>DP provided a good service</h3>
               </div>
               <div className="row">
@@ -243,7 +236,7 @@ function FeedbackModal({
               </div>
             </div>
             <div className="row">
-              <h3 style={{ marginTop: '10px' }}>Can you tell us more?</h3>
+              <h3 style={{ marginTop: '32px' }}>Can you tell us more?</h3>
               {/* field for custom tags, limited to 20 chars */}
               <div
                 className="d-flex custom-items"
@@ -276,9 +269,8 @@ function FeedbackModal({
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
                       setSubmitted(true);
-                      const test = [...selectedTags];
-                      console.log(test);
-                      updateAdjectives(docID, test);
+                      const adj = [...selectedTags];
+                      updateAdjectives(docID, adj);
                     }}
                   >
                     Submit
@@ -310,21 +302,22 @@ export default styled(FeedbackModal)`
     display: inline;
     border: none;
     background: #FFF;
+    margin: 0;
   }
   .star {
-    width: 2rem;
-    height: 2rem;
-    margin: .4rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: .2rem;
 
     @media (min-width: ${breakpoints.sm}px) {
       width: 2.6rem;
       height: 2.6rem;
-      margin: 1rem;
+      margin: 0.2rem;
     }
     @media (min-width: ${breakpoints.md}px) {
       width: 3.5rem;
       height: 3.5rem;
-      margin: 1rem;
+      margin: 0.2rem;
     }
   }
   .rating-tag {

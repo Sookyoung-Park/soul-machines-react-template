@@ -268,7 +268,7 @@ export default styled(Feedback)`
   }
   .star-wrapper {
     display: inline;
-    margin: 2rem;
+    margin: 1rem;
     border: none;
     background: #FFF;
   }

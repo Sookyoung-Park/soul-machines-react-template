@@ -137,3 +137,45 @@ export async function updateAdjectives(docID, adjectives) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
   }
 }
+
+// update "I think A sympathize my feeling"
+export async function updateSympathizeMyFeelingScore(docID, score) {
+  const sympathizeScoreData = {
+    sympathize_my_feeling_score: score,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, sympathizeScoreData);
+    console.log('score updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// update " I think A could be your good friend with you"
+export async function updateGoodFriendScore(docID, score) {
+  const GoodFriendScoreData = {
+    good_friend_score: score,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, GoodFriendScoreData);
+    console.log('score updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// update " I think A could be your good friend with you"
+export async function updateGoodServiceScore(docID, score) {
+  const GoodServiceScoreData = {
+    good_service_score: score,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, GoodServiceScoreData);
+    console.log('score updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
