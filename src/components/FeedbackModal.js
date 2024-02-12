@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
-
+import { updateAdjectives } from '../store/firestore_functions';
 // import { setNextSurveyProgress } from '../store/sm';
 // import { setSurveyProgressState } from '../store/sm';
 
@@ -18,19 +18,10 @@ function FeedbackModal({
   // denyFeedbackText, denyFeedback,
 }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { docID } = user.firebase;
   const { surveyProgress } = user.surveyProgress;
 
   console.log(surveyProgress, ': saved sP in Feedback.js');
-
-  // const dispatch = useDispatch();
-
-  // onclick event for change chatType
-  // const handleSurveyProgressChange = () => {
-  //   dispatch(setNextSurveyProgress());
-  //   console.log('new chatType', surveyProgress);
-  // };
-
-  // const [userChatType, setUserChatType] = useState(''); // 'A B C D'
 
   const nStars = 7;
   // I think A sympathize my feeling
@@ -44,6 +35,10 @@ function FeedbackModal({
   // DP A provided a good service
   const [ratingGoodService, setRatingGoodService] = useState(-1);
   const [ratingGoodServiceSelected, setRatingGoodSerivceSelected] = useState(false);
+
+  // adjectives
+  const [selectedTags, setSelectedTags] = useState([]);
+  // const [adjectivesSelected, setAdjectivesSelected] = useState(false);
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -134,7 +129,7 @@ function FeedbackModal({
   const [customField, setCustomField] = useState('');
   // default tags
   const tagItems = ['Cheerful', 'Friendly', 'Warm', 'Enjoyful', 'Empathic'];
-  const [selectedTags, setSelectedTags] = useState([]);
+
   const handleSelectTag = (t) => {
     const tagIsSelected = selectedTags.indexOf(t) > -1;
     if (tagIsSelected === false) setSelectedTags([...selectedTags, t]);
@@ -281,6 +276,9 @@ function FeedbackModal({
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
                       setSubmitted(true);
+                      const test = [...selectedTags];
+                      console.log(test);
+                      updateAdjectives(docID, test);
                     }}
                   >
                     Submit

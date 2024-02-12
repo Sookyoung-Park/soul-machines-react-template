@@ -125,7 +125,7 @@ export async function updateEngagementRank(docID, rankA, rankB, rankC, rankD) {
 }
 
 // update adjectvies
-export async function upateAdjectives(docID, adjectives) {
+export async function updateAdjectives(docID, adjectives) {
   const adjectivesData = {
     adjectives,
   };

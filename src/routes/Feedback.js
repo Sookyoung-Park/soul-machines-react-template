@@ -7,6 +7,7 @@ import {
   Star, StarFill, XCircle,
 } from 'react-bootstrap-icons';
 import { headerHeight, landingBackgroundImage } from '../config';
+// import { updateAdjectives } from '../store/firestore_functions';
 // import { setChatTypeState } from '../store/sm';
 
 function Feedback({ className }) {
@@ -85,6 +86,8 @@ function Feedback({ className }) {
       if (tagIsSelected === false) setSelectedTags([...selectedTags, t]);
       else setSelectedTags([...selectedTags.filter((v) => v !== t)]);
     }
+    // console.log('selectedTags', selectedTags);
+    // console.log('setSelectedTags', setSelectedTags);
   };
 
   const [alertModal, setAlertModal] = useState(null);
