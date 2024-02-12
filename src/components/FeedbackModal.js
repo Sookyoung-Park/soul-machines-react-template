@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
+
 // import { setNextSurveyProgress } from '../store/sm';
 // import { setSurveyProgressState } from '../store/sm';
 
@@ -172,14 +173,15 @@ function FeedbackModal({
             <div className="row" />
             <div className="row">
               <h2 className="text-center">
-                Can you rate your experience with Digital Persona A?
+                Can you rate your experience with Avatar A?
               </h2>
             </div>
             <div className="row" />
             <hr />
-            <div className="row">
+            <div className="row" style={{ marginTop: '32px' }}>
               <h3>How would you describe your experience?</h3>
-              <div>(Select all that apply)</div>
+              <p> (Please Select All that Apply)</p>
+              {/* <div>(Select all that apply)</div> */}
               <div className="mt-3">
                 {/* combine default tags and custom ones to display as one list */}
                 {/* user can click on default tags to deselect and custom ones to edit */}

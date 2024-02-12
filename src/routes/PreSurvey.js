@@ -26,7 +26,7 @@ function PreSurvey({ className }) {
                     The experiment is a research study on COSC 298 Graduate Research
                     at Dartmouth College. It involves conversations with Digital AI avatars
                     that apply different training sets.
-                    The goal is to determine which training is suitable the most for users in
+                    The goal is to determine which training is most suitable users in
                     the role of a conversational agent.
                     Please conduct the post survey after engaging in comfortable conversations
                     with Digital AI avatars.
