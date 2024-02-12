@@ -23,19 +23,19 @@ function PreSurvey({ className }) {
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
                   <p className="description">
-                    This experiment is an research study currently being conducted
-                    at Dartmouth College. It involves conversations with AI digital
-                    influencers that apply slightly different thresholds. The goal
-                    is to determine which threshold is most suitable for users and
-                    performs best in the role of a conversational agent. Although
-                    they may feel similar, please participate in this survey after
-                    engaging in comfortable conversations with digital influencers.
+                    The experiment is a research study on COSC 298 Graduate Research
+                    at Dartmouth College. It involves conversations with Digital AI avatars
+                    that apply different training sets.
+                    The goal is to determine which training is suitable the most for users in
+                    the role of a conversational agent.
+                    Please conduct the post survey after engaging in comfortable conversations
+                    with Digital AI avatars.
                   </p>
                   <p className="noted">
-                    Noted that the experiment is still in its early stages and may
+                    {/* The experiment is still in its early stages and may
                     lack inclusivity for various races and genders. However, as part
                     of future works, efforts will be made to expand and include as
-                    many races and genders as possible in the research
+                    many races and genders as possible in the research */}
                   </p>
                 </div>
               </div>

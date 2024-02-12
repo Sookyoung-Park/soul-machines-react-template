@@ -39,7 +39,7 @@ function PreSurvey1({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h4 style={{ marginBottom: '24px' }}>Please Select Your Gender Assigned at Birth</h4>
+                  <h4 style={{ marginBottom: '24px' }}>Please Select The Gender You Identify With</h4>
                   <Form>
                     <div key="default-radio" className="mb-3">
                       <Form.Check
@@ -57,6 +57,22 @@ function PreSurvey1({ className }) {
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
                         onChange={() => handleGenderChange('FEMALE')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="genderOthers"
+                        label="Non-binary / Non-conforming"
+                        name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
+                        onChange={() => handleGenderChange('OTHERS')}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="genderOthers"
+                        label="Prefer not to respond"
+                        name="gender-selection"
+                        style={{ fontSize: '1.5rem' }}
+                        onChange={() => handleGenderChange('OTHERS')}
                       />
                       <Form.Check
                         type="radio"

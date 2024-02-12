@@ -53,9 +53,7 @@ function PreSurvey2({ className }) {
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
                   <h4 style={{ marginBottom: '24px' }}>
-                    Please choose the digital influencer
-                    whose physical appearance is most similar to yours.
-
+                    Please choose an AI avatar whose physical appearance is most similar to yours.
                   </h4>
                   <Form>
                     <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
