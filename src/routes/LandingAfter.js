@@ -35,8 +35,16 @@ function LandingAfter({ className }) {
   const API_AI_FEMALE = process.env.REACT_APP_API_KEY_AI_FEMALE;
 
   // infoString : EA_FEMALE, AF_MALE etc
-  const infoString = `_${race}_${gender}`;
-  console.log('info string : ', infoString);
+  let infoString;
+  if (race.legnth === 2) {
+    infoString = `_${race}_${gender}`;
+    console.log('info string : ', infoString);
+  } else {
+    infoString = `_${race}_OTHERS`;
+    console.log('info string', infoString);
+  }
+  // const infoString = `_${race}_${gender}`;
+  // console.log('info string : ', infoString);
   console.log('landingAfter chatType : ', chatType);
 
   let apiA;
