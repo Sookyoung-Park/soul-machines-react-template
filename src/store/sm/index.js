@@ -7,7 +7,7 @@ import roundObject from '../../utils/roundObject';
 import { meatballString } from './meatball';
 
 // here : loading page에 들어오자마자 API키가 결정되고 PERSONA_ID가 1로 지정됨
-const API_KEY_TEMP = process.env.REACT_APP_API_KEY_ELLA || '';
+const API_KEY_TEMP = process.env.REACT_APP_API_KEY_NOAH || '';
 const AUTH_MODE = parseInt(process.env.REACT_APP_PERSONA_AUTH_MODE, 10) || 0;
 const TOKEN_ISSUER = process.env.REACT_APP_TOKEN_URL;
 
