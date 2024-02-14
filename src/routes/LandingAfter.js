@@ -63,16 +63,6 @@ function LandingAfter({ className }) {
     handleFirebaseUpdate();
   }, [fsD]); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
 
-  // function getRandomApiKeyB(api1, api2, txt1, txt2) {
-  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
-  //   if (randomIndex === 0) {
-  //     fsB = txt1;
-  //     return api1;
-  //   }
-  //   fsB = txt2;
-  //   return api2;
-  // }
-
   function getRandomApiKeyB(api1, api2, api3, api4, txt1, txt2, txt3, txt4) {
     const apis = [api1, api2, api3, api4];
     const randomIndex = Math.floor(Math.random() * apis.length);
@@ -88,16 +78,6 @@ function LandingAfter({ className }) {
     }
     return apis[randomIndex];
   }
-
-  // function getRandomApiKeyC(api1, api2, txt1, txt2) {
-  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
-  //   if (randomIndex === 0) {
-  //     fsC = txt1;
-  //     return api1;
-  //   }
-  //   fsC = txt2;
-  //   return api2;
-  // }
 
   function getRandomApiKeyC(api1, api2, api3, api4, txt1, txt2, txt3, txt4) {
     const apis = [api1, api2, api3, api4];
