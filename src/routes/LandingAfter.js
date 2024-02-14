@@ -196,8 +196,8 @@ function LandingAfter({ className }) {
     // here
     case '_AI_MALE':
       apiA = API_AI_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_HP_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE');
+      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_HP_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_HP_FEMALE');
       apiD = API_AI_FEMALE;
       // firestore
       fsA = 'API_AI_MALE';

@@ -17,6 +17,10 @@ import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
 import CS_MALE from '../img/CS_MALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
+import HP_MALE from '../img/HP_MALE.png';
+import HP_FEMALE from '../img/HP_FEMALE.png';
+import AI_MALE from '../img/AI_MALE.png';
+import AI_FEMALE from '../img/AI_FEMALE.png';
 
 function PreSurvey2({ className }) {
   // redux store values
@@ -118,7 +122,50 @@ function PreSurvey2({ className }) {
                         )}
                       />
                     </div>
+                    <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
+                      <Form.Check
+                        type="radio"
+                        id="raceHispanic"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleRaceChange('HP')}
+                        label={(
+                          <div>
+                            {gender === 'MALE' && (
+                            <img src={HP_MALE} alt="Hispanic" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={HP_FEMALE} alt="Hispanic" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={HP_FEMALE} alt="none" style={{ width: '260px', height: '220px' }} />
+                            )}
+                          </div>
+                        )}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceIndian"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleRaceChange('AI')}
+                        label={(
+                          <div>
+                            {gender === 'MALE' && (
+                            <img src={AI_MALE} alt="Indian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={AI_FEMALE} alt="Indian" style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={AI_MALE} alt="none" style={{ width: '260px', height: '220px' }} />
+                            )}
+                          </div>
+                        )}
+                      />
+                    </div>
                   </Form>
+
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '60px' }}>
