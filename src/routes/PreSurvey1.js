@@ -12,7 +12,8 @@ import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
 function PreSurvey1({ className }) {
-  const [userGender, setUserGender] = useState(''); // 'Female' for FEMALE, 'Male' for MALE, 'Others' for OTHERS
+  // FEMALE, MALE, OTHERS_NONBINARY, OTHERS_PREFERNOTANSER, OTHERS_OTHERS
+  const [userGender, setUserGender] = useState('');
   const [isSelectionMade, setIsSelectionMade] = useState(false);
 
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ function PreSurvey1({ className }) {
                         label="Non-binary / Non-conforming"
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('OTHERS')}
+                        onChange={() => handleGenderChange('OTHERS_NONBINARY')}
                       />
                       <Form.Check
                         type="radio"
@@ -72,7 +73,7 @@ function PreSurvey1({ className }) {
                         label="Prefer not to respond"
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('OTHERS')}
+                        onChange={() => handleGenderChange('OTHERS_PREFERNOTANSWER')}
                       />
                       <Form.Check
                         type="radio"
@@ -80,7 +81,7 @@ function PreSurvey1({ className }) {
                         label="Others"
                         name="gender-selection"
                         style={{ fontSize: '1.5rem' }}
-                        onChange={() => handleGenderChange('OTHERS')}
+                        onChange={() => handleGenderChange('OTHERS_OTHERS')}
                       />
                     </div>
                   </Form>
