@@ -33,6 +33,8 @@ function LandingAfter({ className }) {
   const API_HP_FEMALE = process.env.REACT_APP_API_KEY_HP_FEMALE;
   const API_AI_MALE = process.env.REACT_APP_API_KEY_AI_MALE;
   const API_AI_FEMALE = process.env.REACT_APP_API_KEY_AI_FEMALE;
+  const API_SA_MALE = process.env.REACT_APP_API_KEY_SA_MALE;
+  const API_SA_FEMALE = process.env.REACT_APP_API_KEY_SA_FEMALE;
 
   // infoString : EA_FEMALE, AF_MALE etc
   let infoString;
@@ -120,8 +122,8 @@ function LandingAfter({ className }) {
       break;
     case '_EA_FEMALE':
       apiA = API_EA_FEMALE;
-      apiB = getRandomApiKeyB(API_AF_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_AF_MALE, API_CS_MALE, API_HP_MALE, API_AI_MALE, 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_AF_FEMALE, API_CS_FEMALE, API_SA_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE', 'API_SA_FEMALE', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_AF_MALE, API_CS_MALE, API_SA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_CS_MALE', 'API_SA_MALE', 'API_AI_MALE');
       apiD = API_EA_FEMALE;
       // firestore
       fsA = 'API_EA_FEMALE';
@@ -147,8 +149,8 @@ function LandingAfter({ className }) {
       break;
     case '_CS_MALE':
       apiA = API_CS_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_HP_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_AI_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_SA_MALE, API_AF_MALE, API_HP_MALE, API_AI_MALE, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiC = getRandomApiKeyC(API_SA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_SA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
       apiD = API_CS_FEMALE;
       // firebase
       fsA = 'API_CS_MALE';
@@ -199,6 +201,22 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_AI_FEMALE';
       fsD = 'API_AI_MALE';
+      break;
+    case '_SA_MALE':
+      apiA = API_SA_MALE;
+      apiB = getRandomApiKeyB(API_CS_MALE, API_AF_MALE, API_AI_MALE, API_HP_MALE, 'API_CS_MALE', 'API_AF_MALE', 'API_AI_MALE', 'API_HP_MALE');
+      apiC = getRandomApiKeyC(API_CS_FEMALE, API_AF_FEMALE, API_AI_FEMALE, API_HP_FEMALE, 'API_CS_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE', 'API_HP_FEMALE');
+      apiD = API_SA_FEMALE;
+      fsA = 'API_SA_MALE';
+      fsB = 'API_SA_FEMALE';
+      break;
+    case '_SA_FEMALE':
+      apiA = API_SA_FEMALE;
+      apiB = getRandomApiKeyB(API_CS_FEMALE, API_AF_FEMALE, API_AI_FEMALE, API_HP_FEMALE, 'API_CS_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE', 'API_HP_FEMALE');
+      apiC = getRandomApiKeyC(API_CS_MALE, API_AF_MALE, API_AI_MALE, API_HP_MALE, 'API_CS_MALE', 'API_AF_MALE', 'API_AI_MALE', 'API_HP_MALE');
+      apiD = API_SA_MALE;
+      fsA = 'API_SA_FEMALE';
+      fsB = 'API_SA_MALE';
       break;
     default:
       break;
