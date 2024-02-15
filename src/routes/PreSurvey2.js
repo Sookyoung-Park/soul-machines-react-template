@@ -25,12 +25,6 @@ import SA_MALE from '../img/SA_MALE.png';
 import SA_FEMALE from '../img/SA_FEMALE.png';
 
 function PreSurvey2({ className }) {
-  // redux store values
-  // const { user } = useSelector(({ sm }) => ({ ...sm }));
-  // const { gender, race } = user.info;
-  // // for eslint
-  // console.log('for eslint', race);
-
   const [userGender, setUserGender] = useState('');
   const [userRace, setUserRace] = useState(''); // 'Caucasian :CS', 'African: AF', 'Asian: EA'
   const [isSelectionMade, setIsSelectionMade] = useState(false);
@@ -42,11 +36,6 @@ function PreSurvey2({ className }) {
     setUserRace(selectedRace);
     setIsSelectionMade(true);
   };
-
-  // const handleRaceChange = (selectedRace) => {
-  //   setUserRace(selectedRace);
-  //   setIsSelectionMade(true);
-  // };
 
   const handleSubmit = () => {
     dispatch(setUserInfoState(userGender, userRace));

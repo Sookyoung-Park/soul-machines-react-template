@@ -12,8 +12,13 @@ import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
 import CS_MALE from '../img/CS_MALE.png';
-// import CS_FEMALE from '../img/CS_FEMALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
+import HP_MALE from '../img/HP_MALE.png';
+import HP_FEMALE from '../img/HP_FEMALE.png';
+import AI_MALE from '../img/AI_MALE.png';
+import AI_FEMALE from '../img/AI_FEMALE.png';
+import SA_MALE from '../img/SA_MALE.png';
+import SA_FEMALE from '../img/SA_FEMALE.png';
 
 const json = {
   elements: [
@@ -69,6 +74,18 @@ function PostSurvey1({ className }) {
         return CS_MALE;
       case 'CS_FEMALE':
         return CS_FEMALE;
+      case 'HP_MALE':
+        return HP_MALE;
+      case 'HP_FEMALE':
+        return HP_FEMALE;
+      case 'AI_MALE':
+        return AI_MALE;
+      case 'AI_FEMALE':
+        return AI_FEMALE;
+      case 'SA_MALE':
+        return SA_MALE;
+      case 'SA_FEMALE':
+        return SA_FEMALE;
       default:
         return null;
     }
