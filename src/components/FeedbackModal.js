@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
 import {
-  updateAdjectives, updateSympathizeMyFeelingScore, updateGoodFriendScore, updateGoodServiceScore,
+  updateAdjectives, updateSympathizeMyFeelingScore, updateGoodFriendScore,
+  updateGoodServiceScore, readAllExperimentTypes,
 } from '../store/firestore_functions';
+import { setNextSurveyProgress } from '../store/sm/index';
+
+import EA_MALE from '../img/EA_MALE.png';
+import EA_FEMALE from '../img/EA_FEMALE.png';
+import AF_MALE from '../img/AF_MALE.png';
+import AF_FEMALE from '../img/AF_FEMALE.png';
+import CS_MALE from '../img/CS_MALE.png';
+import CS_FEMALE from '../img/CS_FEMALE.png';
+import HP_MALE from '../img/HP_MALE.png';
+import HP_FEMALE from '../img/HP_FEMALE.png';
+import AI_MALE from '../img/AI_MALE.png';
+import AI_FEMALE from '../img/AI_FEMALE.png';
+import SA_MALE from '../img/SA_MALE.png';
+import SA_FEMALE from '../img/SA_FEMALE.png';
 
 function FeedbackModal({
   className, onClose, closeText,
@@ -17,7 +32,55 @@ function FeedbackModal({
   const { docID } = user.firebase;
   const { surveyProgress } = user.surveyProgress;
 
+  const dispatch = useDispatch();
+
   console.log(surveyProgress, ': saved sP in Feedback.js');
+
+  const [imgTitles, setImgTitles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await readAllExperimentTypes(docID);
+        setImgTitles(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // 데이터 가져오기 함수 호출
+  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
+
+  const getImagePath = (imgTitle) => {
+    switch (imgTitle) {
+      case 'EA_MALE':
+        return EA_MALE;
+      case 'EA_FEMALE':
+        return EA_FEMALE;
+      case 'AF_MALE':
+        return AF_MALE;
+      case 'AF_FEMALE':
+        return AF_FEMALE;
+      case 'CS_MALE':
+        return CS_MALE;
+      case 'CS_FEMALE':
+        return CS_FEMALE;
+      case 'HP_MALE':
+        return HP_MALE;
+      case 'HP_FEMALE':
+        return HP_FEMALE;
+      case 'AI_MALE':
+        return AI_MALE;
+      case 'AI_FEMALE':
+        return AI_FEMALE;
+      case 'SA_MALE':
+        return SA_MALE;
+      case 'SA_FEMALE':
+        return SA_FEMALE;
+      default:
+        return null;
+    }
+  };
 
   const nStars = 7;
   // I think A sympathize my feeling
@@ -65,6 +128,9 @@ function FeedbackModal({
     );
   });
 
+  const handleSubmit = () => {
+    dispatch(setNextSurveyProgress());
+  };
   // generate array of clickable stars for ratingGoodFriend
   const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
     const handleHover = () => {
@@ -136,7 +202,17 @@ function FeedbackModal({
     <div className={className}>
       <div className="feedback-container">
         <div className="row d-flex justify-content-center">
-          <div className="tutorial-icon tutorial-icon-dp mb-2" />
+          {/* <div className="tutorial-icon tutorial-icon-dp mb-2" /> */}
+          <div className="tutorial-icon mb-2">
+            <img
+              src={getImagePath(imgTitles[0])}
+              alt={imgTitles[0]}
+              style={{
+                backgroundSize: 'cover',
+                backgroundPosition: 'bottom center',
+              }}
+            />
+          </div>
         </div>
         {submitted ? (
           <div>
@@ -271,9 +347,10 @@ function FeedbackModal({
                       setSubmitted(true);
                       const adj = [...selectedTags];
                       updateAdjectives(docID, adj);
+                      handleSubmit();
                     }}
                   >
-                    Submit
+                    Next
                   </button>
                 </div>
               </div>
@@ -373,7 +450,6 @@ export default styled(FeedbackModal)`
     align-items: center;
     justify-content: center;
 
-    background-color: #EAEAEA;
   }
   .tutorial-icon-dp {
     background-image: url(${landingBackgroundImage});

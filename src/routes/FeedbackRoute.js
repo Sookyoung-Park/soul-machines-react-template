@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
 import Header from '../components/Header';
@@ -28,7 +28,7 @@ function Feedback({ className }) {
             Please feel free to start again.
             Or give us some feedback to help us improve this exciting new platform.
           </p>
-          <div className="mt-2">
+          {/* <div className="mt-2">
             <Link className="btn primary-accent me-2" to="/loading">Start Again</Link>
             <button
               className="btn btn-outline-dark"
@@ -37,7 +37,7 @@ function Feedback({ className }) {
             >
               Provide Feedback
             </button>
-          </div>
+          </div> */}
         </div>,
       );
     }
