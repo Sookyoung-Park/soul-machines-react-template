@@ -132,8 +132,8 @@ function LandingAfter({ className }) {
       break;
     case '_AF_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_SA_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMLAE', 'API_HP_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_CS_MALE, API_HP_MALE, API_SA_MALE, 'API_EA_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_SA_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMLAE', 'API_HP_FEMALE', 'API_SA_FEMALE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_CS_MALE, API_HP_MALE, API_SA_MALE, 'API_EA_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_SA_MALE');
       apiD = API_AF_MALE;
       // firestore
       fsA = 'API_AF_FEMALE';
