@@ -31,10 +31,17 @@ function PreSurvey2({ className }) {
   // for eslint
   console.log('for eslint', race);
 
+  const [userGender, setUserGender] = useState('');
   const [userRace, setUserRace] = useState(''); // 'Caucasian :CS', 'African: AF', 'Asian: EA'
   const [isSelectionMade, setIsSelectionMade] = useState(false);
 
   const dispatch = useDispatch();
+
+  const handleGenderRaceChange = (selectedGender, selectedRace) => {
+    setUserGender(selectedGender);
+    setUserRace(selectedRace);
+    setIsSelectionMade(true);
+  };
 
   const handleRaceChange = (selectedRace) => {
     setUserRace(selectedRace);
@@ -42,7 +49,7 @@ function PreSurvey2({ className }) {
   };
 
   const handleSubmit = () => {
-    dispatch(setUserInfoState(gender, userRace));
+    dispatch(setUserInfoState(userGender, userRace));
   };
 
   return (
@@ -68,23 +75,50 @@ function PreSurvey2({ className }) {
                         id="raceAsian"
                         name="race-selection"
                         style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('EA')}
+                        onChnage={() => handleGenderRaceChange('FEMALE', 'EA')}
                         label={(
                           <div>
-                            {gender === 'MALE' && (
-                            <img src={EA_MALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
-                            )}
-                            {gender === 'FEMALE' && (
                             <img src={EA_FEMALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
-                            )}
-                            {gender !== 'MALE' && gender !== 'FEMALE' && (
-                            <img src={EA_FEMALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
-                            )}
                           </div>
                         )}
                       />
+                      <Form.Check
+                        type="radio"
+                        id="raceAsian"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChnage={() => handleGenderRaceChange('MALE', 'EA')}
+                        label={(
+                          <div>
+                            <img src={EA_MALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                          </div>
+                        )}
+                      />
+                      {/* <Form.Check
+                        type="radio"
+                        id="raceAsian"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChnage={() => genderRaceChange('EA')}
+                        label={(
+                          <div>
+                            {gender === 'MALE' && (
+                            <img src={EA_MALE} alt="Asian"
+                            style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender === 'FEMALE' && (
+                            <img src={EA_FEMALE} alt="Asian"
+                            style={{ width: '260px', height: '220px' }} />
+                            )}
+                            {gender !== 'MALE' && gender !== 'FEMALE' && (
+                            <img src={EA_FEMALE} alt="Asian"
+                            style={{ width: '260px', height: '220px' }} />
+                            )}
+                          </div>
+                        )}
+                      /> */}
                       {/* only OTHERS */}
-                      {gender !== 'MALE' && gender !== 'FEMALE' && (
+                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
                         <Form.Check
                           type="radio"
                           id="raceAsian"
@@ -92,10 +126,11 @@ function PreSurvey2({ className }) {
                           style={{ marginRight: '24px' }}
                           onChange={() => handleRaceChange('EA')}
                           label={(
-                            <img src={EA_MALE} alt="Asian" style={{ width: '260px', height: '220px' }} />
+                            <img src={EA_MALE} alt="Asian"
+                            style={{ width: '260px', height: '220px' }} />
                         )}
                         />
-                      )}
+                      )} */}
                       <Form.Check
                         type="radio"
                         id="raceAfrican"
@@ -163,20 +198,6 @@ function PreSurvey2({ className }) {
                       />
                     </div>
                     <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
-                      {/* only OTHERS */}
-                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceCaucasian"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('CS')}
-                        label={(
-                          <img src={CS_FEMALE} alt="Caucasian"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )} */}
                       <Form.Check
                         type="radio"
                         id="raceHispanic"
@@ -197,20 +218,6 @@ function PreSurvey2({ className }) {
                           </div>
                         )}
                       />
-                      {/* only OTHERS */}
-                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceHispanic"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('HP')}
-                        label={(
-                          <img src={HP_MALE} alt="Hispanic"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )} */}
                       <Form.Check
                         type="radio"
                         id="raceIndian"
@@ -231,21 +238,6 @@ function PreSurvey2({ className }) {
                           </div>
                         )}
                       />
-                      {/* only OTHERS */}
-                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceIndian"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('AI')}
-                        label={(
-                          <img src={AI_MALE} alt="Indian"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )} */}
-                      {/* SA */}
                       <Form.Check
                         type="radio"
                         id="raceSouthAsian"
@@ -266,20 +258,6 @@ function PreSurvey2({ className }) {
                           </div>
                         )}
                       />
-                      {/* only OTHERS */}
-                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceSouthAsian"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('SA')}
-                        label={(
-                          <img src={SA_FEMALE} alt="SouthAsian"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )} */}
                       {gender !== 'MALE' && gender !== 'FEMALE' && (
                       <Form.Check
                         type="radio"
@@ -331,32 +309,6 @@ function PreSurvey2({ className }) {
                         )}
                       />
                       )}
-                      {/* {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceIndian"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('AI')}
-                        label={(
-                          <img src={AI_MALE} alt="Indian"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )}
-                      {gender !== 'MALE' && gender !== 'FEMALE' && (
-                      <Form.Check
-                        type="radio"
-                        id="raceSouthAsian"
-                        name="race-selection"
-                        style={{ marginRight: '24px' }}
-                        onChange={() => handleRaceChange('SA')}
-                        label={(
-                          <img src={SA_FEMALE} alt="SouthAsian"
-                          style={{ width: '260px', height: '220px' }} />
-                        )}
-                      />
-                      )} */}
                     </div>
                   </Form>
                 </div>

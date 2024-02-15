@@ -42,7 +42,7 @@ function PreSurvey({ className }) {
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/presurvey1"
+                    to="/presurvey2"
                     className="shadow btn primary-accent fs-3"
                     type="button"
                   >
