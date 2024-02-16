@@ -47,6 +47,9 @@ function Controls({
     highlightCamera,
   } = useSelector((state) => ({ ...state.sm }));
 
+  const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { chatType } = user.chatType;
+
   const dispatch = useDispatch();
 
   const [showFeedback, setShowFeedback] = useState(false);
@@ -82,7 +85,13 @@ function Controls({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
-      history.push('/feedback');
+      // next-conversation
+      if (chatType === 'E') {
+        history.push('/feedback');
+      } else {
+        history.push('/next-conversation');
+      }
+      // history.push('/feedback');
     }, 15000);
 
     return () => {
