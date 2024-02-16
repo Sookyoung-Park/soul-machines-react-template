@@ -16,9 +16,13 @@ import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
 import CS_MALE from '../img/CS_MALE.png';
+import CS_MALE_2 from '../img/CS_MALE_2.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
+import CS_FEMALE_2 from '../img/CS_FEMALE_2.png';
 import HP_MALE from '../img/HP_MALE.png';
+import HP_MALE_2 from '../img/HP_MALE_2.png';
 import HP_FEMALE from '../img/HP_FEMALE.png';
+import HP_FEMALE_2 from '../img/HP_FEMALE_2.png';
 import AI_MALE from '../img/AI_MALE.png';
 import AI_FEMALE from '../img/AI_FEMALE.png';
 import SA_MALE from '../img/SA_MALE.png';
@@ -47,16 +51,17 @@ function PreSurvey2({ className }) {
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-10 survey-container">
-              <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
+              <div className="row" style={{ marginBottom: '9px', marginTop: '100px' }}>
                 <div>
-                  <h1 className="fw-bol">Pre-Survey</h1>
+                  {/* <h1 className="fw-bol">Pre-Survey</h1> */}
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h4 style={{ marginBottom: '24px' }}>
-                    Please choose an AI avatar whose physical appearance is most similar to yours.
-                  </h4>
+                  <h3 style={{ marginBottom: '32px' }}>
+                    Please choose an AI avatar
+                    whose physical appearance is most similar to yours.
+                  </h3>
                   <Form>
                     <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
                       <Form.Check
@@ -206,6 +211,56 @@ function PreSurvey2({ className }) {
                         label={(
                           <div>
                             <img src={SA_FEMALE} alt="SouthAsian" style={{ width: '260px', height: '220px' }} />
+                          </div>
+                        )}
+                      />
+                    </div>
+                    <div key="default-radio" className="d-flex" style={{ marginRight: '20px' }}>
+                      <Form.Check
+                        type="radio"
+                        id="raceCaucasian"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleGenderRaceChange('FEMALE_2', 'CS')}
+                        label={(
+                          <div>
+                            <img src={CS_FEMALE_2} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                          </div>
+                        )}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceCaucasian"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleGenderRaceChange('MALE_2', 'CS')}
+                        label={(
+                          <div>
+                            <img src={CS_MALE_2} alt="Caucasian" style={{ width: '260px', height: '220px' }} />
+                          </div>
+                        )}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceHispanic"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleGenderRaceChange('FEMALE_2', 'HP')}
+                        label={(
+                          <div>
+                            <img src={HP_FEMALE_2} alt="Hispanic" style={{ width: '260px', height: '220px' }} />
+                          </div>
+                        )}
+                      />
+                      <Form.Check
+                        type="radio"
+                        id="raceHispanic"
+                        name="race-selection"
+                        style={{ marginRight: '24px' }}
+                        onChange={() => handleGenderRaceChange('MALE_2', 'HP')}
+                        label={(
+                          <div>
+                            <img src={HP_MALE_2} alt="Hispanic" style={{ width: '260px', height: '220px' }} />
                           </div>
                         )}
                       />

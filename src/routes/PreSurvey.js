@@ -184,9 +184,10 @@ export default styled(PreSurvey)`
   }
 
   .description{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     line-height: 150%;
     margin-top: 24px;
+    color: #424242;
   }
 
   .noted{

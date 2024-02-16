@@ -29,8 +29,12 @@ function LandingAfter({ className }) {
   const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
   const API_CS_MALE = process.env.REACT_APP_API_KEY_CS_MALE;
   const API_CS_FEMALE = process.env.REACT_APP_API_KEY_CS_FEMALE;
+  const API_CS_MALE_2 = process.env.REACT_APP_API_KEY_CS_MALE_2;
+  const API_CS_FEMALE_2 = process.env.REACT_APP_API_KEY_CS_FEMALE_2;
   const API_HP_MALE = process.env.REACT_APP_API_KEY_HP_MALE;
   const API_HP_FEMALE = process.env.REACT_APP_API_KEY_HP_FEMALE;
+  const API_HP_MALE_2 = process.env.REACT_APP_API_KEY_HP_MALE_2;
+  const API_HP_FEMALE_2 = process.env.REACT_APP_API_KEY_HP_FEMALE_2;
   const API_AI_MALE = process.env.REACT_APP_API_KEY_AI_MALE;
   const API_AI_FEMALE = process.env.REACT_APP_API_KEY_AI_FEMALE;
   const API_SA_MALE = process.env.REACT_APP_API_KEY_SA_MALE;
@@ -148,6 +152,15 @@ function LandingAfter({ className }) {
       fsA = 'API_CS_MALE';
       fsD = 'API_CS_FEMALE';
       break;
+    case '_CS_MALE_2':
+      apiA = API_CS_MALE_2;
+      apiB = getRandomApiKeyB(API_SA_MALE, API_AF_MALE, API_HP_MALE, API_SA_MALE, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_SA_MALE');
+      apiC = getRandomApiKeyC(API_SA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_SA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiD = API_CS_FEMALE_2;
+      // firebase
+      fsA = 'API_CS_MALE_2';
+      fsD = 'API_CS_FEMALE_2';
+      break;
     case '_CS_FEMALE':
       apiA = API_CS_FEMALE;
       apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
@@ -156,6 +169,15 @@ function LandingAfter({ className }) {
       // firestore
       fsA = 'API_CS_FEMALE';
       fsD = 'API_CS_MALE';
+      break;
+    case '_CS_FEMALE_2':
+      apiA = API_CS_FEMALE_2;
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_HP_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiD = API_CS_MALE_2;
+      // firestore
+      fsA = 'API_CS_FEMALE_2';
+      fsD = 'API_CS_MALE_2';
       break;
     case '_HP_MALE':
       apiA = API_HP_MALE;
@@ -166,6 +188,15 @@ function LandingAfter({ className }) {
       fsA = 'API_HP_MALE';
       fsD = 'API_HP_FEMALE';
       break;
+    case '_HP_MALE_2':
+      apiA = API_HP_MALE_2;
+      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
+      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
+      apiD = API_HP_FEMALE_2;
+      // firestore
+      fsA = 'API_HP_MALE_2';
+      fsD = 'API_HP_FEMALE_2';
+      break;
     case '_HP_FEMALE':
       apiA = API_HP_FEMALE;
       apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
@@ -175,7 +206,15 @@ function LandingAfter({ className }) {
       fsA = 'API_HP_FEMALE';
       fsD = 'API_HP_MALE';
       break;
-    // here
+    case '_HP_FEMALE_2':
+      apiA = API_HP_FEMALE_2;
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
+      apiD = API_HP_FEMALE_2;
+      // firestore
+      fsA = 'API_HP_FEMALE_2';
+      fsD = 'API_HP_MALE_2';
+      break;
     case '_AI_MALE':
       apiA = API_AI_MALE;
       apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_HP_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE');
