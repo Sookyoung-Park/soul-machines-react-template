@@ -190,17 +190,17 @@ export const setDocIDState = (docID) => (dispatch) => {
 
 // update surveyProgress
 export const setSurveyProgressState = (surveyProgress) => (dispatch) => {
-  dispatch(actions.setChatTypeState({ surveyProgress }));
+  dispatch(actions.setSurveyProgressState({ surveyProgress }));
 };
 
 export const setNextSurveyProgress = () => (dispatch, getState) => {
   const currentSurveyProgressType = getState().sm.user.surveyProgress.surveyProgress;
-  let nextChatType = String.fromCharCode(currentSurveyProgressType.charCodeAt(0) + 1);
-  if (nextChatType > 'D') {
-    nextChatType = 'E';
+  let nextSurveyProgressType = String.fromCharCode(currentSurveyProgressType.charCodeAt(0) + 1);
+  if (nextSurveyProgressType > 'D') {
+    nextSurveyProgressType = 'E';
   }
 
-  dispatch(setChatTypeState(nextChatType));
+  dispatch(setSurveyProgressState(nextSurveyProgressType));
 };
 
 export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {

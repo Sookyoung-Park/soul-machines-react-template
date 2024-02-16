@@ -125,9 +125,9 @@ export async function updateEngagementRank(docID, rankA, rankB, rankC, rankD) {
 }
 
 // update adjectvies
-export async function updateAdjectives(docID, adjectives) {
+export async function updateAdjectives(docID, avatarType, adjectives) {
   const adjectivesData = {
-    adjectives,
+    [`${avatarType}_adjectives`]: adjectives,
   };
   const docRef = doc(db, 'Projects', docID);
   try {
@@ -139,9 +139,9 @@ export async function updateAdjectives(docID, adjectives) {
 }
 
 // update "I think A sympathize my feeling"
-export async function updateSympathizeMyFeelingScore(docID, score) {
+export async function updateSympathizeMyFeelingScore(docID, avatarType, score) {
   const sympathizeScoreData = {
-    sympathize_my_feeling_score: score,
+    [`${avatarType}_sympathize_my_feeling_score`]: score,
   };
   const docRef = doc(db, 'Projects', docID);
   try {
@@ -153,9 +153,9 @@ export async function updateSympathizeMyFeelingScore(docID, score) {
 }
 
 // update " I think A could be your good friend with you"
-export async function updateGoodFriendScore(docID, score) {
+export async function updateGoodFriendScore(docID, avatarType, score) {
   const GoodFriendScoreData = {
-    good_friend_score: score,
+    [`${avatarType}_good_friend_score`]: score,
   };
   const docRef = doc(db, 'Projects', docID);
   try {
@@ -167,9 +167,9 @@ export async function updateGoodFriendScore(docID, score) {
 }
 
 // update " I think A could be your good friend with you"
-export async function updateGoodServiceScore(docID, score) {
+export async function updateGoodServiceScore(docID, avatarType, score) {
   const GoodServiceScoreData = {
-    good_service_score: score,
+    [`${avatarType}_good_service_score`]: score,
   };
   const docRef = doc(db, 'Projects', docID);
   try {

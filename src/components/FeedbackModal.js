@@ -7,8 +7,11 @@ import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
 import {
-  updateAdjectives, updateSympathizeMyFeelingScore, updateGoodFriendScore,
-  updateGoodServiceScore, readAllExperimentTypes,
+  updateAdjectives,
+  updateSympathizeMyFeelingScore,
+  updateGoodFriendScore,
+  updateGoodServiceScore,
+  readAllExperimentTypes,
 } from '../store/firestore_functions';
 import { setNextSurveyProgress } from '../store/sm/index';
 
@@ -37,19 +40,6 @@ function FeedbackModal({
   console.log(surveyProgress, ': saved sP in Feedback.js');
 
   const [imgTitles, setImgTitles] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await readAllExperimentTypes(docID);
-        setImgTitles(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData(); // 데이터 가져오기 함수 호출
-  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
 
   const getImagePath = (imgTitle) => {
     switch (imgTitle) {
@@ -81,6 +71,9 @@ function FeedbackModal({
         return null;
     }
   };
+
+  // readAllExperimentTypes
+  // const avatarlist = [];
 
   const nStars = 7;
   // I think A sympathize my feeling
@@ -116,7 +109,7 @@ function FeedbackModal({
         onClick={() => {
           setRatingSympathizeFeeling(i);
           setRatingSympathizeFeelingSelected(true);
-          updateSympathizeMyFeelingScore(docID, i + 1);
+          updateSympathizeMyFeelingScore(docID, surveyProgress, i + 1);
         }}
       >
         {
@@ -130,7 +123,34 @@ function FeedbackModal({
 
   const handleSubmit = () => {
     dispatch(setNextSurveyProgress());
+    // window.location.reload();
+
+    if (surveyProgress === 'E') {
+      setSubmitted(true);
+    }
   };
+
+  // [EA_MALE, AF_FEMALE etc]
+  let experimentData;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        experimentData = await readAllExperimentTypes(docID);
+        setImgTitles(experimentData);
+        // console.log(experimentData, 'feedbackmodal readAllExperimentTypes');
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // 데이터 가져오기 함수 호출
+  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
+
+  // useEffect(() => {
+  //   const test = user.surveyProgress;
+  //   console.log('test', test);
+  // }, [handleSubmit]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
+
   // generate array of clickable stars for ratingGoodFriend
   const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
     const handleHover = () => {
@@ -147,7 +167,7 @@ function FeedbackModal({
         onClick={() => {
           setRatingGoodFriend(i);
           setRatingGoodFriendSelected(true);
-          updateGoodFriendScore(docID, i + 1);
+          updateGoodFriendScore(docID, surveyProgress, i + 1);
         }}
       >
         {
@@ -175,7 +195,7 @@ function FeedbackModal({
         onClick={() => {
           setRatingGoodService(i);
           setRatingGoodSerivceSelected(true);
-          updateGoodServiceScore(docID, i + 1);
+          updateGoodServiceScore(docID, surveyProgress, i + 1);
         }}
       >
         {
@@ -344,9 +364,9 @@ function FeedbackModal({
                       || !ratingGoodFriendSelected || !ratingGoodServiceSelected}
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
-                      setSubmitted(true);
+                      // setSubmitted(true);
                       const adj = [...selectedTags];
-                      updateAdjectives(docID, adj);
+                      updateAdjectives(docID, surveyProgress, adj);
                       handleSubmit();
                     }}
                   >
