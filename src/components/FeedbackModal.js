@@ -121,13 +121,34 @@ function FeedbackModal({
     );
   });
 
+  const convertLetterToNr = (letter) => {
+    const letterMap = {
+      A: 0,
+      B: 1,
+      C: 2,
+      D: 3,
+      E: 4,
+    };
+    return letterMap[letter];
+  };
+
+  const ImgIdx = convertLetterToNr(surveyProgress);
+
   const handleSubmit = () => {
     dispatch(setNextSurveyProgress());
     // window.location.reload();
 
-    if (surveyProgress === 'E') {
+    if (surveyProgress === 'D') {
       setSubmitted(true);
     }
+    setRatingSympathizeFeeling(-1);
+    setRatingSympathizeFeelingSelected(false);
+    setRatingGoodFriend(-1);
+    setRatingGoodFriendSelected(false);
+    setRatingGoodService(-1);
+    setRatingGoodSerivceSelected(false);
+    setSelectedTags([]);
+    // setCustomField('');
   };
 
   // [EA_MALE, AF_FEMALE etc]
@@ -145,11 +166,6 @@ function FeedbackModal({
 
     fetchData(); // 데이터 가져오기 함수 호출
   }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
-
-  // useEffect(() => {
-  //   const test = user.surveyProgress;
-  //   console.log('test', test);
-  // }, [handleSubmit]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
 
   // generate array of clickable stars for ratingGoodFriend
   const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
@@ -224,14 +240,25 @@ function FeedbackModal({
         <div className="row d-flex justify-content-center">
           {/* <div className="tutorial-icon tutorial-icon-dp mb-2" /> */}
           <div className="tutorial-icon mb-2">
+            {/* <img
+              // src={getImagePath(imgTitles[0])}
+              src={getImagePath(imgTitles[ImgIdx])}
+              alt="none"
+              style={{
+                backgroundSize: 'cover',
+                backgroundPosition: 'bottom center',
+              }}
+            /> */}
+            {ImgIdx <= 3 && (
             <img
-              src={getImagePath(imgTitles[0])}
-              alt={imgTitles[0]}
+              src={getImagePath(imgTitles[ImgIdx])}
+              alt="none"
               style={{
                 backgroundSize: 'cover',
                 backgroundPosition: 'bottom center',
               }}
             />
+            )}
           </div>
         </div>
         {submitted ? (
@@ -260,7 +287,10 @@ function FeedbackModal({
             <div className="row" />
             <div className="row">
               <h2 className="text-center">
-                Can you rate your experience with Avatar A?
+                Can you rate your experience with Avatar
+                {' '}
+                {String(surveyProgress)}
+                ?
               </h2>
             </div>
             <div className="row" />
