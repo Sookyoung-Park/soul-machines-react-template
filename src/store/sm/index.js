@@ -63,7 +63,6 @@ const initialState = {
     info: {
       gender: '',
       race: '',
-      // ABCD 중 어디인지
     },
     chatType: {
       chatType: 'A',
@@ -329,6 +328,8 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       // handles output from TTS (what user said)
       case ('recognizeResults'): {
         const output = message.body.results[0];
+        // undefined + session이 끝나면 출력이 된다.
+        console.log('recongizeResult : ', output);
         // sometimes we get an empty message, catch and log
         if (!output) {
           console.warn('undefined output!', message.body);
@@ -560,6 +561,20 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       }
 
       case ('startRecognize'): {
+        break;
+      }
+
+      // test
+      case ('conversationResult'): {
+        const timestamp = new Date().toISOString();
+        const test1 = message.body.input.text;
+        const test2 = message.body.output.text;
+        const test = message.body;
+        // const personaTextInput = message.input.text;
+        // const personaTextOutput = message.output.text;
+        console.log('test', test);
+        console.log(`[${timestamp}] input text: ${test1}`);
+        console.log(`output text: ${test2}`);
         break;
       }
 
