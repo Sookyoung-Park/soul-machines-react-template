@@ -238,7 +238,8 @@ function FeedbackModal({
   // allow for custom input
   const [customField, setCustomField] = useState('');
   // default tags
-  const tagItems = ['Cheerful', 'Friendly', 'Warm', 'Enjoyful', 'Empathic'];
+  // const tagItems = ['Predictable', 'Kind', 'Professional', 'Intelligent', 'Friendly'];
+  const tagItems = ['Predictable', 'Kind', 'Professional', 'Intelligent', 'Friendly', 'Dependant', 'Honest', 'Warm', 'Satisfying'];
 
   const handleSelectTag = (t) => {
     const tagIsSelected = selectedTags.indexOf(t) > -1;
