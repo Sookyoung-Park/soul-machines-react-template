@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import {
+  connect,
+  useSelector,
+} from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ContentCardSwitch from '../ContentCardSwitch';
 import { primaryAccent } from '../../globalStyle';
+// test
+// import { updateConversationLog } from '../../store/firestore_functions';
 
 function Transcript({ className, transcript }) {
+  // test
+  const { user } = useSelector(({ sm }) => ({ ...sm }));
+  const { docID } = user.firebase;
+  console.log(docID);
+  const [conversationLog, setConversationLog] = useState([]);
+  console.log(conversationLog, setConversationLog);
+  // test end
+
   // scroll to bottom of transcript whenever it updates
   let scrollRef;
   const [isMounting, setIsMounting] = useState(true);
+
   useEffect(() => {
     setIsMounting(false);
     return () => setIsMounting(true);
   });
+
   // state value is arbitrary, we just need it to change to trigger the effect hook
   const [triggerScrollIntoView, setTriggerScroll] = useState(false);
   useEffect(() => {
@@ -36,6 +51,18 @@ function Transcript({ className, transcript }) {
       );
     }
     if (!text || text?.length === 0) return null;
+
+    // test
+    // error in here
+    // const handleConversation = (timestampTest, textTest) => {
+    //   const newConversation = `${timestampTest} ${textTest}`;
+    //   setConversationLog((prevLog) => [...prevLog, newConversation]);
+    // };
+    // handleConversation(timestamp, text);
+
+    // handleConversation(timestamp, text);
+    // updateConversationLog(docID, conversationLog);
+
     return (
       <div key={timestamp}>
         <div className={`transcript-entry ${source === 'user' ? 'transcript-entry-user' : 'transcript-entry-persona'}`}>
