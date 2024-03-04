@@ -92,7 +92,8 @@ function Controls({
         history.push('/next-conversation');
       }
       // history.push('/feedback');
-    }, 15000);
+      // test
+    }, 1500000);
 
     return () => {
       clearTimeout(timeoutId);

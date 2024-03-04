@@ -122,7 +122,9 @@ const initialState = {
   // so if for some reason the camera is disabled, it will default to a square (1:1)
   cameraWidth: 1,
   cameraHeight: 1,
-  showTranscript: false,
+  // showTranscript: false,
+  // test
+  showTranscript: true,
   // enable and disable features for each new session
   config: {
     autoClearCards: true,
@@ -564,17 +566,13 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
         break;
       }
 
-      // test
       case ('conversationResult'): {
         const timestamp = new Date().toISOString();
         const test1 = message.body.input.text;
         const test2 = message.body.output.text;
-        const test = message.body;
-        // const personaTextInput = message.input.text;
-        // const personaTextOutput = message.output.text;
-        console.log('test', test);
         console.log(`[${timestamp}] input text: ${test1}`);
-        console.log(`output text: ${test2}`);
+        console.log(`[${timestamp}]output text: ${test2}`);
+
         break;
       }
 

@@ -179,3 +179,17 @@ export async function updateGoodServiceScore(docID, avatarType, score) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
   }
 }
+
+// save conversational log
+export async function updateConversationLog(docID, conversationLog) {
+  const conversationLogData = {
+    log: conversationLog,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, conversationLogData);
+    console.log('conversation log updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}

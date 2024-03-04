@@ -1,25 +1,27 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import {
+  connect,
+  // useSelector
+} from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { setActiveCards, animateCamera } from '../store/sm/index';
-// uncomment if using manual camera moves
-// import { calculateCameraPosition } from '../utils/camera';
 import Transcript from './ContentCards/Transcript';
 import ContentCardSwitch from './ContentCardSwitch';
 import breakpoints from '../utils/breakpoints';
+// test
+// import { updateConversationLog } from '../store/firestore_functions';
 
 function ContentCardDisplay({
   activeCards,
-  // uncomment if using manual camera moves
-  // dispatchAnimateCamera,
-  // videoWidth,
-  // videoHeight,
   showTranscript,
   className,
   connected,
   inTranscript,
 }) {
+  // const { user } = useSelector(({ sm }) => ({ ...sm }));
+  // const { docID } = user.firebase;
+
   if (!activeCards) return null;
   const CardDisplay = activeCards.map((c, index) => (
     <div className="mb-2" key={JSON.stringify(c)}>
@@ -61,10 +63,6 @@ function ContentCardDisplay({
 ContentCardDisplay.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   activeCards: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // uncomment if using manual camera moves
-  // dispatchAnimateCamera: PropTypes.func.isRequired,
-  // videoWidth: PropTypes.number.isRequired,
-  // videoHeight: PropTypes.number.isRequired,
   showTranscript: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
   connected: PropTypes.bool.isRequired,
@@ -107,7 +105,9 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchActiveCards: (activeCards) => dispatch(
     // the next time the persona speaks, if the cards are stale, it will clear them.
     // if this value isn't desired, don't set this value to true.
-    setActiveCards({ activeCards, cardsAreStale: true }),
+    // Soo changed cardAreStale: true to false
+    // 대화값이 길어지면 알아서 삭제되길 원하면 나중에 Truef로 다시 바꾸기
+    setActiveCards({ activeCards, cardsAreStale: false }),
   ),
   dispatchAnimateCamera: (options, duration = 1) => dispatch(animateCamera({ options, duration })),
 });
