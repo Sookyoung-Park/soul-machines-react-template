@@ -7,29 +7,46 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ContentCardSwitch from '../ContentCardSwitch';
 import { primaryAccent } from '../../globalStyle';
-// test
 import { updateConversationLog } from '../../store/firestore_functions';
 
 function Transcript({ className, transcript }) {
-  // test
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
-  console.log(docID);
   const [conversationLog, setConversationLog] = useState([]);
-  console.log(conversationLog, setConversationLog);
 
+  // 잘 되는 코드.
+  // useEffect(() => {
+  //   const handleConversation = (timestampTest, textTest) => {
+  //     const newConversation = `${timestampTest} ${textTest}`;
+  //     setConversationLog((prevLog) => [...prevLog, newConversation]);
+  //   };
+
+  //   transcript.forEach(({ timestamp, text }) => {
+  //     handleConversation(timestamp, text);
+  //     // updateConversationLog(docID, conversationLog);
+  //   });
+
+  //   updateConversationLog(docID, conversationLog);
+  // }, [transcript]);
+
+  // Test code
   useEffect(() => {
     const handleConversation = (timestampTest, textTest) => {
-      const newConversation = `${timestampTest} ${textTest}`;
-      setConversationLog((prevLog) => [...prevLog, newConversation]);
+      if (textTest) {
+        const newConversation = `${timestampTest} ${textTest}`;
+        // setConversationLog((prevLog) => [...prevLog, newConversation]);
+        setConversationLog([newConversation]);
+      }
     };
 
     transcript.forEach(({ timestamp, text }) => {
       handleConversation(timestamp, text);
-      updateConversationLog(docID, conversationLog); // 이 부분은 나중에 firestore 로직과 연결되어야 합니다.
     });
   }, [transcript]);
-  // Test done
+
+  useEffect(() => {
+    updateConversationLog(docID, conversationLog);
+  }, [conversationLog, docID]);
 
   // scroll to bottom of transcript whenever it updates
   let scrollRef;
@@ -63,20 +80,6 @@ function Transcript({ className, transcript }) {
       );
     }
     if (!text || text?.length === 0) return null;
-
-    // test
-    // const handleConversation = (timestampTest, textTest) => {
-    //   const newConversation = `${timestampTest} ${textTest}`;
-    //   console.log(newConversation);
-    //   return newConversation;
-    //   // Error here
-    //   // setConversationLog((prevLog) => prevLog.concat(newConversation));
-    // };
-    // const test = handleConversation(timestamp, text);
-    // // setConversationLog((prevLog) => [...prevLog, test]);
-
-    // // handleConversation(timestamp, text);
-    // updateConversationLog(docID, test);
 
     return (
       <div key={timestamp}>

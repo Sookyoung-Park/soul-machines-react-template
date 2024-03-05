@@ -23,7 +23,9 @@ function LandingAfter({ className }) {
   const dispatch = useDispatch();
 
   // api key condition
-  const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
+  // test
+  // const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
+  const API_EA_MALE = process.env.REACT_APP_API_KEY_NOAH;
   const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
   const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
   const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;

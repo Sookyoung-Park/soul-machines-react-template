@@ -27,8 +27,8 @@ function Loading({ className }) {
     apiA, apiB, apiC, apiD,
   } = user.apiKey;
 
-  console.log('apiC', apiC);
-  console.log(chatType, ': saved ChatType in Loading.js');
+  // console.log('apiC', apiC);
+  // console.log(chatType, ': saved ChatType in Loading.js');
 
   // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
   const dispatch = useDispatch();
