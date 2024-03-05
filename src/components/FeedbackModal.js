@@ -8,10 +8,12 @@ import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
 import {
   updateAdjectives,
-  updateSympathizeMyFeelingScore,
+  updateEmpathy1,
   updateGoodFriendScore,
   updateGoodServiceScore,
   readAllExperimentTypes,
+  updateTrustworthy1,
+  updateTrustworthy2,
 } from '../store/firestore_functions';
 import { setNextSurveyProgress } from '../store/sm/index';
 
@@ -32,9 +34,7 @@ import AI_FEMALE from '../img/AI_FEMALE.png';
 import SA_MALE from '../img/SA_MALE.png';
 import SA_FEMALE from '../img/SA_FEMALE.png';
 
-function FeedbackModal({
-  className, onClose, closeText,
-}) {
+function FeedbackModal({ className, onClose, closeText }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
   const { surveyProgress } = user.surveyProgress;
@@ -84,13 +84,22 @@ function FeedbackModal({
     }
   };
 
-  // readAllExperimentTypes
-  // const avatarlist = [];
-
   const nStars = 7;
-  // I think A sympathize my feeling
+  // trustworthiness1 - I could predict the Avatar[N]'s reaction.
+  const [ratingPredictReaction, setRatingPredictReaction] = useState(-1);
+  const [ratingPredictReactionSelected, setRatingPredictReactionSelected] = useState(false);
+
+  // trustworthiness2 - AI avatar is honest and sincere in the interactions.
+  const [ratingHonestSincere, setRatingHonestSincere] = useState(-1);
+  const [ratingHonestSincereSelected, setRatingHonestSincereSelected] = useState(false);
+
+  // sympathize1 - I could feel Avatars emotion during the conversation
   const [ratingSympathizeFeeling, setRatingSympathizeFeeling] = useState(-1);
   const [ratingSympathizeFeelingSelected, setRatingSympathizeFeelingSelected] = useState(false);
+
+  // sympathize2 - I could understand Avatars emotion state.
+  const [ratingUnderstandEmotion, setRatingUnderstandEmotion] = useState(-1);
+  const [ratingUnderstandEmotionSelected, setRatingUnderstandEmotionSelected] = useState(false);
 
   // I think DP could be a good friend with me
   const [ratingGoodFriend, setRatingGoodFriend] = useState(-1);
@@ -104,34 +113,6 @@ function FeedbackModal({
   const [selectedTags, setSelectedTags] = useState([]);
 
   const [submitted, setSubmitted] = useState(false);
-
-  // generate array of clickable stars for ratingSympathizeFeeling
-  const starsSympathizeFeeling = Array.from(Array(nStars)).map((_, i) => {
-    const handleHover = () => {
-      if (!ratingSympathizeFeelingSelected) setRatingSympathizeFeeling(i);
-    };
-    return (
-      <button
-        // eslint-disable-next-line react/no-array-index-key
-        key={i}
-        className="star-wrapper"
-        type="button"
-        onMouseOver={handleHover}
-        onFocus={handleHover}
-        onClick={() => {
-          setRatingSympathizeFeeling(i);
-          setRatingSympathizeFeelingSelected(true);
-          updateSympathizeMyFeelingScore(docID, surveyProgress, i + 1);
-        }}
-      >
-        {
-        ratingSympathizeFeeling >= i
-          ? <StarFill className="star star-fill" fill="#63c980" />
-          : <Star className="star star-outline" fill="#d5e3d9" />
-      }
-      </button>
-    );
-  });
 
   const convertLetterToNr = (letter) => {
     const letterMap = {
@@ -178,6 +159,118 @@ function FeedbackModal({
 
     fetchData(); // 데이터 가져오기 함수 호출
   }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
+
+  // trustworthy1 (predict reaction) - generate array of clickable stars for ratingSympathizeFeeling
+  const starsTrustworthy1 = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingPredictReactionSelected) setRatingPredictReaction(i);
+    };
+    return (
+      <button
+          // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingPredictReaction(i);
+          setRatingPredictReactionSelected(true);
+          updateTrustworthy1(docID, surveyProgress, i + 1);
+        }}
+      >
+        {
+          ratingPredictReaction >= i
+            ? <StarFill className="star star-fill" fill="#63c980" />
+            : <Star className="star star-outline" fill="#d5e3d9" />
+        }
+      </button>
+    );
+  });
+
+  // trustworthy2 (honest and sincere) - generate array of clickable stars
+  const starsTrustworthy2 = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingHonestSincereSelected) setRatingHonestSincere(i);
+    };
+    return (
+      <button
+            // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingHonestSincere(i);
+          setRatingHonestSincereSelected(true);
+          updateTrustworthy2(docID, surveyProgress, i + 1);
+        }}
+      >
+        {
+            ratingHonestSincere >= i
+              ? <StarFill className="star star-fill" fill="#63c980" />
+              : <Star className="star star-outline" fill="#d5e3d9" />
+          }
+      </button>
+    );
+  });
+
+  // empathy1 (could feel Avatar's emotion - generate array of clickable stars
+  const starsEmpathy1 = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingSympathizeFeelingSelected) setRatingSympathizeFeeling(i);
+    };
+    return (
+      <button
+          // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingSympathizeFeeling(i);
+          setRatingSympathizeFeelingSelected(true);
+          updateEmpathy1(docID, surveyProgress, i + 1);
+        }}
+      >
+        {
+          ratingSympathizeFeeling >= i
+            ? <StarFill className="star star-fill" fill="#63c980" />
+            : <Star className="star star-outline" fill="#d5e3d9" />
+        }
+      </button>
+    );
+  });
+
+  // empathy2 - I could understand Avatars emotion state.
+  const starsEmpathy2 = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!ratingUnderstandEmotionSelected) setRatingUnderstandEmotion(i);
+    };
+    return (
+      <button
+            // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingUnderstandEmotion(i);
+          setRatingUnderstandEmotionSelected(true);
+          // updateSympathizeMyFeelingScore(docID, surveyProgress, i + 1);
+        }}
+      >
+        {
+            ratingUnderstandEmotion >= i
+              ? <StarFill className="star star-fill" fill="#63c980" />
+              : <Star className="star star-outline" fill="#d5e3d9" />
+          }
+      </button>
+    );
+  });
 
   // generate array of clickable stars for ratingGoodFriend
   const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
@@ -237,8 +330,6 @@ function FeedbackModal({
 
   // allow for custom input
   const [customField, setCustomField] = useState('');
-  // default tags
-  // const tagItems = ['Predictable', 'Kind', 'Professional', 'Intelligent', 'Friendly'];
   const tagItems = ['Predictable', 'Kind', 'Professional', 'Intelligent', 'Friendly', 'Dependant', 'Honest', 'Warm', 'Satisfying'];
 
   const handleSelectTag = (t) => {
@@ -253,15 +344,6 @@ function FeedbackModal({
         <div className="row d-flex justify-content-center">
           {/* <div className="tutorial-icon tutorial-icon-dp mb-2" /> */}
           <div className="tutorial-icon mb-2">
-            {/* <img
-              // src={getImagePath(imgTitles[0])}
-              src={getImagePath(imgTitles[ImgIdx])}
-              alt="none"
-              style={{
-                backgroundSize: 'cover',
-                backgroundPosition: 'bottom center',
-              }}
-            /> */}
             {ImgIdx <= 3 && (
             <img
               src={getImagePath(imgTitles[ImgIdx])}
@@ -309,7 +391,7 @@ function FeedbackModal({
             <div className="row" />
             <hr />
             <div className="row" style={{ marginTop: '32px' }}>
-              <h3>How would you describe your experience?</h3>
+              <h4>How would you describe your experience?</h4>
               <p> (Please Select All that Apply)</p>
               <div className="mt-3">
                 {tagItems.map((t) => (
@@ -329,9 +411,48 @@ function FeedbackModal({
             <div className="mt-3">
               {/* <SurveyComponent /> */}
             </div>
+            {/* test */}
             <div className="row">
               <div style={{ marginTop: '16px' }}>
-                <h3>I think A sympathize my feeling</h3>
+                <h4>
+                  I could predict the AI avatar&apos;s reaction.
+                </h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;never Predictable&apos; and 7= &apos;very predictable&apos;)</p>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingPredictReactionSelected) setRatingPredictReaction(-1);
+                  }}
+                >
+                  {starsTrustworthy1}
+                </div>
+              </div>
+            </div>
+            {/* test */}
+            <div className="row">
+              <div style={{ marginTop: '16px' }}>
+                <h4>
+                  AI avatar is honest and sincere during the conversation.
+                </h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;never honest and sincere&apos; and 7= &apos;very honest and sincere&apos;)</p>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingHonestSincereSelected) setRatingHonestSincere(-1);
+                  }}
+                >
+                  {starsTrustworthy2}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div style={{ marginTop: '16px' }}>
+                <h4>I could feel AI avatar&apos;s emotion during the conversation.</h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;never feel&apos; and 7= &apos;totally feel&apos;)</p>
               </div>
               <div className="row">
                 <div
@@ -340,13 +461,29 @@ function FeedbackModal({
                     if (!ratingSympathizeFeelingSelected) setRatingSympathizeFeeling(-1);
                   }}
                 >
-                  {starsSympathizeFeeling}
+                  {starsEmpathy1}
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div style={{ marginTop: '16px' }}>
+                <h4>I could understand AI avatar&apos;s emotion state</h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;never understand&apos; and 7= &apos;totally understand&apos;)</p>
+              </div>
+              <div className="row">
+                <div
+                  className="justify-content-left d-flex"
+                  onMouseLeave={() => {
+                    if (!ratingUnderstandEmotionSelected) setRatingUnderstandEmotion(-1);
+                  }}
+                >
+                  {starsEmpathy2}
                 </div>
               </div>
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h3>I think A could be your good friend with you</h3>
+                <h4>I think A could be your good friend with you</h4>
               </div>
               <div className="row">
                 <div
@@ -361,7 +498,7 @@ function FeedbackModal({
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h3>DP provided a good service</h3>
+                <h4>DP provided a good service</h4>
               </div>
               <div className="row">
                 <div
@@ -375,7 +512,7 @@ function FeedbackModal({
               </div>
             </div>
             <div className="row">
-              <h3 style={{ marginTop: '32px' }}>Can you tell us more?</h3>
+              <h4 style={{ marginTop: '32px' }}>Can you tell us more?</h4>
               {/* field for custom tags, limited to 20 chars */}
               <div
                 className="d-flex custom-items"
@@ -445,8 +582,8 @@ export default styled(FeedbackModal)`
     margin: 0;
   }
   .star {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.1rem;
+    height: 1.1rem;
     margin: .2rem;
 
     @media (min-width: ${breakpoints.sm}px) {
