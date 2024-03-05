@@ -70,7 +70,6 @@ export async function readAllExperimentTypes(docID) {
 }
 
 // after survey
-
 // update trustworhty_1
 export async function updateTrustworthy1(docID, avatarType, score) {
   const Trustworthy1Data = {
@@ -121,6 +120,34 @@ export async function updateEmpathy2(docID, avatarType, score) {
   const docRef = doc(db, 'Projects', docID);
   try {
     await updateDoc(docRef, sympathizeScore2Data);
+    console.log('score updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// good service_1
+export async function updateGoodService1(docID, avatarType, score) {
+  const GoodService1ScoreData = {
+    [`${avatarType}_service_evaluation_1`]: score,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, GoodService1ScoreData);
+    console.log('score updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// good service_2
+export async function updateGoodService2(docID, avatarType, score) {
+  const GoodService2ScoreData = {
+    [`${avatarType}_service_evaluation_2`]: score,
+  };
+  const docRef = doc(db, 'Projects', docID);
+  try {
+    await updateDoc(docRef, GoodService2ScoreData);
     console.log('score updated. 문서 ID:', docRef.id);
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
@@ -190,34 +217,6 @@ export async function updateAdjectives(docID, avatarType, adjectives) {
   try {
     await updateDoc(docRef, adjectivesData);
     console.log('adjectivesData updated. 문서 ID:', docRef.id);
-  } catch (error) {
-    console.error('데이터 추가 중 오류가 발생했습니다:', error);
-  }
-}
-
-// update " I think A could be your good friend with you"
-export async function updateGoodFriendScore(docID, avatarType, score) {
-  const GoodFriendScoreData = {
-    [`${avatarType}_good_friend_score`]: score,
-  };
-  const docRef = doc(db, 'Projects', docID);
-  try {
-    await updateDoc(docRef, GoodFriendScoreData);
-    console.log('score updated. 문서 ID:', docRef.id);
-  } catch (error) {
-    console.error('데이터 추가 중 오류가 발생했습니다:', error);
-  }
-}
-
-// update " I think A could be your good friend with you"
-export async function updateGoodServiceScore(docID, avatarType, score) {
-  const GoodServiceScoreData = {
-    [`${avatarType}_good_service_score`]: score,
-  };
-  const docRef = doc(db, 'Projects', docID);
-  try {
-    await updateDoc(docRef, GoodServiceScoreData);
-    console.log('score updated. 문서 ID:', docRef.id);
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
   }

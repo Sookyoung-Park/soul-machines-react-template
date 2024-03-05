@@ -8,13 +8,13 @@ import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
 import {
   updateAdjectives,
-  updateGoodFriendScore,
-  updateGoodServiceScore,
   readAllExperimentTypes,
   updateTrustworthy1,
   updateTrustworthy2,
   updateEmpathy1,
   updateEmpathy2,
+  updateGoodService1,
+  updateGoodService2,
 } from '../store/firestore_functions';
 import { setNextSurveyProgress } from '../store/sm/index';
 
@@ -104,13 +104,13 @@ function FeedbackModal({ className, onClose, closeText }) {
 
   // need to fix from here
 
-  // I think DP could be a good friend with me
-  const [ratingGoodFriend, setRatingGoodFriend] = useState(-1);
-  const [ratingGoodFriendSelected, setRatingGoodFriendSelected] = useState(false);
-
-  // DP A provided a good service
+  // trustworthy1 - AI avatar provided good service.
   const [ratingGoodService, setRatingGoodService] = useState(-1);
   const [ratingGoodServiceSelected, setRatingGoodSerivceSelected] = useState(false);
+
+  // trustworhy2 - I would like to use the service again.
+  const [ratingServiceAgain, setRatingServiceAgain] = useState(-1);
+  const [RatingServiceAgainSelected, setRatingServiceAgainSelected] = useState(false);
 
   // adjectives
   const [selectedTags, setSelectedTags] = useState([]);
@@ -137,10 +137,6 @@ function FeedbackModal({ className, onClose, closeText }) {
     if (surveyProgress === 'D') {
       setSubmitted(true);
     }
-    setRatingGoodFriend(-1);
-    setRatingGoodFriendSelected(false);
-    setRatingGoodService(-1);
-    setRatingGoodSerivceSelected(false);
     setSelectedTags([]);
     // trustworthiness
     setRatingPredictReaction(-1);
@@ -152,6 +148,11 @@ function FeedbackModal({ className, onClose, closeText }) {
     setRatingSympathizeFeelingSelected(false);
     setRatingUnderstandEmotionSelected(-1);
     setRatingUnderstandEmotionSelected(false);
+    // service evaluation
+    setRatingServiceAgain(-1);
+    setRatingServiceAgainSelected(false);
+    setRatingGoodService(-1);
+    setRatingGoodSerivceSelected(false);
     // setCustomField('');
   };
 
@@ -283,10 +284,38 @@ function FeedbackModal({ className, onClose, closeText }) {
     );
   });
 
-  // generate array of clickable stars for ratingGoodFriend
-  const starsRatingGoodFriend = Array.from(Array(nStars)).map((_, i) => {
+  // good service 1 - Avatar gave good or poor service (1=”very poor” and 7 = “very good”)
+  const starsGoodService1 = Array.from(Array(nStars)).map((_, i) => {
     const handleHover = () => {
-      if (!ratingGoodFriendSelected) setRatingGoodFriend(i);
+      if (!ratingGoodServiceSelected) setRatingGoodService(i);
+    };
+    return (
+      <button
+              // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        className="star-wrapper"
+        type="button"
+        onMouseOver={handleHover}
+        onFocus={handleHover}
+        onClick={() => {
+          setRatingGoodService(i);
+          setRatingGoodSerivceSelected(true);
+          updateGoodService1(docID, surveyProgress, i + 1);
+        }}
+      >
+        {
+              ratingGoodService >= i
+                ? <StarFill className="star star-fill" fill="#63c980" />
+                : <Star className="star star-outline" fill="#d5e3d9" />
+            }
+      </button>
+    );
+  });
+
+  // good service 2 - I would like to use the service again.
+  const starsGoodService2 = Array.from(Array(nStars)).map((_, i) => {
+    const handleHover = () => {
+      if (!RatingServiceAgainSelected) setRatingServiceAgain(i);
     };
     return (
       <button
@@ -297,44 +326,16 @@ function FeedbackModal({ className, onClose, closeText }) {
         onMouseOver={handleHover}
         onFocus={handleHover}
         onClick={() => {
-          setRatingGoodFriend(i);
-          setRatingGoodFriendSelected(true);
-          updateGoodFriendScore(docID, surveyProgress, i + 1);
+          setRatingServiceAgain(i);
+          setRatingServiceAgainSelected(true);
+          updateGoodService2(docID, surveyProgress, i + 1);
         }}
       >
         {
-          ratingGoodFriend >= i
+          ratingServiceAgain >= i
             ? <StarFill className="star star-fill" fill="#63c980" />
             : <Star className="star star-outline" fill="#d5e3d9" />
         }
-      </button>
-    );
-  });
-
-  // generate array of clickable stars for ratingGoodService
-  const starsRatingGoodService = Array.from(Array(nStars)).map((_, i) => {
-    const handleHover = () => {
-      if (!ratingGoodServiceSelected) setRatingGoodService(i);
-    };
-    return (
-      <button
-            // eslint-disable-next-line react/no-array-index-key
-        key={i}
-        className="star-wrapper"
-        type="button"
-        onMouseOver={handleHover}
-        onFocus={handleHover}
-        onClick={() => {
-          setRatingGoodService(i);
-          setRatingGoodSerivceSelected(true);
-          updateGoodServiceScore(docID, surveyProgress, i + 1);
-        }}
-      >
-        {
-            ratingGoodService >= i
-              ? <StarFill className="star star-fill" fill="#63c980" />
-              : <Star className="star star-outline" fill="#d5e3d9" />
-          }
       </button>
     );
   });
@@ -494,22 +495,24 @@ function FeedbackModal({ className, onClose, closeText }) {
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h4>I think A could be your good friend with you</h4>
+                <h4>AI avatar provided good service.</h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;very poor&apos; and 7= &apos;very good&apos;)</p>
               </div>
               <div className="row">
                 <div
                   className="justify-content-left d-flex"
                   onMouseLeave={() => {
-                    if (!ratingGoodFriendSelected) setRatingGoodFriend(-1);
+                    if (!RatingServiceAgainSelected) setRatingServiceAgain(-1);
                   }}
                 >
-                  {starsRatingGoodFriend}
+                  {starsGoodService1}
                 </div>
               </div>
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h4>DP provided a good service</h4>
+                <h4>I would like to use the service again</h4>
+                <p style={{ fontSize: '1.2em' }}>(1= &apos;would avoid using the service&apos; and 7= &apos;would want very much to use the service.&apos;)</p>
               </div>
               <div className="row">
                 <div
@@ -518,7 +521,7 @@ function FeedbackModal({ className, onClose, closeText }) {
                     if (!ratingGoodServiceSelected) setRatingGoodService(-1);
                   }}
                 >
-                  {starsRatingGoodService}
+                  {starsGoodService2}
                 </div>
               </div>
             </div>
@@ -553,7 +556,7 @@ function FeedbackModal({ className, onClose, closeText }) {
                     className="btn btn-dark"
                     disabled={!ratingHonestSincere || !ratingPredictReaction
                       || !ratingSympathizeFeelingSelected || !ratingUnderstandEmotionSelected
-                      || !ratingGoodFriendSelected || !ratingGoodServiceSelected}
+                      || !RatingServiceAgainSelected || !ratingGoodServiceSelected}
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
                       // setSubmitted(true);
