@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ContentCardSwitch from '../ContentCardSwitch';
 import { primaryAccent } from '../../globalStyle';
 // test
-// import { updateConversationLog } from '../../store/firestore_functions';
+import { updateConversationLog } from '../../store/firestore_functions';
 
 function Transcript({ className, transcript }) {
   // test
@@ -17,7 +17,9 @@ function Transcript({ className, transcript }) {
   console.log(docID);
   const [conversationLog, setConversationLog] = useState([]);
   console.log(conversationLog, setConversationLog);
-  // test end
+
+  // test2
+  // const fs = require('fs');
 
   // scroll to bottom of transcript whenever it updates
   let scrollRef;
@@ -53,15 +55,18 @@ function Transcript({ className, transcript }) {
     if (!text || text?.length === 0) return null;
 
     // test
-    // error in here
-    // const handleConversation = (timestampTest, textTest) => {
-    //   const newConversation = `${timestampTest} ${textTest}`;
-    //   setConversationLog((prevLog) => [...prevLog, newConversation]);
-    // };
-    // handleConversation(timestamp, text);
+    const handleConversation = (timestampTest, textTest) => {
+      const newConversation = `${timestampTest} ${textTest}`;
+      console.log(newConversation);
+      return newConversation;
+      // Error here
+      // setConversationLog((prevLog) => prevLog.concat(newConversation));
+    };
+    const test = handleConversation(timestamp, text);
+    // setConversationLog((prevLog) => [...prevLog, test]);
 
     // handleConversation(timestamp, text);
-    // updateConversationLog(docID, conversationLog);
+    updateConversationLog(docID, test);
 
     return (
       <div key={timestamp}>

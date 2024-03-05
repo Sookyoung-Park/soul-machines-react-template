@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, doc, addDoc, updateDoc, getDoc,
+  // setDoc,
 } from 'firebase/firestore';
 import firebaseConfig from '../config/firebaseConfig';
 
@@ -181,13 +182,40 @@ export async function updateGoodServiceScore(docID, avatarType, score) {
 }
 
 // save conversational log
+// export async function updateConversationLog(docID, conversationLog) {
+//   const conversationLogData = {
+//     log: conversationLog,
+//   };
+//   const docRef = doc(db, 'Projects', docID);
+//   try {
+//     await updateDoc(docRef, conversationLogData);
+//     console.log('conversation log updated. 문서 ID:', docRef.id);
+//   } catch (error) {
+//     console.error('데이터 추가 중 오류가 발생했습니다:', error);
+//   }
+// }
+
+// export async function updateConversationLog(docID, conversationLog) {
+//   const conversationLogData = {
+//     log: conversationLog,
+//   };
+//   const docRef = doc(collection(db, 'Projects', docID), 'conversation');
+//   try {
+//     await setDoc(docRef, conversationLogData);
+//     console.log('conversation log updated. 문서 ID:', docRef.id);
+//   } catch (error) {
+//     console.error('데이터 추가 중 오류가 발생했습니다:', error);
+//   }
+// }
+
 export async function updateConversationLog(docID, conversationLog) {
   const conversationLogData = {
     log: conversationLog,
   };
-  const docRef = doc(db, 'Projects', docID);
+  const docRef = collection(db, `Projects/${docID}/conversation`);
   try {
-    await updateDoc(docRef, conversationLogData);
+    // await setDoc(docRef, conversationLogData);
+    await addDoc(docRef, conversationLogData);
     console.log('conversation log updated. 문서 ID:', docRef.id);
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
