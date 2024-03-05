@@ -8,12 +8,13 @@ import breakpoints from '../utils/breakpoints';
 import { landingBackgroundImage } from '../config';
 import {
   updateAdjectives,
-  updateEmpathy1,
   updateGoodFriendScore,
   updateGoodServiceScore,
   readAllExperimentTypes,
   updateTrustworthy1,
   updateTrustworthy2,
+  updateEmpathy1,
+  updateEmpathy2,
 } from '../store/firestore_functions';
 import { setNextSurveyProgress } from '../store/sm/index';
 
@@ -101,6 +102,8 @@ function FeedbackModal({ className, onClose, closeText }) {
   const [ratingUnderstandEmotion, setRatingUnderstandEmotion] = useState(-1);
   const [ratingUnderstandEmotionSelected, setRatingUnderstandEmotionSelected] = useState(false);
 
+  // need to fix from here
+
   // I think DP could be a good friend with me
   const [ratingGoodFriend, setRatingGoodFriend] = useState(-1);
   const [ratingGoodFriendSelected, setRatingGoodFriendSelected] = useState(false);
@@ -134,13 +137,21 @@ function FeedbackModal({ className, onClose, closeText }) {
     if (surveyProgress === 'D') {
       setSubmitted(true);
     }
-    setRatingSympathizeFeeling(-1);
-    setRatingSympathizeFeelingSelected(false);
     setRatingGoodFriend(-1);
     setRatingGoodFriendSelected(false);
     setRatingGoodService(-1);
     setRatingGoodSerivceSelected(false);
     setSelectedTags([]);
+    // trustworthiness
+    setRatingPredictReaction(-1);
+    setRatingPredictReactionSelected(false);
+    setRatingHonestSincere(-1);
+    setRatingHonestSincereSelected(false);
+    // empathy
+    setRatingSympathizeFeeling(-1);
+    setRatingSympathizeFeelingSelected(false);
+    setRatingUnderstandEmotionSelected(-1);
+    setRatingUnderstandEmotionSelected(false);
     // setCustomField('');
   };
 
@@ -260,7 +271,7 @@ function FeedbackModal({ className, onClose, closeText }) {
         onClick={() => {
           setRatingUnderstandEmotion(i);
           setRatingUnderstandEmotionSelected(true);
-          // updateSympathizeMyFeelingScore(docID, surveyProgress, i + 1);
+          updateEmpathy2(docID, surveyProgress, i + 1);
         }}
       >
         {
@@ -540,7 +551,8 @@ function FeedbackModal({ className, onClose, closeText }) {
                   <button
                     type="button"
                     className="btn btn-dark"
-                    disabled={!ratingSympathizeFeelingSelected
+                    disabled={!ratingHonestSincere || !ratingPredictReaction
+                      || !ratingSympathizeFeelingSelected || !ratingUnderstandEmotionSelected
                       || !ratingGoodFriendSelected || !ratingGoodServiceSelected}
                     onClick={() => {
                       setSelectedTags([...selectedTags, customField]);
