@@ -18,8 +18,18 @@ function Transcript({ className, transcript }) {
   const [conversationLog, setConversationLog] = useState([]);
   console.log(conversationLog, setConversationLog);
 
-  // test2
-  // const fs = require('fs');
+  useEffect(() => {
+    const handleConversation = (timestampTest, textTest) => {
+      const newConversation = `${timestampTest} ${textTest}`;
+      setConversationLog((prevLog) => [...prevLog, newConversation]);
+    };
+
+    transcript.forEach(({ timestamp, text }) => {
+      handleConversation(timestamp, text);
+      updateConversationLog(docID, conversationLog); // 이 부분은 나중에 firestore 로직과 연결되어야 합니다.
+    });
+  }, [transcript]);
+  // Test done
 
   // scroll to bottom of transcript whenever it updates
   let scrollRef;
@@ -55,18 +65,18 @@ function Transcript({ className, transcript }) {
     if (!text || text?.length === 0) return null;
 
     // test
-    const handleConversation = (timestampTest, textTest) => {
-      const newConversation = `${timestampTest} ${textTest}`;
-      console.log(newConversation);
-      return newConversation;
-      // Error here
-      // setConversationLog((prevLog) => prevLog.concat(newConversation));
-    };
-    const test = handleConversation(timestamp, text);
-    // setConversationLog((prevLog) => [...prevLog, test]);
+    // const handleConversation = (timestampTest, textTest) => {
+    //   const newConversation = `${timestampTest} ${textTest}`;
+    //   console.log(newConversation);
+    //   return newConversation;
+    //   // Error here
+    //   // setConversationLog((prevLog) => prevLog.concat(newConversation));
+    // };
+    // const test = handleConversation(timestamp, text);
+    // // setConversationLog((prevLog) => [...prevLog, test]);
 
-    // handleConversation(timestamp, text);
-    updateConversationLog(docID, test);
+    // // handleConversation(timestamp, text);
+    // updateConversationLog(docID, test);
 
     return (
       <div key={timestamp}>

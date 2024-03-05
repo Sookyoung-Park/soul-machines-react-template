@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, doc, addDoc, updateDoc, getDoc,
-  // setDoc,
+  setDoc,
 } from 'firebase/firestore';
 import firebaseConfig from '../config/firebaseConfig';
 
@@ -182,13 +182,14 @@ export async function updateGoodServiceScore(docID, avatarType, score) {
 }
 
 // save conversational log
-// export async function updateConversationLog(docID, conversationLog) {
+// export async function addConversationLog(docID, conversationLog) {
 //   const conversationLogData = {
 //     log: conversationLog,
 //   };
-//   const docRef = doc(db, 'Projects', docID);
+//   const docRef = collection(db, `Projects/${docID}/conversation`);
 //   try {
-//     await updateDoc(docRef, conversationLogData);
+//     // await setDoc(docRef, conversationLogData);
+//     await addDoc(docRef, conversationLogData);
 //     console.log('conversation log updated. 문서 ID:', docRef.id);
 //   } catch (error) {
 //     console.error('데이터 추가 중 오류가 발생했습니다:', error);
@@ -199,23 +200,38 @@ export async function updateGoodServiceScore(docID, avatarType, score) {
 //   const conversationLogData = {
 //     log: conversationLog,
 //   };
-//   const docRef = doc(collection(db, 'Projects', docID), 'conversation');
+//   const docRef = collection(db, `Projects/${docID}/conversation`);
 //   try {
-//     await setDoc(docRef, conversationLogData);
+//     // await setDoc(docRef, conversationLogData);
+//     await addDoc(docRef, conversationLogData);
 //     console.log('conversation log updated. 문서 ID:', docRef.id);
 //   } catch (error) {
 //     console.error('데이터 추가 중 오류가 발생했습니다:', error);
 //   }
 // }
 
-export async function updateConversationLog(docID, conversationLog) {
+// 대화의 첫 번째 마디를 저장
+export async function addConversationLog(docID, conversationLog) {
   const conversationLogData = {
     log: conversationLog,
   };
   const docRef = collection(db, `Projects/${docID}/conversation`);
   try {
-    // await setDoc(docRef, conversationLogData);
-    await addDoc(docRef, conversationLogData);
+    await setDoc(docRef, conversationLogData);
+    console.log('conversation log updated. 문서 ID:', docRef.id);
+  } catch (error) {
+    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+  }
+}
+
+// 대화의 두 번째 이후 마디를 업데이트
+export async function updateConversationLog(docID, conversationLog) {
+  const conversationLogData = {
+    log: conversationLog,
+  };
+  const docRef = doc(db, `Projects/${docID}/conversation/conversationDocID`); // conversationDocID는 대화 문서의 ID
+  try {
+    await setDoc(docRef, conversationLogData); // 기존 문서를 덮어쓰기 때문에 setDoc을 사용합니다.
     console.log('conversation log updated. 문서 ID:', docRef.id);
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
