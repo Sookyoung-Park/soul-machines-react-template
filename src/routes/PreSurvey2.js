@@ -12,11 +12,14 @@ import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
 import EA_MALE from '../img/EA_MALE.png';
+// import EA_FEMALE from '../img/EA_FEMALE.png';
 import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
+// import CS_MALE from '../img/CS_MALE.png';
 import CS_MALE from '../img/CS_MALE.png';
 import CS_MALE_2 from '../img/CS_MALE_2.png';
+// import CS_FEMALE from '../img/CS_FEMALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
 import CS_FEMALE_2 from '../img/CS_FEMALE_2.png';
 import HP_MALE from '../img/HP_MALE.png';

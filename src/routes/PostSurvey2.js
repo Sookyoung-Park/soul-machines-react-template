@@ -8,11 +8,13 @@ import { useSelector } from 'react-redux';
 import { readAllExperimentTypes, updateIntelligenceRank } from '../store/firestore_functions';
 
 import EA_MALE from '../img/EA_MALE.png';
+// import EA_FEMALE from '../img/EA_FEMALE.png';
 import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
-import CS_MALE from '../img/CS_MALE.png';
+// import CS_MALE from '../img/CS_MALE.png';
 // import CS_FEMALE from '../img/CS_FEMALE.png';
+import CS_MALE from '../img/CS_MALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
 
 const json = {
