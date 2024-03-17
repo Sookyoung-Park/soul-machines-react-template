@@ -146,7 +146,7 @@ function FeedbackModal({ className, onClose, closeText }) {
     // empathy
     setRatingSympathizeFeeling(-1);
     setRatingSympathizeFeelingSelected(false);
-    setRatingUnderstandEmotionSelected(-1);
+    setRatingUnderstandEmotion(-1);
     setRatingUnderstandEmotionSelected(false);
     // service evaluation
     setRatingServiceAgain(-1);
