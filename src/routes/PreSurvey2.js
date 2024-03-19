@@ -12,7 +12,6 @@ import videoFill from '../img/camera-video-fill.svg';
 import { setUserInfoState } from '../store/sm';
 
 import EA_MALE from '../img/EA_MALE.png';
-// import EA_FEMALE from '../img/EA_FEMALE.png';
 import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
