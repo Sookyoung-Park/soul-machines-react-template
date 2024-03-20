@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Star, StarFill } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import breakpoints from '../utils/breakpoints';
@@ -35,7 +34,7 @@ import AI_FEMALE from '../img/AI_FEMALE.png';
 import SA_MALE from '../img/SA_MALE.png';
 import SA_FEMALE from '../img/SA_FEMALE.png';
 
-function FeedbackModal({ className, onClose, closeText }) {
+function FeedbackModal({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
   const { surveyProgress } = user.surveyProgress;
@@ -371,22 +370,8 @@ function FeedbackModal({ className, onClose, closeText }) {
         {submitted ? (
           <div>
             <div className="row text-center">
-              <h2>Thank you for your feedback.</h2>
-              <p>Want to keep chatting? If not, we can end our conversation.</p>
-            </div>
-            <div className="row">
-              <div className="d-flex justify-content-center">
-                <button
-                  onClick={onClose}
-                  type="button"
-                  className="btn btn-dark me-4"
-                >
-                  {closeText}
-                </button>
-                <Link to="/" className="btn btn-outline-dark" type="button">
-                  I&apos;m Done
-                </Link>
-              </div>
+              <h2>Thank you for your feedback!</h2>
+              <p>Thank you for your time! You can close the website.</p>
             </div>
           </div>
         ) : (
@@ -544,13 +529,6 @@ function FeedbackModal({ className, onClose, closeText }) {
               </div>
               <div className="row mt-3">
                 <div className="justify-content-end d-flex">
-                  {/* <button
-                    onClick={() => (denyFeedback ? denyFeedback() : history.push('/'))}
-                    type="button"
-                    className="btn btn-outline-dark me-2"
-                  >
-                    { denyFeedbackText || 'No Thanks' }
-                  </button> */}
                   <button
                     type="button"
                     className="btn btn-dark"
@@ -579,14 +557,6 @@ function FeedbackModal({ className, onClose, closeText }) {
 
 FeedbackModal.propTypes = {
   className: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  closeText: PropTypes.string,
-  // denyFeedbackText: PropTypes.string.isRequired,
-  // denyFeedback: PropTypes.string.isRequired,
-};
-
-FeedbackModal.defaultProps = {
-  closeText: 'Close',
 };
 
 export default styled(FeedbackModal)`

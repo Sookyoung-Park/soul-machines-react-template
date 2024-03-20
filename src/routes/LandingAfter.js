@@ -16,14 +16,18 @@ import {
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
-import { writeUserInfo, updateExperimentType } from '../store/firestore_functions';
+import {
+  writeUserInfo,
+  updateExperimentType,
+} from '../store/firestore_functions';
 
 function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
   const { gender, race } = user.info;
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
-  const { docID } = user.chatType;
+  const { docID } = user.firebase;
+  console.log('debuggin soo docID', docID);
   const dispatch = useDispatch();
 
   // api key condition
@@ -61,12 +65,14 @@ function LandingAfter({ className }) {
   let fsD;
 
   async function handleFirebaseUpdate() {
-    const docId = await writeUserInfo(gender, race);
-    if (docId) {
+    // const docId = await writeUserInfo(gender, race);
+    if (!docID) {
+      const docId = await writeUserInfo(gender, race);
+      dispatch(setDocIDState(docId));
       updateExperimentType(docId, fsA, fsB, fsC, fsD);
       // test here
-      dispatch(setDocIDState(docId));
-      console.log('docId: ', docId);
+
+      console.log('debugging Soo docId: ', docId);
     }
   }
 
@@ -385,7 +391,7 @@ function LandingAfter({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '24px' }} />
               <Link
-                to={chatType === 'E' ? '/feedback' : '/loading'}
+                to={chatType === 'E' ? '/ps1' : '/loading'}
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
                 onClick={() => {
@@ -395,11 +401,10 @@ function LandingAfter({ className }) {
               >
                 {chatType === 'E' ? 'Start Survey' : `Chat with Influencer ${chatType}`}
               </Link>
-              {/* test */}
               <Link
-                // to="/ps1"
+                to="/ps1"
                 // test
-                to="/feedback"
+                // to="/feedback"
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
                 onClick={() => {
@@ -409,7 +414,6 @@ function LandingAfter({ className }) {
               >
                 TEST TO AA
               </Link>
-              {/* test */}
               <div className="col" />
             </div>
           </div>

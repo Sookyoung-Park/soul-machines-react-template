@@ -863,6 +863,7 @@ const smSlice = createSlice({
       return newState;
     },
     // set firebase docId
+    // 잘 작동되는 코드
     setDocIDState: (state, { payload }) => {
       console.log('Reducer received firebase docId with payload:', payload);
 
@@ -883,20 +884,6 @@ const smSlice = createSlice({
 
       console.log('New state setDocIDState:', newState);
       return newState;
-      // 잘 작동되는 코드
-      // console.log('Reducer received firebase docId with payload:', payload);
-
-      // const newState = {
-      //   ...state,
-      //   user: {
-      //     ...state.user,
-      //     firebase: {
-      //       docID: payload.docID,
-      //     },
-      //   },
-      // };
-      // console.log('New state setDocIDState:', newState);
-      // return newState;
     },
     // set apiA B C D
     setApiKeysState: (state, { payload }) => {
