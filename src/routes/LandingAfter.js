@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
@@ -20,11 +23,10 @@ function LandingAfter({ className }) {
   const { chatType } = user.chatType;
   const { gender, race } = user.info;
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
-
+  const { docID } = user.chatType;
   const dispatch = useDispatch();
 
   // api key condition
-  // test
   // const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
   const API_EA_MALE = process.env.REACT_APP_API_KEY_NOAH;
   const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
@@ -59,18 +61,20 @@ function LandingAfter({ className }) {
   let fsD;
 
   async function handleFirebaseUpdate() {
-    const docID = await writeUserInfo(gender, race);
-    if (docID) {
-      updateExperimentType(docID, fsA, fsB, fsC, fsD);
+    const docId = await writeUserInfo(gender, race);
+    if (docId) {
+      updateExperimentType(docId, fsA, fsB, fsC, fsD);
       // test here
-      dispatch(setDocIDState(docID));
-      console.log('docID: ', docID);
+      dispatch(setDocIDState(docId));
+      console.log('docId: ', docId);
     }
   }
 
   useEffect(() => {
     // 컴포넌트가 마운트될 때 한 번만 실행되도록 설정
-    handleFirebaseUpdate();
+    if (!docID) {
+      handleFirebaseUpdate();
+    }
   }, [fsD]); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
 
   function getRandomApiKeyB(api1, api2, api3, api4, txt1, txt2, txt3, txt4) {
