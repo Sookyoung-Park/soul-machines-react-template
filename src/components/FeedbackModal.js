@@ -532,7 +532,7 @@ function FeedbackModal({ className }) {
                   <button
                     type="button"
                     className="btn btn-dark"
-                    disabled={!ratingHonestSincere || !ratingPredictReaction
+                    disabled={!ratingHonestSincereSelected || !ratingPredictReactionSelected
                       || !ratingSympathizeFeelingSelected || !ratingUnderstandEmotionSelected
                       || !RatingServiceAgainSelected || !ratingGoodServiceSelected}
                     onClick={() => {
