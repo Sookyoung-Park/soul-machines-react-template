@@ -13,7 +13,9 @@ function Transcript({ className, transcript }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
   const [conversationLog, setConversationLog] = useState([]);
+  const { chatType } = user.chatType;
 
+  console.log('firebase docID', docID);
   // 잘 되는 코드.
   // useEffect(() => {
   //   const handleConversation = (timestampTest, textTest) => {
@@ -45,7 +47,8 @@ function Transcript({ className, transcript }) {
   }, [transcript]);
 
   useEffect(() => {
-    updateConversationLog(docID, conversationLog);
+    console.log('for debugging', docID);
+    updateConversationLog(docID, conversationLog, chatType);
   }, [conversationLog, docID]);
 
   // scroll to bottom of transcript whenever it updates

@@ -35,6 +35,7 @@ export async function updateExperimentType(docID, A, B, C, D) {
     experiment_B: B,
     experiment_C: C,
     experiment_D: D,
+    docID,
   };
   const docRef = doc(db, 'Projects', docID);
   try {
@@ -251,23 +252,19 @@ export async function addConversationLog(docID, conversationLog) {
 //   }
 // }
 
-export async function updateConversationLog(docID, newConversationLog) {
+export async function updateConversationLog(docID, newConversationLog, chatType) {
   try {
-    const docRef = doc(db, `Projects/${docID}/conversation/conversationDocID`);
+    const docRef = doc(db, `Projects/${docID}/conversations/${chatType}`);
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
       const existingConversationLog = docSnapshot.data().log;
 
-      // 중복 제거를 위해 새로운 대화 로그를 필터링합니다.
-      const filteredNewConversationLog = newConversationLog.filter((newConversation) => (
-        !existingConversationLog.includes(newConversation)
-      ));
-
-      // 필터링된 새로운 대화 로그를 기존 대화 로그에 추가합니다.
-      const updatedConversationLog = [...existingConversationLog, ...filteredNewConversationLog];
+      // 새로운 대화 로그를 기존 대화 로그에 추가합니다.
+      const updatedConversationLog = [...existingConversationLog, ...newConversationLog];
       await setDoc(docRef, { log: updatedConversationLog });
       console.log('conversation log updated. 문서 ID:', docRef.id);
     } else {
+      // 새로운 문서를 생성하고 대화 로그를 추가합니다.
       await setDoc(docRef, { log: newConversationLog });
       console.log('New conversation log created. 문서 ID:', docRef.id);
     }
@@ -276,13 +273,21 @@ export async function updateConversationLog(docID, newConversationLog) {
   }
 }
 
+// 원래 코드
 // export async function updateConversationLog(docID, newConversationLog) {
 //   try {
-//     const docRef = doc(db, `Projects/${docID}/conversation/conversationDocID`);
+//     const docRef = doc(db, `Projects/${docID}/conversation/conversation${docID}`);
 //     const docSnapshot = await getDoc(docRef);
 //     if (docSnapshot.exists()) {
 //       const existingConversationLog = docSnapshot.data().log;
-//       const updatedConversationLog = [...existingConversationLog, ...newConversationLog];
+
+//       // 중복 제거를 위해 새로운 대화 로그를 필터링합니다.
+//       const filteredNewConversationLog = newConversationLog.filter((newConversation) => (
+//         !existingConversationLog.includes(newConversation)
+//       ));
+
+//       // 필터링된 새로운 대화 로그를 기존 대화 로그에 추가합니다.
+//       const updatedConversationLog = [...existingConversationLog, ...filteredNewConversationLog];
 //       await setDoc(docRef, { log: updatedConversationLog });
 //       console.log('conversation log updated. 문서 ID:', docRef.id);
 //     } else {

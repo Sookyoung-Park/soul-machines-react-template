@@ -8,7 +8,8 @@ import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundColor } from '../config';
 import {
-  setRequestedMediaPerms, setChatTypeState, setApiKeysState, setDocIDState,
+  setRequestedMediaPerms, setChatTypeState, setApiKeysState,
+  setDocIDState,
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
@@ -61,6 +62,7 @@ function LandingAfter({ className }) {
     const docID = await writeUserInfo(gender, race);
     if (docID) {
       updateExperimentType(docID, fsA, fsB, fsC, fsD);
+      // test here
       dispatch(setDocIDState(docID));
       console.log('docID: ', docID);
     }
