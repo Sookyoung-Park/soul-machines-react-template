@@ -43,6 +43,11 @@ function PreSurvey({ className }) {
                       Please conduct the post survey after engaging in comfortable conversations
                       with Digital AI avatars.
                     </b>
+                    <br />
+                    <br />
+                    <b style={{ color: '#00693e' }}>
+                      Please use Chrome!
+                    </b>
                   </p>
                 </div>
               </div>

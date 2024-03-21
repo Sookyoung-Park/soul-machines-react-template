@@ -31,18 +31,34 @@ function Transcript({ className, transcript }) {
   //   updateConversationLog(docID, conversationLog);
   // }, [transcript]);
 
-  // Test code
+  // 기존코드
+  // useEffect(() => {
+  //   const handleConversation = (timestampTest, textTest) => {
+  //     if (textTest) {
+  //       const newConversation = `${timestampTest} ${textTest}`;
+  //       // setConversationLog((prevLog) => [...prevLog, newConversation]);
+  //       setConversationLog([newConversation]);
+  //     }
+  //   };
+
+  //   transcript.forEach(({ timestamp, text }) => {
+  //     handleConversation(timestamp, text);
+  //   });
+  // }, [transcript]);
+
+  // TEST CODE
   useEffect(() => {
-    const handleConversation = (timestampTest, textTest) => {
+    const handleConversation = (timestampTest, textTest, source) => {
       if (textTest) {
-        const newConversation = `${timestampTest} ${textTest}`;
-        // setConversationLog((prevLog) => [...prevLog, newConversation]);
-        setConversationLog([newConversation]);
+        const timestamp = new Date(timestampTest).toISOString().slice(5, 19).replace('T', ' ');
+        const speaker = source === 'user' ? 'TESTER' : 'AI';
+        const newConversation = `${speaker} ${timestamp} ${textTest}`;
+        setConversationLog((prevLog) => [...prevLog, newConversation]);
       }
     };
 
-    transcript.forEach(({ timestamp, text }) => {
-      handleConversation(timestamp, text);
+    transcript.forEach(({ timestamp, text, source }) => {
+      handleConversation(timestamp, text, source);
     });
   }, [transcript]);
 

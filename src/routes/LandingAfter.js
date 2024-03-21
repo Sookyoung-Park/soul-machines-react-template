@@ -310,7 +310,7 @@ function LandingAfter({ className }) {
                       {' '}
                       <strong>maximum 3 minutes</strong>
                       {' '}
-                      for each digital influencer.
+                      for each AI avatar.
                     </li>
                     <li>
                       You can exit the conversation

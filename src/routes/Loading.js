@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { useHistory, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  ArrowLeftCircleFill, ArrowRightCircleFill, BodyText, ChatLeftQuoteFill, MicFill,
+  ArrowLeftCircleFill, ArrowRightCircleFill, BodyText,
+  ChatLeftQuoteFill,
+  MicFill,
 } from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
 
 function Loading({ className }) {
-  // 리덕스 조회해서 상태 가져옴
   const {
     connected,
     loading,
@@ -21,16 +21,11 @@ function Loading({ className }) {
     user,
   } = useSelector(({ sm }) => (sm));
 
-  // const { gender, race } = user.info;
   const { chatType } = user.chatType;
   const {
     apiA, apiB, apiC, apiD,
   } = user.apiKey;
 
-  // console.log('apiC', apiC);
-  // console.log(chatType, ': saved ChatType in Loading.js');
-
-  // 상태 변경을 일으키기 위해서는 액션이라는 객체를 디스패치해야 합니다. useDispatch 훅은 이런 액션을 디스패치하기 위한 메소드를 반환합니다.
   const dispatch = useDispatch();
 
   const [isLoadingMade, setIsLoadingMade] = useState(false);
@@ -40,91 +35,14 @@ function Loading({ className }) {
   } = connectionState;
 
   const stateNameMap = {
-    SearchingForDigitalPerson: 'Searching For Digital Influencers',
+    SearchingForDigitalPerson: 'Searching For AI Avatar',
     DownloadingAssets: 'Downloading Assets',
-    ConnectingToDigitalPerson: 'Connecting To Digital Influencers',
+    ConnectingToDigitalPerson: 'Connecting To AI Avatar',
   };
   // map name vals to plain english if we know the state name, otherwise just display the name as is
   const stateName = (name in stateNameMap) ? stateNameMap[name] : name;
 
-  // // pull querystring to see if we are displaying an error
-  // // (app can redirect to /loading on fatal err)
-  // const useQuery = () => new URLSearchParams(useLocation().search);
-  // const query = useQuery();
-
-  // // api key condition
-  // const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
-  // const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
-  // const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
-  // const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
-  // const API_CS_MALE = process.env.REACT_APP_API_KEY_CS_MALE;
-  // const API_CS_FEMALE = process.env.REACT_APP_API_KEY_CS_FEMALE;
-
-  // // extract user info
-  // const infoString = `_${race}_${gender}`;
-  // console.log('info string : ', infoString);
-
-  // let apiA;
-  // let apiB;
-  // let apiC;
-  // let apiD;
-
-  // function getRandomApiKey(api1, api2) {
-  //   const randomIndex = Math.random() < 0.5 ? 0 : 1;
-  //   return randomIndex === 0 ? api1 : api2;
-  // }
-
-  // // api allocation logic
-  // // ApiKey_A = same race, same gender
-  // // ApiKey_B = different race, same gender
-  // // ApiKey_C = different race, different gender
-  // // ApiKey_D = same race, different gender
-  // switch (infoString) {
-  //   case '_EA_MALE':
-  //     apiA = API_EA_MALE;
-  //     apiB = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-  //     apiC = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
-  //     apiD = API_EA_FEMALE;
-  //     break;
-  //   case '_EA_FEMALE':
-  //     apiA = process.env.REACT_APP_API_KEY_EA_FEMALE;
-  //     apiB = getRandomApiKey(API_AF_FEMALE, API_CS_FEMALE);
-  //     apiC = getRandomApiKey(API_AF_MALE, API_CS_MALE);
-  //     apiD = API_EA_MALE;
-  //     break;
-  //   case '_AF_MALE':
-  //     apiA = process.env.REACT_APP_API_KEY_AF_MALE;
-  //     apiB = getRandomApiKey(API_EA_MALE, API_CS_MALE);
-  //     apiC = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
-  //     apiD = API_AF_FEMALE;
-  //     break;
-  //   case '_AF_FEMALE':
-  //     apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
-  //     apiB = getRandomApiKey(API_EA_FEMALE, API_CS_FEMALE);
-  //     apiC = getRandomApiKey(API_EA_MALE, API_CS_MALE);
-  //     apiD = API_AF_MALE;
-  //     break;
-  //   case '_CS_MALE':
-  //     apiA = process.env.REACT_APP_API_KEY_CS_MALE;
-  //     apiB = getRandomApiKey(API_EA_MALE, API_AF_MALE);
-  //     apiC = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
-  //     apiD = API_CS_FEMALE;
-  //     break;
-  //   case '_CS_FEMALE':
-  //     apiA = process.env.REACT_APP_API_KEY_CS_FEMALE;
-  //     apiB = getRandomApiKey(API_EA_FEMALE, API_AF_FEMALE);
-  //     apiC = getRandomApiKey(API_EA_MALE, API_AF_MALE);
-  //     apiD = API_CS_MALE;
-  //     break;
-  //   default:
-  //     break;
-  // }
-
-  // console.log(apiA, apiB, apiC, apiD);
-
   // create persona scene on button press on on mount, depending on device size
-  // connected with api
-  // const apiKey = process.env.REACT_APP_API_KEY_EA_MALE || '';
   const createSceneIfNotStarted = (apiKey) => {
     if (loading === false && connected === false && error === null) {
       dispatch(createScene(apiKey));
@@ -165,7 +83,8 @@ function Loading({ className }) {
             {' '}
           </button>
           <h4>
-            Before You Begin
+            Before you begin,
+
           </h4>
           <button className="btn-unstyled" type="button" onClick={() => setPage(page + 1)}>
             <ArrowRightCircleFill size={32} />
@@ -179,6 +98,7 @@ function Loading({ className }) {
                 <div>
                   <p>
                     Conversation works best in a quiet environment
+                    <br />
                     with your microphone and camera on!
                   </p>
                 </div>
@@ -187,6 +107,7 @@ function Loading({ className }) {
                 <div>
                   <p>
                     Conversation works best in a quiet environment
+                    <br />
                     with your microphone and camera on!
                   </p>
                 </div>
@@ -214,9 +135,7 @@ function Loading({ className }) {
           </button>
         </div>
         <div className="mt-0 mb-2">
-          Noah will listen to whatever you say.
           Speak clearly, and in short responses.
-          {/* Other options, like typing or choosing your responses, are also available. */}
         </div>
       </div>
     </div>,
@@ -232,14 +151,14 @@ function Loading({ className }) {
             <ArrowLeftCircleFill size={32} />
           </button>
           <h4>
-            Have Fun with Digital People!
+            Have Fun!
           </h4>
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
           </button>
         </div>
         <div className="mt-0 mb-2">
-          Feel free to talk to Noah about your life, problems or any questions!
+          Feel free to talk about a prompt you select with AI avatars.
         </div>
       </div>
     </div>,
@@ -248,7 +167,6 @@ function Loading({ className }) {
   const [skip, setSkip] = useState(false);
   const redirectToVideoOnConnect = () => {
     setSkip(true);
-    // setIsLoadingMade(true);
   };
 
   const history = useHistory();
@@ -267,17 +185,6 @@ function Loading({ className }) {
             </div>
             <div className="row">
               <div>
-                {/* {isLoadingMade && (
-                <Link
-                  to="/presurvey2"
-                  className="btn btn-dark connected-button"
-                  type="button"
-                  disabled={skip}
-                  onClick={redirectToVideoOnConnect}
-                >
-                  Next
-                </Link>
-                )} */}
                 {isLoadingMade && (
                 <button
                   className={`${connected ? 'btn btn-dark connected-button' : 'btn-unstyled unconnected-button'} m-2`}
@@ -285,7 +192,7 @@ function Loading({ className }) {
                   disabled={skip}
                   onClick={redirectToVideoOnConnect}
                 >
-                  { connected ? `Chat with Influencer ${chatType}` : 'Please wait for the loading ...' }
+                  { connected ? `Chat with Avatar ${chatType}` : 'Please wait for the loading ...' }
                 </button>
                 )}
               </div>
