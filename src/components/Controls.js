@@ -19,6 +19,8 @@ import {
   // setOutputMute,
   setMicOn,
   // setCameraOn,
+
+  setNextChatType,
 } from '../store/sm/index';
 import mic from '../img/mic.svg';
 import micFill from '../img/mic-fill.svg';
@@ -101,6 +103,12 @@ function Controls({
   }, [dispatch, history]);
 
   const iconSize = 24;
+
+  // test
+  const handleChatTypeChange = () => {
+    dispatch(setNextChatType());
+    console.log('new chatType', chatType);
+  };
 
   return (
     <div className={className}>
@@ -201,7 +209,9 @@ function Controls({
           className="btn btn-dark connected-button"
           onClick={() => {
             dispatch(disconnect());
-            history.push('/next-conversation');
+            handleChatTypeChange();
+            // history.push('/next-conversation');
+            history.push('/landingafter');
           }}
         >
           Exit Conversation

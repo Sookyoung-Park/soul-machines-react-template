@@ -27,27 +27,25 @@ function NextConversation({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        <div className="container d-flex">
-          <div className="landing-container flex-grow-1">
-            <div className="col-12 col-lg-8">
-              <div className="row" style={{ marginBottom: '60px' }}>
-                <div>
-                  <Link
-                    to="/landingafter"
-                    className="shadow btn primary-accent fs-3"
-                    type="button"
-                    onClick={() => handleChatTypeChange()}
-                  >
-                    Chat with Next Influencer
-                  </Link>
-                </div>
-              </div>
-              <div className="col" />
-            </div>
+        <div className="row justify-content-center">
+          {' '}
+          {/* 좌우 가운데 정렬 */}
+          <div className="col-auto">
+            {' '}
+            {/* col-auto를 사용하여 버튼의 너비를 자동으로 조정 */}
+            <Link
+              to="/landingafter"
+              className="shadow btn primary-accent fs-3"
+              type="button"
+              onClick={() => handleChatTypeChange()}
+            >
+              Chat with Next Avatar
+            </Link>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
 
@@ -159,19 +157,8 @@ export default styled(NextConversation)`
     }
   }
   .row{
-    align-tiems: center;
-  }
-
-  .description{
-    font-size: 1.2rem;
-    line-height: 150%;
-    margin-top: 24px;
-  }
-
-  .noted{
-    font-size: 1.1rem;
-    margin-top: 20px;
-    font-weight: 600;
+    margin-top: 160px;
+    justify-content: center;
   }
 
 `;
