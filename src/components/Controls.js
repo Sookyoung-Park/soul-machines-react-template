@@ -4,21 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-  CameraVideoFill,
-  CameraVideoOffFill,
+  // CameraVideoFill,
+  // CameraVideoOffFill,
   ChatSquareTextFill,
-  MicFill,
-  MicMuteFill,
-  VolumeMuteFill,
-  VolumeUpFill,
+  // MicFill,
+  // MicMuteFill,
+  // VolumeMuteFill,
+  // VolumeUpFill,
 } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
 import {
   setShowTranscript,
   disconnect,
-  setOutputMute,
+  // setOutputMute,
   setMicOn,
-  setCameraOn,
+  // setCameraOn,
 } from '../store/sm/index';
 import mic from '../img/mic.svg';
 import micFill from '../img/mic-fill.svg';
@@ -35,16 +35,16 @@ function Controls({
   className,
 }) {
   const {
-    micOn,
-    cameraOn,
-    isOutputMuted,
+    // micOn,
+    // cameraOn,
+    // isOutputMuted,
     showTranscript,
     transcript,
-    requestedMediaPerms,
-    highlightMic,
-    highlightMute,
+    // requestedMediaPerms,
+    // highlightMic,
+    // highlightMute,
     highlightChat,
-    highlightCamera,
+    // highlightCamera,
   } = useSelector((state) => ({ ...state.sm }));
 
   const { user } = useSelector(({ sm }) => ({ ...sm }));
@@ -87,7 +87,7 @@ function Controls({
       dispatch(disconnect());
       // next-conversation
       if (chatType === 'E') {
-        history.push('/feedback');
+        history.push('/ps1');
       } else {
         history.push('/next-conversation');
       }
@@ -123,7 +123,7 @@ function Controls({
       <div className="d-flex">
         <div>
           {/* mute dp sound */}
-          <button
+          {/* <button
             type="button"
             className="control-icon"
             aria-label="Toggle DP Audio"
@@ -131,11 +131,13 @@ function Controls({
             onClick={() => dispatch(setOutputMute({ isOutputMuted: !isOutputMuted }))}
           >
             {isOutputMuted ? (
-              <VolumeMuteFill size={iconSize} style={{ border: highlightMute ? 'red 2px solid' : '' }} />
+              <VolumeMuteFill size={iconSize}
+              style={{ border: highlightMute ? 'red 2px solid' : '' }} />
             ) : (
-              <VolumeUpFill size={iconSize} color={primaryAccent} style={{ border: highlightMute ? 'red 2px solid' : '' }} />
+              <VolumeUpFill size={iconSize} color={primaryAccent}
+              style={{ border: highlightMute ? 'red 2px solid' : '' }} />
             )}
-          </button>
+          </button> */}
           {/* show transcript */}
           <button
             type="button"
@@ -154,7 +156,7 @@ function Controls({
         </div>
         <div>
           {/* toggle user mic */}
-          <button
+          {/* <button
             type="button"
             className="control-icon"
             aria-label="Toggle Microphone"
@@ -163,15 +165,17 @@ function Controls({
             onClick={() => dispatch(setMicOn({ micOn: !micOn }))}
           >
             {micOn ? (
-              <MicFill size={iconSize} color={primaryAccent} style={{ border: highlightMic ? 'red 2px solid' : '' }} />
+              <MicFill size={iconSize} color={primaryAccent}
+              style={{ border: highlightMic ? 'red 2px solid' : '' }} />
             ) : (
-              <MicMuteFill size={iconSize} style={{ border: highlightMic ? 'red 2px solid' : '' }} />
+              <MicMuteFill size={iconSize}
+              style={{ border: highlightMic ? 'red 2px solid' : '' }} />
             )}
           </button>
         </div>
-        <div>
+        <div> */}
           {/* toggle user camera */}
-          <button
+          {/* <button
             type="button"
             className="control-icon"
             aria-label="Toggle Camera"
@@ -186,9 +190,10 @@ function Controls({
                 style={{ border: highlightCamera ? 'red 2px solid' : '' }}
               />
             ) : (
-              <CameraVideoOffFill size={iconSize} style={{ border: highlightCamera ? 'red 2px solid' : '' }} />
+              <CameraVideoOffFill size={iconSize}
+              style={{ border: highlightCamera ? 'red 2px solid' : '' }} />
             )}
-          </button>
+          </button> */}
         </div>
         {showExitButton && (
         <button

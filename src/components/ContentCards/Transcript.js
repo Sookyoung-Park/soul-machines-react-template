@@ -16,49 +16,18 @@ function Transcript({ className, transcript }) {
   const { chatType } = user.chatType;
 
   console.log('firebase docID', docID);
-  // 잘 되는 코드.
-  // useEffect(() => {
-  //   const handleConversation = (timestampTest, textTest) => {
-  //     const newConversation = `${timestampTest} ${textTest}`;
-  //     setConversationLog((prevLog) => [...prevLog, newConversation]);
-  //   };
 
-  //   transcript.forEach(({ timestamp, text }) => {
-  //     handleConversation(timestamp, text);
-  //     // updateConversationLog(docID, conversationLog);
-  //   });
-
-  //   updateConversationLog(docID, conversationLog);
-  // }, [transcript]);
-
-  // 기존코드
-  // useEffect(() => {
-  //   const handleConversation = (timestampTest, textTest) => {
-  //     if (textTest) {
-  //       const newConversation = `${timestampTest} ${textTest}`;
-  //       // setConversationLog((prevLog) => [...prevLog, newConversation]);
-  //       setConversationLog([newConversation]);
-  //     }
-  //   };
-
-  //   transcript.forEach(({ timestamp, text }) => {
-  //     handleConversation(timestamp, text);
-  //   });
-  // }, [transcript]);
-
-  // TEST CODE
   useEffect(() => {
-    const handleConversation = (timestampTest, textTest, source) => {
+    const handleConversation = (timestampTest, textTest, speaker) => {
       if (textTest) {
-        const timestamp = new Date(timestampTest).toISOString().slice(5, 19).replace('T', ' ');
-        const speaker = source === 'user' ? 'TESTER' : 'AI';
-        const newConversation = `${speaker} ${timestamp} ${textTest}`;
-        setConversationLog((prevLog) => [...prevLog, newConversation]);
+        const newConversation = `${speaker} ${timestampTest} ${textTest}`;
+        setConversationLog([newConversation]);
       }
     };
-
     transcript.forEach(({ timestamp, text, source }) => {
-      handleConversation(timestamp, text, source);
+      const speaker = source === 'user' ? 'TESTER' : 'AI';
+      const timestampTest = new Date(timestamp).toISOString().slice(5, 19).replace('T', ' ');
+      handleConversation(timestampTest, text, speaker);
     });
   }, [transcript]);
 
