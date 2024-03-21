@@ -398,7 +398,7 @@ function LandingAfter({ className }) {
               >
                 {chatType === 'E' ? 'Start Survey' : `Chat with Influencer ${chatType}`}
               </Link>
-              <Link
+              {/* <Link
                 to="/ps1"
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
@@ -408,7 +408,7 @@ function LandingAfter({ className }) {
                 }}
               >
                 TEST TO AA
-              </Link>
+              </Link> */}
               <div className="col" />
             </div>
           </div>
