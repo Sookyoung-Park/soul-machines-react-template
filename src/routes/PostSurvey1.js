@@ -12,13 +12,9 @@ import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
 import CS_MALE from '../img/CS_MALE.png';
-// import CS_MALE_2 from '../img/CS_MALE_2.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
-// import CS_FEMALE_2 from '../img/CS_FEMALE_2.png';
 import HP_MALE from '../img/HP_MALE.png';
-// import HP_MALE_2 from '../img/HP_MALE_2.png';
 import HP_FEMALE from '../img/HP_FEMALE.png';
-// import HP_FEMALE_2 from '../img/HP_FEMALE_2.png';
 import AI_MALE from '../img/AI_MALE.png';
 import AI_FEMALE from '../img/AI_FEMALE.png';
 import SA_MALE from '../img/SA_MALE.png';
@@ -62,8 +58,6 @@ function PostSurvey1({ className }) {
     fetchData(); // 데이터 가져오기 함수 호출
   }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
 
-  // console.log('xprm Tpyes', imgTitles); // 데이터 확인
-
   const getImagePath = (imgTitle) => {
     switch (imgTitle) {
       case 'EA_MALE':
@@ -105,57 +99,38 @@ function PostSurvey1({ className }) {
   console.log('info string postsurvey: ', infoString);
   console.log('docID postsurvey', docID);
 
+  // original code
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   console.log(surveyCompleted, 'for eslint');
 
   survey.showCompleteButton = false;
 
-  const handleNextButtonClick = () => {
-    if (!surveyCompleted) {
-      const surveyData = survey.data;
-      console.log('Survey data:', surveyData);
-      setSurveyCompleted(true);
-
-      const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');
-      const indexOfB = surveyData['rank-trustworthy'].indexOf('DP B');
-      const indexOfC = surveyData['rank-trustworthy'].indexOf('DP C');
-      const indexOfD = surveyData['rank-trustworthy'].indexOf('DP D');
-
-      const dpARank = indexOfA !== -1 ? indexOfA + 1 : null;
-      const dpBRank = indexOfB !== -1 ? indexOfB + 1 : null;
-      const dpCRank = indexOfC !== -1 ? indexOfC + 1 : null;
-      const dpDRank = indexOfD !== -1 ? indexOfD + 1 : null;
-
-      updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
-    }
-  };
-
   // 이전코드
-  // const handleNextButtonClick = () => {
-  //   const surveyData = survey.data;
-  //   console.log('Survey data:', surveyData);
-  //   setSurveyCompleted(true);
+  const handleNextButtonClick = () => {
+    const surveyData = survey.data;
+    console.log('Survey data:', surveyData);
+    setSurveyCompleted(true);
 
-  //   // 'Powerful CPU' 항목의 인덱스를 찾습니다.
-  //   const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');
-  //   const indexOfB = surveyData['rank-trustworthy'].indexOf('DP B');
-  //   const indexOfC = surveyData['rank-trustworthy'].indexOf('DP C');
-  //   const indexOfD = surveyData['rank-trustworthy'].indexOf('DP D');
+    // 'Powerful CPU' 항목의 인덱스를 찾습니다.
+    const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');
+    const indexOfB = surveyData['rank-trustworthy'].indexOf('DP B');
+    const indexOfC = surveyData['rank-trustworthy'].indexOf('DP C');
+    const indexOfD = surveyData['rank-trustworthy'].indexOf('DP D');
 
-  //   // 해당 인덱스에 할당된 값을 변수에 저장합니다.
-  //   // indexOfPowerfulCPU !== -1: 이 조건은 'Powerful CPU'가 배열에 존재하는지 확인합니다.요소가 존재하지 않으면 -1을 반환
-  //   // indexOfPowerfulCPU + 1: 배열에서 찾아진 경우 해당 인덱스에 1을 더한 값을 powerfulCPUData 변수에 할당합니다.
-  //   // null: 'Powerful CPU'가 배열에 존재하지 않는 경우, powerfulCPUData 변수에 null을 할당합니다.
-  //   const dpARank = indexOfA !== -1 ? indexOfA + 1 : null;
-  //   const dpBRank = indexOfB !== -1 ? indexOfB + 1 : null;
-  //   const dpCRank = indexOfC !== -1 ? indexOfC + 1 : null;
-  //   const dpDRank = indexOfD !== -1 ? indexOfD + 1 : null;
-  //   // console.log('DP A data:', dpARank);
-  //   // console.log('DP B data:', dpBRank);
-  //   // console.log('DP C data:', dpCRank);
-  //   // console.log('DP D data:', dpDRank);
-  //   updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
-  // };
+    // 해당 인덱스에 할당된 값을 변수에 저장합니다.
+    // indexOfPowerfulCPU !== -1: 이 조건은 'Powerful CPU'가 배열에 존재하는지 확인합니다.요소가 존재하지 않으면 -1을 반환
+    // indexOfPowerfulCPU + 1: 배열에서 찾아진 경우 해당 인덱스에 1을 더한 값을 powerfulCPUData 변수에 할당합니다.
+    // null: 'Powerful CPU'가 배열에 존재하지 않는 경우, powerfulCPUData 변수에 null을 할당합니다.
+    const dpARank = indexOfA !== -1 ? indexOfA + 1 : null;
+    const dpBRank = indexOfB !== -1 ? indexOfB + 1 : null;
+    const dpCRank = indexOfC !== -1 ? indexOfC + 1 : null;
+    const dpDRank = indexOfD !== -1 ? indexOfD + 1 : null;
+    // console.log('DP A data:', dpARank);
+    // console.log('DP B data:', dpBRank);
+    // console.log('DP C data:', dpCRank);
+    // console.log('DP D data:', dpDRank);
+    updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
+  };
 
   // on complete and console print
   survey.onComplete.add((sender, options) => {
