@@ -27,12 +27,11 @@ function LandingAfter({ className }) {
   const { gender, race } = user.info;
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const { docID } = user.firebase;
-  console.log('debuggin soo docID', docID);
+
   const dispatch = useDispatch();
 
   // api key condition
-  // const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
-  const API_EA_MALE = process.env.REACT_APP_API_KEY_NOAH;
+  const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
   const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
   const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
   const API_AF_FEMALE = process.env.REACT_APP_API_KEY_AF_FEMALE;
@@ -65,13 +64,10 @@ function LandingAfter({ className }) {
   let fsD;
 
   async function handleFirebaseUpdate() {
-    // const docId = await writeUserInfo(gender, race);
     if (!docID) {
       const docId = await writeUserInfo(gender, race);
       dispatch(setDocIDState(docId));
       updateExperimentType(docId, fsA, fsB, fsC, fsD);
-      // test here
-
       console.log('debugging Soo docId: ', docId);
     }
   }
@@ -294,36 +290,37 @@ function LandingAfter({ className }) {
   return (
     <div className={className}>
       <div className="landing-wrapper">
-        <div className="container d-flex">
+        <div className="container d-flex align-items-center flex-column">
           <div className="landing-container flex-grow-1">
-            <div className="col-12 col-lg-10">
+            <div className="col-12 col-lg-12">
               <div className="row" style={{ marginBottom: '9px', marginTop: '120px' }}>
                 <div>
-                  <h1 className="fw-bol">Chat with Digital Influencers!</h1>
+                  <h2 className="fw-bol">Chat with 4 different counselor AI avatars!</h2>
                 </div>
               </div>
               <div className="row">
                 <div>
-                  <h5 className="fw-light" style={{ marginBottom: '32px' }}>
-                    You will talk with 4 different digital influencers.
-                    Feel free to chat about your interests, life or problems.
-                  </h5>
                   <ul style={{ fontSize: '1.1rem' }}>
                     <li>
-                      You have
+                      <strong>Select one of the given prompts</strong>
+                      ,and chat with an AI avatar about the topic.
+                    </li>
+                    <li>
+                      You can chat
                       {' '}
-                      <strong>maximum three minutes</strong>
+                      <strong>maximum 3 minutes</strong>
                       {' '}
                       for each digital influencer.
                     </li>
                     <li>
-                      You can leave the conversation
+                      You can exit the conversation
                       {' '}
-                      <strong>once 2 minutes have passed</strong>
+                      <strong>once 1 minutes 40 seconds have passed</strong>
                       , if you want.
                     </li>
                     <li>
-                      The record will be only used for data analysis and it will be
+                      All chats will be recorded. Data will be only
+                      used for data analysis and it will be
                       discarded after the experiment.
                     </li>
                   </ul>
@@ -347,7 +344,7 @@ function LandingAfter({ className }) {
                         checked={mic}
                       />
                       <div className="d-block ms-2" style={{ marginLeft: '12px' }}>
-                        Use your microphone so digital influencers can hear you.
+                        Use your microphone so that AI avatars can hear you.
                       </div>
                     </label>
                   </div>
@@ -371,7 +368,7 @@ function LandingAfter({ className }) {
                         checked={camera}
                       />
                       <div className="d-block ms-2">
-                        Use your camera so you can chat face-to-face.
+                        Use your camera so that you can chat face-to-face.
                       </div>
                     </label>
                   </div>
@@ -384,7 +381,7 @@ function LandingAfter({ className }) {
                     <span className="ps-1">+</span>
                     <MicFill size={26} />
                     <div className="text-left fst-italic-bold" style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
-                      Please Enable your camera and mic to optimize a conversation.
+                      <strong>You must enable your camera and mic to start a conversation.</strong>
                     </div>
                   </div>
                 </div>
@@ -403,8 +400,6 @@ function LandingAfter({ className }) {
               </Link>
               <Link
                 to="/ps1"
-                // test
-                // to="/feedback"
                 className="shadow btn primary-accent fs-3 w-100"
                 type="button"
                 onClick={() => {

@@ -39,24 +39,18 @@ function PreSurvey({ className }) {
                     The goal is to determine which training is most suitable users in
                     the role of a conversational agent.
                     <br />
-                    <b>
+                    <b style={{ color: '#00693e' }}>
                       Please conduct the post survey after engaging in comfortable conversations
                       with Digital AI avatars.
                     </b>
-                  </p>
-                  <p className="noted">
-                    {/* The experiment is still in its early stages and may
-                    lack inclusivity for various races and genders. However, as part
-                    of future works, efforts will be made to expand and include as
-                    many races and genders as possible in the research */}
                   </p>
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '60px' }}>
                 <div>
                   <Link
-                    to="/presurvey2"
-                    className="shadow btn primary-accent fs-3"
+                    to="/presurvey"
+                    className="shadow btn primary-accent fs-3 NextButton"
                     type="button"
                   >
                     Next
@@ -115,8 +109,6 @@ export default styled(PreSurvey)`
     justify-content: space-between;
 
   .form-check.selected {
-    background-color:  #0062ff; /* 선택된 상태의 배경색을 원하는 색상으로 지정하세요. */
-    color: #0062ff; /* 선택된 상태의 텍스트 색상을 원하는 색상으로 지정하세요. */
     border-radius: 50%; /* 동그라미 형태로 만들기 */
     padding: 5px; /* 여백 추가 */
   }
@@ -190,10 +182,8 @@ export default styled(PreSurvey)`
     color: #424242;
   }
 
-  .noted{
-    font-size: 1.1rem;
-    margin-top: 20px;
-    font-weight: 600;
+  .NextButton:hover {
+    background-color: #00693e;
   }
 
 `;

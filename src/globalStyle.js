@@ -17,8 +17,8 @@ export default createGlobalStyle`
     
   }
   .form-check-input:checked {
-    background-color: ${primaryAccent};
-    border-color: ${primaryAccent};
+    background-color: #00693e;
+    border-color: #00693e;
   }
   .btn-unstyled {
     border: none;

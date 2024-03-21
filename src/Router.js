@@ -18,7 +18,6 @@ import Feedback from './routes/FeedbackRoute';
 import ContentCardTest from './routes/ContentCardTest';
 import PreSurvey from './routes/PreSurvey';
 import PreSurvey1 from './routes/PreSurvey1';
-import PreSurvey2 from './routes/PreSurvey2';
 import NextConversation from './routes/NextConversation';
 import PostSurvey1 from './routes/PostSurvey1';
 import PostSurvey2 from './routes/PostSurvey2';
@@ -111,11 +110,8 @@ function App() {
         <Route path="/next-conversation">
           <NextConversation />
         </Route>
-        <Route path="/presurvey1">
+        <Route path="/presurvey">
           <PreSurvey1 />
-        </Route>
-        <Route path="/presurvey2">
-          <PreSurvey2 />
         </Route>
         <Route path="/landingafter">
           <LandingAfter />
