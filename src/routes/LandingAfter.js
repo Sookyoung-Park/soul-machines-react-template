@@ -249,7 +249,7 @@ function LandingAfter({ className }) {
       apiC = getRandomApiKeyC(API_CS_FEMALE, API_AF_FEMALE, API_AI_FEMALE, API_HP_FEMALE, 'API_CS_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE', 'API_HP_FEMALE');
       apiD = API_SA_FEMALE;
       fsA = 'API_SA_MALE';
-      fsB = 'API_SA_FEMALE';
+      fsD = 'API_SA_FEMALE';
       break;
     case '_SA_FEMALE':
       apiA = API_SA_FEMALE;
@@ -257,7 +257,7 @@ function LandingAfter({ className }) {
       apiC = getRandomApiKeyC(API_CS_MALE, API_AF_MALE, API_AI_MALE, API_HP_MALE, 'API_CS_MALE', 'API_AF_MALE', 'API_AI_MALE', 'API_HP_MALE');
       apiD = API_SA_MALE;
       fsA = 'API_SA_FEMALE';
-      fsB = 'API_SA_MALE';
+      fsD = 'API_SA_MALE';
       break;
     default:
       break;
