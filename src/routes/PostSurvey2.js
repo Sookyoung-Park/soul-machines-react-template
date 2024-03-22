@@ -42,6 +42,8 @@ const json = {
   showQuestionNumbers: false,
 };
 
+const survey = new Model(json);
+
 function PostSurvey2({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
@@ -103,7 +105,7 @@ function PostSurvey2({ className }) {
     }
   };
 
-  const survey = new Model(json);
+  // const survey = new Model(json);
 
   survey.onComplete.add((sender, options) => {
     console.log(options, 'for eslint');

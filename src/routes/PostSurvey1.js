@@ -228,7 +228,7 @@
 
 // export default PostSurvey1;
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Model } from 'survey-core';
 import { Survey } from 'survey-react-ui';
 import 'survey-core/defaultV2.min.css';
@@ -267,6 +267,8 @@ const json = {
   ],
   showQuestionNumbers: false,
 };
+
+const survey = new Model(json);
 
 function PostSurvey1({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
@@ -319,11 +321,7 @@ function PostSurvey1({ className }) {
     }
   };
 
-  const survey = new Model(json);
-  survey.onComplete.add((sender, options) => {
-    console.log(options, 'for eslint');
-    console.log(JSON.stringify(sender.data, null, 3));
-  });
+  // const survey = new Model(json);
 
   const infoString = `${race}_${gender}`;
   console.log('info string postsurvey: ', infoString);
@@ -335,34 +333,7 @@ function PostSurvey1({ className }) {
 
   survey.showCompleteButton = false;
 
-  // 이전코드
-  // const handleNextButtonClick = () => {
-  //   const surveyData = survey.data;
-  //   console.log('Survey data:', surveyData);
-  //   setSurveyCompleted(true);
-
-  //   // 'Powerful CPU' 항목의 인덱스를 찾습니다.
-  //   const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');
-  //   const indexOfB = surveyData['rank-trustworthy'].indexOf('DP B');
-  //   const indexOfC = surveyData['rank-trustworthy'].indexOf('DP C');
-  //   const indexOfD = surveyData['rank-trustworthy'].indexOf('DP D');
-
-  //   // 해당 인덱스에 할당된 값을 변수에 저장합니다.
-  //   // indexOfPowerfulCPU !== -1: 이 조건은 'Powerful CPU'가 배열에 존재하는지 확인합니다.요소가 존재하지 않으면 -1을 반환
-  //   // indexOfPowerfulCPU + 1: 배열에서 찾아진 경우 해당 인덱스에 1을 더한 값을 powerfulCPUData 변수에 할당합니다.
-  //   // null: 'Powerful CPU'가 배열에 존재하지 않는 경우, powerfulCPUData 변수에 null을 할당합니다.
-  //   const dpARank = indexOfA !== -1 ? indexOfA + 1 : null;
-  //   const dpBRank = indexOfB !== -1 ? indexOfB + 1 : null;
-  //   const dpCRank = indexOfC !== -1 ? indexOfC + 1 : null;
-  //   const dpDRank = indexOfD !== -1 ? indexOfD + 1 : null;
-  //   // console.log('DP A data:', dpARank);
-  //   // console.log('DP B data:', dpBRank);
-  //   // console.log('DP C data:', dpCRank);
-  //   // console.log('DP D data:', dpDRank);
-  //   updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
-  // };
-
-  const handleNextButtonClick = useCallback(() => {
+  const handleNextButtonClick = () => {
     const surveyData = survey.data;
     console.log('Survey data:', surveyData);
 
@@ -383,14 +354,25 @@ function PostSurvey1({ className }) {
     // console.log('DP D data:', dpDRank);
     updateTrustworthyRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
 
-    setSurveyCompleted(true); // 마지막에 호출되도록 이동
-  }, [docID, survey]);
+    setSurveyCompleted(true);
+  // }, [survey.data]);
+  };
 
   // on complete and console print
-  survey.onComplete.add((sender, options) => {
-    console.log(options, 'options');
-    console.log("User's rankings:", sender.data.smartphoneFeatures);
-  });
+  // survey.onComplete.add((sender, options) => {
+  //   console.log(options, 'options');
+  //   console.log("User's rankings:", sender.data.smartphoneFeatures);
+  // });
+  // test
+  useEffect(() => {
+    if (survey) {
+      // onComplete 이벤트 핸들러 추가
+      survey.onComplete.add((sender, options) => {
+        console.log(options, 'options');
+        console.log("User's rankings:", sender.data.smartphoneFeatures);
+      });
+    }
+  }, [survey]); // survey가 변경될 때마다 useEffect 호출
 
   return (
     <div className={className}>
