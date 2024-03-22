@@ -13,8 +13,12 @@ import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
 import CS_MALE from '../img/CS_MALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
+import CS_MALE_2 from '../img/CS_MALE_2.png';
+import CS_FEMALE_2 from '../img/CS_FEMALE_2.png';
 import HP_MALE from '../img/HP_MALE.png';
 import HP_FEMALE from '../img/HP_FEMALE.png';
+import HP_MALE_2 from '../img/HP_MALE_2.png';
+import HP_FEMALE_2 from '../img/HP_FEMALE_2.png';
 import AI_MALE from '../img/AI_MALE.png';
 import AI_FEMALE from '../img/AI_FEMALE.png';
 import SA_MALE from '../img/SA_MALE.png';
@@ -74,10 +78,18 @@ function PostSurvey1({ className }) {
         return CS_MALE;
       case 'CS_FEMALE':
         return CS_FEMALE;
+      case 'CS_MALE_2':
+        return CS_MALE_2;
+      case 'CS_FEMALE_2':
+        return CS_FEMALE_2;
       case 'HP_MALE':
         return HP_MALE;
       case 'HP_FEMALE':
         return HP_FEMALE;
+      case 'HP_MALE_2':
+        return HP_MALE_2;
+      case 'HP_FEMALE_2':
+        return HP_FEMALE_2;
       case 'AI_MALE':
         return AI_MALE;
       case 'AI_FEMALE':

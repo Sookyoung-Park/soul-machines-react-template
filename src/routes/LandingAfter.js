@@ -1,7 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
@@ -11,8 +8,8 @@ import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundColor } from '../config';
 import {
-  setRequestedMediaPerms, setChatTypeState, setApiKeysState,
-  setDocIDState,
+  setRequestedMediaPerms, setChatTypeState,
+  setApiKeysState, setDocIDState,
 } from '../store/sm';
 import micFill from '../img/mic-fill.svg';
 import videoFill from '../img/camera-video-fill.svg';
@@ -50,8 +47,6 @@ function LandingAfter({ className }) {
 
   // infoString : EA_FEMALE, AF_MALE etc
   const infoString = `_${race}_${gender}`;
-  console.log('info string : ', infoString);
-  console.log('landingAfter chatType : ', chatType);
 
   let apiA;
   let apiB;
@@ -68,19 +63,17 @@ function LandingAfter({ className }) {
       const docId = await writeUserInfo(gender, race);
       dispatch(setDocIDState(docId));
       updateExperimentType(docId, fsA, fsB, fsC, fsD);
-      console.log('debugging Soo docId: ', docId);
     }
   }
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 한 번만 실행되도록 설정
     if (!docID) {
       handleFirebaseUpdate();
     }
-  }, [fsD]); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
+  }, [fsD]);
 
-  function getRandomApiKeyB(api1, api2, api3, api4, txt1, txt2, txt3, txt4) {
-    const apis = [api1, api2, api3, api4];
+  function getRandomApiKeyB(api1, api2, api3, txt1, txt2, txt3) {
+    const apis = [api1, api2, api3];
     const randomIndex = Math.floor(Math.random() * apis.length);
 
     if (randomIndex === 0) {
@@ -89,14 +82,12 @@ function LandingAfter({ className }) {
       fsB = txt2;
     } else if (randomIndex === 2) {
       fsB = txt3;
-    } else if (randomIndex === 3) {
-      fsB = txt4;
     }
     return apis[randomIndex];
   }
 
-  function getRandomApiKeyC(api1, api2, api3, api4, txt1, txt2, txt3, txt4) {
-    const apis = [api1, api2, api3, api4];
+  function getRandomApiKeyC(api1, api2, api3, txt1, txt2, txt3) {
+    const apis = [api1, api2, api3];
     const randomIndex = Math.floor(Math.random() * apis.length);
 
     if (randomIndex === 0) {
@@ -105,8 +96,6 @@ function LandingAfter({ className }) {
       fsC = txt2;
     } else if (randomIndex === 2) {
       fsC = txt3;
-    } else if (randomIndex === 3) {
-      fsC = txt4;
     }
     return apis[randomIndex];
   }
@@ -119,142 +108,128 @@ function LandingAfter({ className }) {
   switch (infoString) {
     case '_EA_MALE':
       apiA = API_EA_MALE;
-      apiB = getRandomApiKeyB(API_AF_MALE, API_CS_MALE, API_HP_MALE, API_AI_MALE, 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_AI_MALE');
-      apiC = getRandomApiKeyC(API_AF_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_AF_MALE, API_SA_MALE, API_HP_MALE, 'API_AF_MALE', 'API_SA_MALE', 'API_HP_MALE');
+      apiC = getRandomApiKeyC(API_CS_FEMALE, API_CS_FEMALE_2, API_AI_FEMALE, 'API_CS_FEMALE', 'API_CS_FEMALE_2', 'API_AI_FEMALE');
       apiD = API_EA_FEMALE;
-      // firestore
       fsA = 'API_EA_MALE';
       fsD = 'API_EA_FEMALE';
       break;
     case '_EA_FEMALE':
       apiA = API_EA_FEMALE;
-      apiB = getRandomApiKeyB(API_AF_FEMALE, API_CS_FEMALE, API_SA_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_CS_FEMALE', 'API_SA_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_AF_MALE, API_CS_MALE, API_SA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_CS_MALE', 'API_SA_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_AF_FEMALE, API_SA_FEMALE, API_HP_FEMALE, 'API_AF_FEMALE', 'API_SA_FEMALE', 'API_HP_FEMALE');
+      apiC = getRandomApiKeyC(API_CS_MALE, API_CS_MALE_2, API_AI_MALE, 'API_CS_MALE', 'API_CS_MALE_2', 'API_AI_MALE');
       apiD = API_EA_FEMALE;
-      // firestore
       fsA = 'API_EA_FEMALE';
       fsD = 'API_EA_MALE';
       break;
     case '_AF_MALE':
       apiA = API_AF_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE, API_HP_MALE, API_SA_MALE, 'API_EA_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_SA_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_SA_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMALE', 'API_HP_FEMALE', 'API_SA_FEMALE');
+      apiB = getRandomApiKeyB(API_SA_MALE, API_HP_MALE_2, API_AI_MALE, 'API_SA_MALE', 'API_HP_MALE_2', 'API_AI_MALE');
+      apiC = getRandomApiKeyC(API_CS_FEMALE, API_CS_FEMALE_2, API_EA_FEMALE, 'API_CS_FEMALE', 'API_CS_FEMALE_2', 'API_EA_FEMALE');
       apiD = API_AF_FEMALE;
-      // firestore
       fsA = 'API_AF_MALE';
       fsD = 'API_AF_FEMALE';
       break;
     case '_AF_FEMALE':
       apiA = process.env.REACT_APP_API_KEY_AF_FEMALE;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE, API_HP_FEMALE, API_SA_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMLAE', 'API_HP_FEMALE', 'API_SA_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_CS_MALE, API_HP_MALE, API_SA_MALE, 'API_EA_MALE', 'API_CS_MALE', 'API_HP_MALE', 'API_SA_MALE');
+      apiB = getRandomApiKeyB(API_SA_FEMALE, API_HP_FEMALE_2, API_AI_FEMALE, 'API_SA_FEMALE', 'API_HP_FEMALE_2', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_CS_MALE, API_CS_MALE_2, API_EA_MALE, 'API_CS_MALE', 'API_CS_MALE_2', 'API_EA_MALE');
       apiD = API_AF_MALE;
-      // firestore
       fsA = 'API_AF_FEMALE';
       fsD = 'API_AF_MALE';
       break;
     case '_CS_MALE':
       apiA = API_CS_MALE;
-      apiB = getRandomApiKeyB(API_SA_MALE, API_AF_MALE, API_HP_MALE, API_SA_MALE, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_SA_MALE');
-      apiC = getRandomApiKeyC(API_SA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_SA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_AF_MALE, API_EA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_EA_MALE', 'API_AI_MALE');
+      apiC = getRandomApiKeyC(API_HP_FEMALE, API_SA_FEMALE, API_HP_FEMALE_2, 'API_HP_FEMALE', 'API_SA_FEMALE', 'API_HP_FEMALE_2');
       apiD = API_CS_FEMALE;
-      // firebase
       fsA = 'API_CS_MALE';
       fsD = 'API_CS_FEMALE';
       break;
     case '_CS_MALE_2':
       apiA = API_CS_MALE_2;
-      apiB = getRandomApiKeyB(API_SA_MALE, API_AF_MALE, API_HP_MALE, API_SA_MALE, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_SA_MALE');
-      apiC = getRandomApiKeyC(API_SA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_SA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_AI_MALE');
+      apiC = getRandomApiKeyC(API_SA_FEMALE, API_HP_FEMALE_2, API_HP_FEMALE, 'API_SA_FEMALE', 'API_HP_FEMALE_2', 'API_HP_FEMALE');
       apiD = API_CS_FEMALE_2;
-      // firebase
       fsA = 'API_CS_MALE_2';
       fsD = 'API_CS_FEMALE_2';
       break;
     case '_CS_FEMALE':
       apiA = API_CS_FEMALE;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_HP_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
       apiD = API_CS_MALE;
-      // firestore
       fsA = 'API_CS_FEMALE';
       fsD = 'API_CS_MALE';
       break;
     case '_CS_FEMALE_2':
       apiA = API_CS_FEMALE_2;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_HP_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE');
+      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
       apiD = API_CS_MALE_2;
-      // firestore
       fsA = 'API_CS_FEMALE_2';
       fsD = 'API_CS_MALE_2';
       break;
     case '_HP_MALE':
       apiA = API_HP_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE_2, API_CS_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE_2', 'API_CS_MALE');
+      apiC = getRandomApiKeyC(API_AF_FEMALE, API_SA_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_SA_FEMALE', 'API_AI_FEMALE');
       apiD = API_HP_FEMALE;
-      // firestore
       fsA = 'API_HP_MALE';
       fsD = 'API_HP_FEMALE';
       break;
     case '_HP_MALE_2':
       apiA = API_HP_MALE_2;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE_2, API_CS_MALE, 'API_EA_MALE', 'API_CS_MALE_2', 'API_CS_MALE');
+      apiC = getRandomApiKeyC(API_AF_FEMALE, API_SA_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_SA_FEMALE', 'API_AI_FEMALE');
       apiD = API_HP_FEMALE_2;
-      // firestore
       fsA = 'API_HP_MALE_2';
       fsD = 'API_HP_FEMALE_2';
       break;
     case '_HP_FEMALE':
       apiA = API_HP_FEMALE;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE_2, API_CS_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMALE_2', 'API_CS_FEMALE');
+      apiC = getRandomApiKeyC(API_AF_MALE, API_SA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_SA_MALE', 'API_AI_MALE');
       apiD = API_HP_MALE;
-      // firestore
       fsA = 'API_HP_FEMALE';
       fsD = 'API_HP_MALE';
       break;
     case '_HP_FEMALE_2':
       apiA = API_HP_FEMALE_2;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_AI_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_AI_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE_2, API_CS_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMALE_2', 'API_CS_FEMALE');
+      apiC = getRandomApiKeyC(API_AF_MALE, API_SA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_SA_MALE', 'API_AI_MALE');
       apiD = API_HP_FEMALE_2;
-      // firestore
       fsA = 'API_HP_FEMALE_2';
       fsD = 'API_HP_MALE_2';
       break;
     case '_AI_MALE':
       apiA = API_AI_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_HP_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE');
-      apiC = getRandomApiKeyC(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_HP_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_HP_FEMALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_SA_MALE, API_HP_MALE, 'API_EA_MALE', 'API_SA_MALE', 'API_HP_MALE');
+      apiC = getRandomApiKeyC(API_AF_FEMALE, API_CS_FEMALE, API_CS_FEMALE_2, 'API_AF_FEMALE', 'API_CS_FEMALE', 'API_CS_FEMALE_2');
       apiD = API_AI_FEMALE;
-      // firestore
       fsA = 'API_AI_MALE';
       fsD = 'API_AI_FEMALE';
       break;
     case '_AI_FEMALE':
       apiA = API_AI_FEMALE;
-      apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_CS_FEMALE, API_HP_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_CS_MALE', 'API_HP_FEMALE');
-      apiC = getRandomApiKeyC(API_EA_MALE, API_AF_MALE, API_CS_MALE, API_HP_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE', 'API_HP_MALE');
+      apiB = getRandomApiKeyB(API_EA_FEMALE, API_SA_FEMALE, API_HP_FEMALE, 'API_EA_FEMALE', 'API_SA_FEMALE', 'API_HP_FEMALE');
+      apiC = getRandomApiKeyC(API_AF_MALE, API_CS_MALE, API_CS_MALE_2, 'API_AF_MALE', 'API_CS_MALE', 'API_CS_MALE_2');
       apiD = API_AI_MALE;
-      // firestore
       fsA = 'API_AI_FEMALE';
       fsD = 'API_AI_MALE';
       break;
     case '_SA_MALE':
       apiA = API_SA_MALE;
-      apiB = getRandomApiKeyB(API_CS_MALE, API_AF_MALE, API_AI_MALE, API_HP_MALE, 'API_CS_MALE', 'API_AF_MALE', 'API_AI_MALE', 'API_HP_MALE');
-      apiC = getRandomApiKeyC(API_CS_FEMALE, API_AF_FEMALE, API_AI_FEMALE, API_HP_FEMALE, 'API_CS_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE', 'API_HP_FEMALE');
+      apiB = getRandomApiKeyB(API_CS_MALE, API_CS_MALE_2, API_EA_MALE, 'API_CS_MALE', 'API_CS_MALE_2', 'API_EA_MALE');
+      apiC = getRandomApiKeyC(API_EA_FEMALE, API_HP_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_HP_FEMALE', 'API_AI_FEMALE');
       apiD = API_SA_FEMALE;
       fsA = 'API_SA_MALE';
       fsD = 'API_SA_FEMALE';
       break;
     case '_SA_FEMALE':
       apiA = API_SA_FEMALE;
-      apiB = getRandomApiKeyB(API_CS_FEMALE, API_AF_FEMALE, API_AI_FEMALE, API_HP_FEMALE, 'API_CS_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE', 'API_HP_FEMALE');
-      apiC = getRandomApiKeyC(API_CS_MALE, API_AF_MALE, API_AI_MALE, API_HP_MALE, 'API_CS_MALE', 'API_AF_MALE', 'API_AI_MALE', 'API_HP_MALE');
+      apiB = getRandomApiKeyB(API_CS_FEMALE, API_CS_FEMALE_2, API_EA_FEMALE, 'API_CS_FEMALE', 'API_CS_FEMALE_2', 'API_EA_FEMALE');
+      apiC = getRandomApiKeyC(API_EA_MALE, API_HP_MALE_2, API_AI_MALE, 'API_EA_MALE', 'API_HP_MALE_2', 'API_AI_MALE');
       apiD = API_SA_MALE;
       fsA = 'API_SA_FEMALE';
       fsD = 'API_SA_MALE';
