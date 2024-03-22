@@ -34,7 +34,7 @@ function STTFeedback({ className }) {
         `}
     >
       <div className="text-wrap text-start input-display">
-        {userSpeaking ? 'Listening: ' : 'DP heard: '}
+        {userSpeaking ? 'Listening: ' : 'Hearing: '}
         {placeholder || lastUserUtterance}
         {
           userSpeaking

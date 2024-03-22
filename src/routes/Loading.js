@@ -192,7 +192,7 @@ function Loading({ className }) {
                   disabled={skip}
                   onClick={redirectToVideoOnConnect}
                 >
-                  { connected ? `Chat with Avatar ${chatType}` : 'Please wait for the loading ...' }
+                  { connected ? `Chat with Avatar ${chatType}` : 'It may take time. Please wait for the loading ...' }
                 </button>
                 )}
               </div>

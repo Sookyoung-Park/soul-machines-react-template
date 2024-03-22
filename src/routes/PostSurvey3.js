@@ -8,14 +8,21 @@ import { useSelector } from 'react-redux';
 import { readAllExperimentTypes, updateEngagementRank } from '../store/firestore_functions';
 
 import EA_MALE from '../img/EA_MALE.png';
-// import EA_FEMALE from '../img/EA_FEMALE.png';
 import EA_FEMALE from '../img/EA_FEMALE.png';
 import AF_MALE from '../img/AF_MALE.png';
 import AF_FEMALE from '../img/AF_FEMALE.png';
-// import CS_MALE from '../img/CS_MALE.png';
-// import CS_FEMALE from '../img/CS_FEMALE.png'testset;
 import CS_MALE from '../img/CS_MALE.png';
 import CS_FEMALE from '../img/CS_FEMALE.png';
+import CS_MALE_2 from '../img/CS_MALE_2.png';
+import CS_FEMALE_2 from '../img/CS_FEMALE_2.png';
+import HP_MALE from '../img/HP_MALE.png';
+import HP_FEMALE from '../img/HP_FEMALE.png';
+import HP_MALE_2 from '../img/HP_MALE_2.png';
+import HP_FEMALE_2 from '../img/HP_FEMALE_2.png';
+import AI_MALE from '../img/AI_MALE.png';
+import AI_FEMALE from '../img/AI_FEMALE.png';
+import SA_MALE from '../img/SA_MALE.png';
+import SA_FEMALE from '../img/SA_FEMALE.png';
 
 const json = {
   elements: [
@@ -71,12 +78,33 @@ function PostSurvey3({ className }) {
         return CS_MALE;
       case 'CS_FEMALE':
         return CS_FEMALE;
+      case 'CS_MALE_2':
+        return CS_MALE_2;
+      case 'CS_FEMALE_2':
+        return CS_FEMALE_2;
+      case 'HP_MALE':
+        return HP_MALE;
+      case 'HP_FEMALE':
+        return HP_FEMALE;
+      case 'HP_MALE_2':
+        return HP_MALE_2;
+      case 'HP_FEMALE_2':
+        return HP_FEMALE_2;
+      case 'AI_MALE':
+        return AI_MALE;
+      case 'AI_FEMALE':
+        return AI_FEMALE;
+      case 'SA_MALE':
+        return SA_MALE;
+      case 'SA_FEMALE':
+        return SA_FEMALE;
       default:
         return null;
     }
   };
 
   const survey = new Model(json);
+
   survey.onComplete.add((sender, options) => {
     console.log(options, 'for eslint');
     console.log(JSON.stringify(sender.data, null, 3));
@@ -94,7 +122,6 @@ function PostSurvey3({ className }) {
   const handleNextButtonClick = () => {
     const surveyData = survey.data;
     console.log('Survey data:', surveyData);
-    setSurveyCompleted(true);
 
     // 'Powerful CPU' 항목의 인덱스를 찾습니다.
     const indexOfA = surveyData['rank-engagement'].indexOf('DP A');
@@ -115,13 +142,14 @@ function PostSurvey3({ className }) {
     // console.log('DP C data:', dpCRank);
     // console.log('DP D data:', dpDRank);
     updateEngagementRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
+    setSurveyCompleted(true);
   };
 
   // on complete and console print
-  survey.onComplete.add((sender, options) => {
-    console.log(options, 'options');
-    console.log("User's rankings:", sender.data.smartphoneFeatures);
-  });
+  // survey.onComplete.add((sender, options) => {
+  //   console.log(options, 'options');
+  //   console.log("User's rankings:", sender.data.smartphoneFeatures);
+  // });
 
   return (
     <div className={className}>
@@ -185,122 +213,3 @@ PostSurvey3.propTypes = {
 };
 
 export default PostSurvey3;
-// export default styled(PostSurvey1)`
-//   .landing-wrapper {
-//     min-height: 100vh;
-
-//     background-size: auto 60%;
-//     background-repeat: no-repeat;
-//     background-position: bottom center;
-
-//     @media (min-width: ${breakpoints.lg}px) {
-//       background-size: 60% auto;
-//       background-position: right bottom;
-//     }
-//   }
-//   .landing-container {
-//     padding-top: 1rem;
-//     display: flex;
-//     justify-content: center;
-
-//     &>div {
-//       background-color: ${Color(landingBackgroundColor).alpha(0.5)};
-//       backdrop-filter: blur(10px);
-//       border: 1px solid rgba(0,0,0,0.1);
-//       padding: 1rem;
-//       border-radius: 5px;
-//       text-align: center;
-
-//       @media (min-width: ${breakpoints.lg}px) {
-//         border: none;
-//       }
-//     }
-//   }
-//   .form-switch .form-check-input {
-//     min-width: 7rem;
-//     height: 3rem;
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-
-//   .form-check.selected {
-//     background-color:  #0062ff; /* 선택된 상태의 배경색을 원하는 색상으로 지정하세요. */
-//     color: #0062ff; /* 선택된 상태의 텍스트 색상을 원하는 색상으로 지정하세요. */
-//     border-radius: 50%; /* 동그라미 형태로 만들기 */
-//     padding: 5px; /* 여백 추가 */
-//   }
-
-//     &.mic-switch::before, &.mic-switch.status-checked::after {
-//         background-image: url(${micFill});
-//     }
-//     &.video-switch::before, &.video-switch.status-checked::after {
-//         background-image: url(${videoFill});
-//     }
-//     &.mic-switch.status-checked::before, &.video-switch.status-checked::before {
-//       background-image: none;
-//     }
-
-//     &.status-unchecked {
-//       &::after {
-//         content: 'OFF';
-//         color: #000;
-//         margin-right: 18%;
-//       }
-//       &::before {
-//         background-size: 60%;
-//         background-repeat: no-repeat;
-//         background-color: rgb(220, 220, 220);
-//         background-position: 45% center;
-//         content: '';
-//         display: block;
-
-//         border-radius: 50%;
-
-//         height: 80%;
-//         margin-left: 5%;
-//         aspect-ratio: 1;
-//         float: right;
-//       }
-//     }
-
-//     &.status-checked {
-//       &::before {
-//         content: 'ON';
-//         color: #FFF;
-//         margin-left: 22%;
-//       }
-
-//       &::after {
-//         background-size: 60%;
-//         background-repeat: no-repeat;
-//         background-color: #FFF;
-//         background-position: 55% center;
-//         content: '';
-//         display: block;
-
-//         border-radius: 50%;
-
-//         height: 80%;
-//         margin-right: 5%;
-//         aspect-ratio: 1;
-//         float: right;
-//       }
-//     }
-//   }
-//   .row{
-//     align-tiems: center;
-//   }
-
-//   .description{
-//     font-size: 1.2rem;
-//     line-height: 150%;
-//     margin-top: 24px;
-//   }
-
-//   .noted{
-//     font-size: 1.1rem;
-//     margin-top: 20px;
-//     font-weight: 600;
-//   }
-
-// `;
