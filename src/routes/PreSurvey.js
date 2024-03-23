@@ -61,6 +61,15 @@ function PreSurvey({ className }) {
                     Next
                   </Link>
                 </div>
+                <div>
+                  <Link
+                    to="/presurvey-prompt"
+                    className="shadow btn primary-accent fs-3 NextButton"
+                    type="button"
+                  >
+                    FOR TESTTSS
+                  </Link>
+                </div>
               </div>
               <div className="col" />
             </div>

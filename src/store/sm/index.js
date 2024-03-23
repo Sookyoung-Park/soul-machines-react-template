@@ -863,9 +863,8 @@ const smSlice = createSlice({
       return newState;
     },
     // set firebase docId
-    // 잘 작동되는 코드
     setDocIDState: (state, { payload }) => {
-      console.log('Reducer received firebase docId with payload:', payload);
+      // console.log('Reducer received firebase docId with payload:', payload);
 
       // 만약 payload.docID가 비어 있지 않으면서 현재 상태의 user.firebase.docID가 존재하지 않는 경우에만 값을 추가합니다.
       const isNewDocID = payload.docID && !state.user.firebase.docID;
@@ -882,7 +881,7 @@ const smSlice = createSlice({
         },
       };
 
-      console.log('New state setDocIDState:', newState);
+      // console.log('New state setDocIDState:', newState);
       return newState;
     },
     // set apiA B C D

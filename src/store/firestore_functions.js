@@ -19,7 +19,8 @@ export async function writeUserInfo(gender, race) {
 
   try {
     const docRef = await addDoc(newDefDoc, userInfo);
-    console.log('새로운 문서가 추가되었습니다. 문서 ID:', docRef.id);
+    console.log('새로운 문서가 추가되었습니다. writeUserInfo');
+    // console.log(docRef.id);
     return docRef.id;
   } catch (error) {
     console.error('데이터 추가 중 오류가 발생했습니다:', error);
@@ -29,7 +30,7 @@ export async function writeUserInfo(gender, race) {
 
 // updateExperimentType
 export async function updateExperimentType(docID, A, B, C, D) {
-  console.log('firebaesfucntion:', A, B, C, D);
+  console.log('Firestore Stored:', A, B, C, D);
   const experimentData = {
     experiment_A: A,
     experiment_B: B,
@@ -40,9 +41,9 @@ export async function updateExperimentType(docID, A, B, C, D) {
   const docRef = doc(db, 'Projects', docID);
   try {
     await updateDoc(docRef, experimentData);
-    console.log('experiment data 새로운 문서가 추가되었습니다. 문서 ID:', docRef.id);
+    // console.log('experiment data 새로운 문서가 추가되었습니다. 문서 ID:', docRef.id);
   } catch (error) {
-    console.error('데이터 추가 중 오류가 발생했습니다:', error);
+    console.error('updateExperimentType 데이터 추가 중 오류가 발생했습니다:', error);
   }
 }
 

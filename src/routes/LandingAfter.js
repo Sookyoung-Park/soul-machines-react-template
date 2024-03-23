@@ -240,7 +240,7 @@ function LandingAfter({ className }) {
 
   const [userChatType, setChatType] = useState(''); // 'A B C D'
   // for eslint
-  console.log(userChatType, 'for trash');
+  console.log(userChatType, 'for eslint');
 
   const handleChatTypeChange = () => {
     if (chatType === 'A') {
