@@ -26,7 +26,6 @@ function Loading({ className }) {
     apiA, apiB, apiC, apiD,
   } = user.apiKey;
   const { chatPrompts } = user;
-  // chatPromptsArr = [chatPrompts.A, chatPrompts.B, chatPrompts.C, chatPrompts.D];
 
   const dispatch = useDispatch();
 

@@ -4,22 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
-  // CameraVideoFill,
-  // CameraVideoOffFill,
   ChatSquareTextFill,
-  // MicFill,
-  // MicMuteFill,
-  // VolumeMuteFill,
-  // VolumeUpFill,
 } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
 import {
   setShowTranscript,
   disconnect,
-  // setOutputMute,
   setMicOn,
-  // setCameraOn,
-
   setNextChatType,
 } from '../store/sm/index';
 import mic from '../img/mic.svg';
@@ -52,12 +43,12 @@ function Controls({
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
 
-  const dispatch = useDispatch();
-
   const [showFeedback, setShowFeedback] = useState(false);
-  // track 2min for test=> show Exit Conversation
   const [showExitButton, setShowExitButton] = useState(false);
+
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   // bind transcrpt open and mute func to each other, so that
   // when we open the transcript we mute the mic
@@ -82,20 +73,25 @@ function Controls({
     };
   }, []);
 
+  // test
+  const handleChatTypeChange = () => {
+    dispatch(setNextChatType());
+    console.log('new chatType', chatType);
+  };
+
   // redirect to feedback page after 3min 30sec
   // 3min30sec = 210000
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
+      handleChatTypeChange();
       // next-conversation
       if (chatType === 'E') {
         history.push('/ps1');
       } else {
-        history.push('/next-conversation');
+        history.push('/landingafter');
       }
-      // history.push('/feedback');
-      // test
-    }, 1500000);
+    }, 15000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -103,12 +99,6 @@ function Controls({
   }, [dispatch, history]);
 
   const iconSize = 24;
-
-  // test
-  const handleChatTypeChange = () => {
-    dispatch(setNextChatType());
-    console.log('new chatType', chatType);
-  };
 
   return (
     <div className={className}>
@@ -130,22 +120,6 @@ function Controls({
       ) : null}
       <div className="d-flex">
         <div>
-          {/* mute dp sound */}
-          {/* <button
-            type="button"
-            className="control-icon"
-            aria-label="Toggle DP Audio"
-            data-tip="Toggle DP Audio"
-            onClick={() => dispatch(setOutputMute({ isOutputMuted: !isOutputMuted }))}
-          >
-            {isOutputMuted ? (
-              <VolumeMuteFill size={iconSize}
-              style={{ border: highlightMute ? 'red 2px solid' : '' }} />
-            ) : (
-              <VolumeUpFill size={iconSize} color={primaryAccent}
-              style={{ border: highlightMute ? 'red 2px solid' : '' }} />
-            )}
-          </button> */}
           {/* show transcript */}
           <button
             type="button"
@@ -161,47 +135,6 @@ function Controls({
               style={{ border: highlightChat ? 'red 2px solid' : '' }}
             />
           </button>
-        </div>
-        <div>
-          {/* toggle user mic */}
-          {/* <button
-            type="button"
-            className="control-icon"
-            aria-label="Toggle Microphone"
-            data-tip="Toggle Microphone"
-            disabled={requestedMediaPerms.micDenied === true}
-            onClick={() => dispatch(setMicOn({ micOn: !micOn }))}
-          >
-            {micOn ? (
-              <MicFill size={iconSize} color={primaryAccent}
-              style={{ border: highlightMic ? 'red 2px solid' : '' }} />
-            ) : (
-              <MicMuteFill size={iconSize}
-              style={{ border: highlightMic ? 'red 2px solid' : '' }} />
-            )}
-          </button>
-        </div>
-        <div> */}
-          {/* toggle user camera */}
-          {/* <button
-            type="button"
-            className="control-icon"
-            aria-label="Toggle Camera"
-            data-tip="Toggle Camera"
-            disabled={requestedMediaPerms.cameraDenied === true}
-            onClick={() => dispatch(setCameraOn({ cameraOn: !cameraOn }))}
-          >
-            {cameraOn ? (
-              <CameraVideoFill
-                size={iconSize}
-                color={primaryAccent}
-                style={{ border: highlightCamera ? 'red 2px solid' : '' }}
-              />
-            ) : (
-              <CameraVideoOffFill size={iconSize}
-              style={{ border: highlightCamera ? 'red 2px solid' : '' }} />
-            )}
-          </button> */}
         </div>
         {showExitButton && (
         <button

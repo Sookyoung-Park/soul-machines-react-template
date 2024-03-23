@@ -29,12 +29,10 @@ function UsageCaseSelection({ className }) {
   const dispatch = useDispatch();
 
   const [submitted, setSubmitted] = useState(false);
-  console.log(submitted);
+  console.log(submitted, 'for eslint');
 
   const handleSubmit = () => {
-    // updateUsagePrompt(); // firestore 함수 호출
-    console.log(selectedTags);
-    setSubmitted(true); // submitted 상태 업데이트
+    setSubmitted(true);
     dispatch(setChatPromptsState(selectedTags));
   };
 
@@ -49,8 +47,6 @@ function UsageCaseSelection({ className }) {
             <hr />
             <div className="row">
               <div className="mt-3">
-                {/* combine default tags and custom ones to display as one list */}
-                {/* user can click on default tags to deselect and custom ones to edit */}
                 {[...tagItems].map((t) => (
                   <button
                     className={`rating-tag ${selectedTags.indexOf(t) > -1 ? 'rating-tag-selected' : ''}`}
@@ -70,15 +66,6 @@ function UsageCaseSelection({ className }) {
             </div>
             <div className="row mt-3">
               <div className="justify-content-end d-flex">
-                {/* <button
-                  type="button"
-                  className="btn btn-dark"
-                  disabled={selectedTags.length !== 4}
-                //   onClick={() => setSubmitted(true)}
-                  onClick={() => handleSubmit()}
-                >
-                  Submit
-                </button> */}
                 {isSelectionMade && (
                 <Link
                   to="/landingafter"

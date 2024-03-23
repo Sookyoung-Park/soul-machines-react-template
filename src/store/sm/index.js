@@ -223,7 +223,7 @@ export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {
 
 // create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
-  console.log('createScene apiKey : ', apiKey);
+  // console.log('createScene apiKey : ', apiKey);
   if (scene !== null) {
     return console.error('warning! you attempted to create a new scene, when one already exists!');
   }
@@ -827,7 +827,8 @@ const smSlice = createSlice({
     // 상태를 업데이트합니다.
     // user info
     setUserInfoState: (state, { payload }) => {
-      console.log('Reducer received setUserInfoState with payload:', payload);
+      // console.log('Reducer received setUserInfoState with payload:', payload);
+      console.log('Reducer received setUserInfoState with payload');
 
       const newState = {
         ...state,
@@ -844,8 +845,8 @@ const smSlice = createSlice({
     },
     // chatType State
     setChatTypeState: (state, { payload }) => {
-      console.log('Reducer received setUserChatTypeState with payload:', payload);
-
+      // console.log('Reducer received setUserChatTypeState with payload:', payload);
+      console.log('Reducer received setUserChatTypeState with payload');
       const newState = {
         ...state,
         user: {
@@ -860,7 +861,8 @@ const smSlice = createSlice({
     },
     // chatPrompts State
     setChatPromptsState: (state, { payload }) => {
-      console.log('Reducer received setUserChatPrompts with payload:', payload);
+      // console.log('Reducer received setUserChatPrompts with payload:', payload);
+      console.log('Reducer received setUserChatPrompts with payload');
 
       const newState = {
         ...state,
@@ -874,7 +876,7 @@ const smSlice = createSlice({
           },
         },
       };
-      console.log('New state:', newState);
+      // console.log('New state:', newState);
       return newState;
     },
     // surveyProgress State

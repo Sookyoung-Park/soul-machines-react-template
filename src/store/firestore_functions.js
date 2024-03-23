@@ -23,7 +23,7 @@ export async function writeUserInfo(gender, race, chatPrompts) {
 
   try {
     const docRef = await addDoc(newDefDoc, userInfo);
-    console.log('새로운 문서가 추가되었습니다. writeUserInfo');
+    console.log('Added writeUserInfo');
     // console.log(docRef.id);
     return docRef.id;
   } catch (error) {
@@ -34,7 +34,7 @@ export async function writeUserInfo(gender, race, chatPrompts) {
 
 // updateExperimentType
 export async function updateExperimentType(docID, A, B, C, D) {
-  console.log('Firestore Stored:', A, B, C, D);
+  console.log('Firestore experimentType Stored');
   const experimentData = {
     experiment_A: A,
     experiment_B: B,

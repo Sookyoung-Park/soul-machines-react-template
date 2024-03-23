@@ -279,18 +279,6 @@ function PreSurvey1({ className }) {
                   </Link>
                   )}
                 </div>
-                {/* <div>
-                  {isSelectionMade && (
-                  <Link
-                    to="/landingafter"
-                    className="shadow btn primary-accent fs-3 StartButton"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Start
-                  </Link>
-                  )}
-                </div> */}
               </div>
               <div className="col" />
             </div>
