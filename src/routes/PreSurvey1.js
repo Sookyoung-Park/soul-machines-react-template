@@ -270,6 +270,18 @@ function PreSurvey1({ className }) {
                 <div>
                   {isSelectionMade && (
                   <Link
+                    to="/presurvey-prompt"
+                    className="shadow btn primary-accent fs-3 StartButton"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
+                    Next
+                  </Link>
+                  )}
+                </div>
+                {/* <div>
+                  {isSelectionMade && (
+                  <Link
                     to="/landingafter"
                     className="shadow btn primary-accent fs-3 StartButton"
                     type="button"
@@ -278,7 +290,7 @@ function PreSurvey1({ className }) {
                     Start
                   </Link>
                   )}
-                </div>
+                </div> */}
               </div>
               <div className="col" />
             </div>

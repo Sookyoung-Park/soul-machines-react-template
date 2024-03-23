@@ -67,6 +67,12 @@ const initialState = {
     chatType: {
       chatType: 'A',
     },
+    chatPrompts: {
+      A: '',
+      B: '',
+      C: '',
+      D: '',
+    },
     apiKey: {
       apiA: '',
       apiB: '',
@@ -172,6 +178,11 @@ export const setUserInfoState = (gender, race) => (dispatch) => {
 // update chatType actions
 export const setChatTypeState = (chatType) => (dispatch) => {
   dispatch(actions.setChatTypeState({ chatType }));
+};
+
+// test update chatPRompt actions
+export const setChatPromptsState = (chatPrompts) => (dispatch) => {
+  dispatch(actions.setChatPromptsState({ chatPrompts }));
 };
 
 export const setNextChatType = () => (dispatch, getState) => {
@@ -845,6 +856,25 @@ const smSlice = createSlice({
         },
       };
       // console.log('New state:', newState);
+      return newState;
+    },
+    // chatPrompts State
+    setChatPromptsState: (state, { payload }) => {
+      console.log('Reducer received setUserChatPrompts with payload:', payload);
+
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          chatPrompts: {
+            A: payload.chatPrompts[0],
+            B: payload.chatPrompts[1],
+            C: payload.chatPrompts[2],
+            D: payload.chatPrompts[3],
+          },
+        },
+      };
+      console.log('New state:', newState);
       return newState;
     },
     // surveyProgress State

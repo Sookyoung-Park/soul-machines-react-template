@@ -24,6 +24,8 @@ function LandingAfter({ className }) {
   const { gender, race } = user.info;
   const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const { docID } = user.firebase;
+  const { chatPrompts } = user;
+  const chatPromptsArr = [chatPrompts.A, chatPrompts.B, chatPrompts.C, chatPrompts.D];
 
   const dispatch = useDispatch();
 
@@ -60,7 +62,7 @@ function LandingAfter({ className }) {
 
   async function handleFirebaseUpdate() {
     if (!docID) {
-      const docId = await writeUserInfo(gender, race);
+      const docId = await writeUserInfo(gender, race, chatPromptsArr);
       dispatch(setDocIDState(docId));
       updateExperimentType(docId, fsA, fsB, fsC, fsD);
     }
@@ -371,7 +373,7 @@ function LandingAfter({ className }) {
                   handleChatTypeChange();
                 }}
               >
-                {chatType === 'E' ? 'Start Survey' : `Chat with Influencer ${chatType}`}
+                {chatType === 'E' ? 'Start Survey' : `Chat with AI avatar ${chatType}`}
               </Link>
               {/* <Link
                 to="/ps1"

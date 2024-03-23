@@ -1,45 +1,47 @@
 import React, {
   useState,
 } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { headerHeight, landingBackgroundImage } from '../config';
+import { Link } from 'react-router-dom';
+import { setChatPromptsState } from '../store/sm';
 
 function UsageCaseSelection({ className }) {
-  // allow for custom input
-//   const [customField, setCustomField] = useState('');
-//   const [customItems, setCustomItems] = useState([]);
-
-  // default tags
-  const tagItems = ['Travel and Vacation', 'Health and Wellness', 'Sports and Exercise', 'Hobbies and Interests', 'Culture and Arts', 'Family and Friends', 'Study and Careers'];
+  const [isSelectionMade, setIsSelectionMade] = useState(false);
+  // https://www.indeed.com/career-advice/career-development/small-talk-topics
+  const tagItems = ['Food and Cooking', 'Pet', 'Hometown', 'Hobbies and Interests', 'Travle and Vacation', 'Family and Friends', 'Study and Careers', 'Current Events', 'The weekend',
+    'Social Media', 'Fashion and Beauty'];
 
   const [selectedTags, setSelectedTags] = useState([]);
 
   const handleSelectTag = (t) => {
-    // const isCustom = customItems.indexOf(t) > -1;
-    // if (isCustom) {
-    //   const tagIsSelected = customItems.indexOf(t) > -1;
-    //   if (tagIsSelected === false) setSelectedTags([...selectedTags, t]);
-    //   // remove custom tag from array if selected again and set input as value so user can edit
-    //   else {
-    //     setSelectedTags([...selectedTags.filter((v) => v !== t)]);
-    //     setCustomItems([...customItems.filter((v) => v !== t)]);
-    //     setCustomField(t);
-    //   }
-    // } else {
     const tagIsSelected = selectedTags.indexOf(t) > -1;
     if (tagIsSelected === false) setSelectedTags([...selectedTags, t]);
     else setSelectedTags([...selectedTags.filter((v) => v !== t)]);
-    // }
+    if (selectedTags.length === 3) {
+      setIsSelectionMade(true);
+    } else {
+      setIsSelectionMade(false);
+    }
   };
+
+  const dispatch = useDispatch();
 
   const [submitted, setSubmitted] = useState(false);
   console.log(submitted);
 
+  const handleSubmit = () => {
+    // updateUsagePrompt(); // firestore 함수 호출
+    console.log(selectedTags);
+    setSubmitted(true); // submitted 상태 업데이트
+    dispatch(setChatPromptsState(selectedTags));
+  };
+
   return (
     <div className={className}>
-      <div className="container feedback-container d-flex" style={{ marginTop: '120px' }}>
-        <div className="container">
+      <div className="d-flex" style={{ marginTop: '200px' }}>
+        <div className="container-prompt">
           <div>
             <div className="row">
               <h3 className="text-center">Please choose 4 prompts you would like to talk about</h3>
@@ -62,25 +64,32 @@ function UsageCaseSelection({ className }) {
                   className="d-inline-block"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    // if (customField !== '') {
-                    //   setCustomItems([...customItems, customField]);
-                    //   handleSelectTag(customField);
-                    //   setCustomField('');
-                    // }
                   }}
                 />
               </div>
             </div>
             <div className="row mt-3">
               <div className="justify-content-end d-flex">
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-dark"
-                //   disabled={!ratingSelected}
-                  onClick={() => setSubmitted(true)}
+                  disabled={selectedTags.length !== 4}
+                //   onClick={() => setSubmitted(true)}
+                  onClick={() => handleSubmit()}
                 >
                   Submit
-                </button>
+                </button> */}
+                {isSelectionMade && (
+                <Link
+                  to="/landingafter"
+                  className="shadow btn primary-accent fs-3 StartButton"
+                  type="button"
+                  disabled={selectedTags.length !== 4}
+                  onClick={handleSubmit}
+                >
+                  Next
+                </Link>
+                )}
               </div>
             </div>
           </div>
@@ -94,8 +103,14 @@ UsageCaseSelection.propTypes = {
   className: PropTypes.string.isRequired,
 };
 export default styled(UsageCaseSelection)`
-  .feedback-container {
-    height: calc(100vh - ${headerHeight});
+  .container-prompt {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--bs-gutter-x)* 2);
+    padding-right: calc(var(--bs-gutter-x)* 2);
+    width: 50%;
   }
   .star-wrapper {
     display: inline;
@@ -157,11 +172,6 @@ export default styled(UsageCaseSelection)`
     justify-content: center;
 
     background-color: #EAEAEA;
-  }
-  .tutorial-icon-dp {
-    background-image: url(${landingBackgroundImage});
-    background-size: cover;
-    background-position: bottom center;
   }
   .alert-modal {
     position: absolute;

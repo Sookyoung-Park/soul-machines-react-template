@@ -11,10 +11,14 @@ const db = getFirestore(firebaseApp);
 const newDefDoc = collection(db, 'Projects');
 
 // write new docID & user info
-export async function writeUserInfo(gender, race) {
+export async function writeUserInfo(gender, race, chatPrompts) {
   const userInfo = {
     gender,
     race,
+    prompt_A: chatPrompts[0],
+    prompt_B: chatPrompts[1],
+    prompt_C: chatPrompts[2],
+    prompt_D: chatPrompts[3],
   };
 
   try {

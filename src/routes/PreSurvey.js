@@ -15,7 +15,7 @@ function PreSurvey({ className }) {
         <div className="container d-flex">
           <div className="landing-container flex-grow-1">
             <div className="col-12 col-lg-8">
-              <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
+              <div className="row" style={{ ottom: '9px', marginTop: '200px' }}>
                 <div>
                   <h1 className="fw-bol">Before Experiment</h1>
                 </div>
@@ -39,10 +39,14 @@ function PreSurvey({ className }) {
                     The goal is to determine which training is most suitable users in
                     the role of a conversational agent.
                     <br />
-                    <b style={{ color: '#00693e' }}>
-                      Please conduct the post survey after engaging in comfortable conversations
-                      with Digital AI avatars.
-                    </b>
+
+                    Please conduct the
+                    {' '}
+                    <b>post survey</b>
+                    {' '}
+                    after engaging in comfortable conversations
+                    with Digital AI avatars.
+
                     <br />
                     <br />
                     <b style={{ color: '#00693e' }}>
@@ -59,15 +63,6 @@ function PreSurvey({ className }) {
                     type="button"
                   >
                     Next
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    to="/presurvey-prompt"
-                    className="shadow btn primary-accent fs-3 NextButton"
-                    type="button"
-                  >
-                    FOR TESTTSS
                   </Link>
                 </div>
               </div>

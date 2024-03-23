@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import {
   ArrowLeftCircleFill, ArrowRightCircleFill, BodyText,
   ChatLeftQuoteFill,
-  MicFill,
+  // MicFill,
 } from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
@@ -25,6 +25,8 @@ function Loading({ className }) {
   const {
     apiA, apiB, apiC, apiD,
   } = user.apiKey;
+  const { chatPrompts } = user;
+  // chatPromptsArr = [chatPrompts.A, chatPrompts.B, chatPrompts.C, chatPrompts.D];
 
   const dispatch = useDispatch();
 
@@ -50,17 +52,22 @@ function Loading({ className }) {
     }
   };
 
+  let chatPrompt;
   if (chatType === 'A') {
     createSceneIfNotStarted(apiA);
+    chatPrompt = chatPrompts.A;
     // setIsLoadingMade(true);
   } else if (chatType === 'B') {
     createSceneIfNotStarted(apiB);
+    chatPrompt = chatPrompts.B;
     // setIsLoadingMade(true);
   } else if (chatType === 'C') {
     createSceneIfNotStarted(apiC);
+    chatPrompt = chatPrompts.C;
     // setIsLoadingMade(true);
   } else if (chatType === 'D') {
     createSceneIfNotStarted(apiD);
+    chatPrompt = chatPrompts.D;
     // setIsLoadingMade(true);
   }
 
@@ -72,47 +79,24 @@ function Loading({ className }) {
   const [page, setPage] = useState(0);
   const pages = [
     <div>
-      <div className="row justify-content-center">
-        <div className="tutorial-icon mb-2">
+      {/* <div className="row justify-content-center"> */}
+      {/* <div className="tutorial-icon mb-2">
           <MicFill size={iconSize} />
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       <div className="row">
         <div className="d-flex align-items-center justify-content-between">
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
           </button>
-          <h4>
-            Before you begin,
-
-          </h4>
+          <h2 style={{ color: '#00693e' }}>
+            Prompt:
+            {' '}
+            {chatPrompt}
+          </h2>
           <button className="btn-unstyled" type="button" onClick={() => setPage(page + 1)}>
             <ArrowRightCircleFill size={32} />
           </button>
-        </div>
-        <div className="mt-0 mb-2">
-          {
-            // show different modal if mic is off or if mic perms are denied
-            requestedMediaPerms.mic === true && requestedMediaPerms.micDenied === false
-              ? (
-                <div>
-                  <p>
-                    Conversation works best in a quiet environment
-                    <br />
-                    with your microphone and camera on!
-                  </p>
-                </div>
-              )
-              : (
-                <div>
-                  <p>
-                    Conversation works best in a quiet environment
-                    <br />
-                    with your microphone and camera on!
-                  </p>
-                </div>
-              )
-          }
         </div>
       </div>
     </div>,
@@ -151,14 +135,41 @@ function Loading({ className }) {
             <ArrowLeftCircleFill size={32} />
           </button>
           <h4>
-            Have Fun!
+            {/* Have Fun! */}
+            Before you begin,
           </h4>
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
           </button>
         </div>
         <div className="mt-0 mb-2">
-          Feel free to talk about a prompt you select with AI avatars.
+          <div>
+            <div className="mt-0 mb-2">
+              {
+            // show different modal if mic is off or if mic perms are denied
+            requestedMediaPerms.mic === true && requestedMediaPerms.micDenied === false
+              ? (
+                <div>
+                  <p>
+                    Conversation works best in a quiet environment
+                    <br />
+                    with your microphone and camera on!
+                  </p>
+                </div>
+              )
+              : (
+                <div>
+                  <p>
+                    Conversation works best in a quiet environment
+                    <br />
+                    with your microphone and camera on!
+                  </p>
+                </div>
+              )
+          }
+            </div>
+          </div>
+          {/* Feel free to talk about a prompt you select with AI avatars. */}
         </div>
       </div>
     </div>,
