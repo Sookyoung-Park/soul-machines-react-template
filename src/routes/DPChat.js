@@ -14,7 +14,7 @@ import Header from '../components/Header';
 import {
   disconnectPage, disconnectRoute,
 } from '../config';
-import TextInput from '../components/TextInput';
+// import TextInput from '../components/TextInput';
 import STTFeedback from '../components/STTFeedback';
 
 function DPChat({
@@ -137,7 +137,7 @@ function DPChat({
           {showTranscript === true || micOn === false ? (
             <div className="row justify-content-center">
               <div className="col-md-8 col-lg-5 p-3">
-                <TextInput />
+                {/* <TextInput /> */}
               </div>
             </div>
           ) : null}
