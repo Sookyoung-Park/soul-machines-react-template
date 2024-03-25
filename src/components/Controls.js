@@ -3,20 +3,20 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-  ChatSquareTextFill,
-} from 'react-bootstrap-icons';
+// import {
+//   ChatSquareTextFill,
+// } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
 import {
-  setShowTranscript,
+  // setShowTranscript,
   disconnect,
-  setMicOn,
+  // setMicOn,
   setNextChatType,
 } from '../store/sm/index';
 import mic from '../img/mic.svg';
 import micFill from '../img/mic-fill.svg';
 import breakpoints from '../utils/breakpoints';
-import { primaryAccent } from '../globalStyle';
+// import { primaryAccent } from '../globalStyle';
 import FeedbackModal from './FeedbackModal';
 
 const volumeMeterHeight = 24;
@@ -27,18 +27,18 @@ const largeHeight = volumeMeterHeight * volumeMeterMultiplier;
 function Controls({
   className,
 }) {
-  const {
-    // micOn,
-    // cameraOn,
-    // isOutputMuted,
-    showTranscript,
-    transcript,
-    // requestedMediaPerms,
-    // highlightMic,
-    // highlightMute,
-    highlightChat,
-    // highlightCamera,
-  } = useSelector((state) => ({ ...state.sm }));
+  // const {
+  //   // micOn,
+  //   // cameraOn,
+  //   // isOutputMuted,
+  //   showTranscript,
+  //   transcript,
+  //   // requestedMediaPerms,
+  //   // highlightMic,
+  //   // highlightMute,
+  //   highlightChat,
+  //   // highlightCamera,
+  // } = useSelector((state) => ({ ...state.sm }));
 
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
@@ -52,10 +52,10 @@ function Controls({
 
   // bind transcrpt open and mute func to each other, so that
   // when we open the transcript we mute the mic
-  const toggleKeyboardInput = () => {
-    dispatch(setShowTranscript(!showTranscript));
-    dispatch(setMicOn({ micOn: showTranscript }));
-  };
+  // const toggleKeyboardInput = () => {
+  //   dispatch(setShowTranscript(!showTranscript));
+  //   // dispatch(setMicOn({ micOn: showTranscript }));
+  // };
 
   useEffect(() => {
     ReactTooltip.rebuild();
@@ -98,7 +98,7 @@ function Controls({
     };
   }, [dispatch, history]);
 
-  const iconSize = 24;
+  // const iconSize = 24;
 
   return (
     <div className={className}>
@@ -121,7 +121,7 @@ function Controls({
       <div className="d-flex">
         <div>
           {/* show transcript */}
-          <button
+          {/* <button
             type="button"
             className="control-icon"
             aria-label="Toggle Transcript"
@@ -134,7 +134,7 @@ function Controls({
               color={showTranscript ? primaryAccent : '#B3B3B3'}
               style={{ border: highlightChat ? 'red 2px solid' : '' }}
             />
-          </button>
+          </button> */}
         </div>
         {showExitButton && (
         <button
@@ -263,4 +263,5 @@ export default styled(Controls)`
     padding: 1.3rem;
     border-radius: 5px;
   }
+
 `;

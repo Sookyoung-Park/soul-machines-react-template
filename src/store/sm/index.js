@@ -128,7 +128,6 @@ const initialState = {
   // so if for some reason the camera is disabled, it will default to a square (1:1)
   cameraWidth: 1,
   cameraHeight: 1,
-  // showTranscript: false,
   // test
   showTranscript: true,
   // enable and disable features for each new session

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import
+React,
+{ useEffect, useState } from 'react';
 import {
   connect,
   useSelector,
@@ -15,8 +17,6 @@ function Transcript({ className, transcript }) {
   const [conversationLog, setConversationLog] = useState([]);
   const { chatType } = user.chatType;
 
-  console.log('firebase docID', docID);
-
   useEffect(() => {
     const handleConversation = (timestampTest, textTest, speaker) => {
       if (textTest) {
@@ -32,7 +32,6 @@ function Transcript({ className, transcript }) {
   }, [transcript]);
 
   useEffect(() => {
-    console.log('for debugging', docID);
     updateConversationLog(docID, conversationLog, chatType);
   }, [conversationLog, docID]);
 
@@ -55,6 +54,7 @@ function Transcript({ className, transcript }) {
   const transcriptDisplay = transcript.map(({
     source, text, card, timestamp,
   }, index) => {
+    console.log('for eslint', source);
     // we don't want to wrap cards in a bubble, return as is w/ a key added
     if (card) {
       return (
@@ -71,7 +71,9 @@ function Transcript({ className, transcript }) {
 
     return (
       <div key={timestamp}>
-        <div className={`transcript-entry ${source === 'user' ? 'transcript-entry-user' : 'transcript-entry-persona'}`}>
+        {/* <div className={`transcript-entry ${source === 'user'
+          ? 'transcript-entry-user' : 'transcript-entry-persona'}`}
+        >
           <div>
             <small>
               {source === 'user' ? 'You' : 'Digital Influencer'}
@@ -80,7 +82,7 @@ function Transcript({ className, transcript }) {
           <div className="transcript-entry-content">
             {text}
           </div>
-        </div>
+        </div> */}
       </div>
     );
   });
@@ -88,13 +90,14 @@ function Transcript({ className, transcript }) {
   return (
     <div className={className}>
       <div className="transcript-list-group">
-        {transcriptDisplay.length > 0
+        {transcriptDisplay}
+        {/* {transcriptDisplay.length > 0
           ? transcriptDisplay
           : (
             <li className="list-group-item">
               No items to show, say something!
             </li>
-          )}
+          )} */}
         {/* height added because safari doesn't display zero height elems,
         so the scroll behavior doesn't work */}
         <div ref={(el) => { scrollRef = el; }} style={{ clear: 'both', height: '1px' }} />
