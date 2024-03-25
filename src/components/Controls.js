@@ -3,20 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import {
-//   ChatSquareTextFill,
-// } from 'react-bootstrap-icons';
 import ReactTooltip from 'react-tooltip';
-import {
-  // setShowTranscript,
-  disconnect,
-  // setMicOn,
-  setNextChatType,
-} from '../store/sm/index';
+import { disconnect, setNextChatType } from '../store/sm/index';
 import mic from '../img/mic.svg';
 import micFill from '../img/mic-fill.svg';
 import breakpoints from '../utils/breakpoints';
-// import { primaryAccent } from '../globalStyle';
 import FeedbackModal from './FeedbackModal';
 
 const volumeMeterHeight = 24;
@@ -27,19 +18,6 @@ const largeHeight = volumeMeterHeight * volumeMeterMultiplier;
 function Controls({
   className,
 }) {
-  // const {
-  //   // micOn,
-  //   // cameraOn,
-  //   // isOutputMuted,
-  //   showTranscript,
-  //   transcript,
-  //   // requestedMediaPerms,
-  //   // highlightMic,
-  //   // highlightMute,
-  //   highlightChat,
-  //   // highlightCamera,
-  // } = useSelector((state) => ({ ...state.sm }));
-
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
 
@@ -47,22 +25,14 @@ function Controls({
   const [showExitButton, setShowExitButton] = useState(false);
 
   const history = useHistory();
-
   const dispatch = useDispatch();
-
-  // bind transcrpt open and mute func to each other, so that
-  // when we open the transcript we mute the mic
-  // const toggleKeyboardInput = () => {
-  //   dispatch(setShowTranscript(!showTranscript));
-  //   // dispatch(setMicOn({ micOn: showTranscript }));
-  // };
 
   useEffect(() => {
     ReactTooltip.rebuild();
   });
 
   // 2min after timeout => show ExitSession Button
-  // 2 min = 120000
+  // 1Min 40 sec = 100000
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
@@ -73,19 +43,16 @@ function Controls({
     };
   }, []);
 
-  // test
   const handleChatTypeChange = () => {
     dispatch(setNextChatType());
-    console.log('new chatType', chatType);
   };
 
   // redirect to feedback page after 3min 30sec
-  // 3min30sec = 210000
+  // 3min30sec = 180000
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
       handleChatTypeChange();
-      // next-conversation
       if (chatType === 'E') {
         history.push('/ps1');
       } else {
@@ -97,8 +64,6 @@ function Controls({
       clearTimeout(timeoutId);
     };
   }, [dispatch, history]);
-
-  // const iconSize = 24;
 
   return (
     <div className={className}>
@@ -119,31 +84,14 @@ function Controls({
         </div>
       ) : null}
       <div className="d-flex">
-        <div>
-          {/* show transcript */}
-          {/* <button
-            type="button"
-            className="control-icon"
-            aria-label="Toggle Transcript"
-            data-tip="Toggle Transcript"
-            onClick={toggleKeyboardInput}
-            disabled={transcript.length <= 0}
-          >
-            <ChatSquareTextFill
-              size={iconSize}
-              color={showTranscript ? primaryAccent : '#B3B3B3'}
-              style={{ border: highlightChat ? 'red 2px solid' : '' }}
-            />
-          </button> */}
-        </div>
+        <div />
         {showExitButton && (
         <button
           type="button"
-          className="btn btn-dark connected-button"
+          className="btn btn-light connected-button"
           onClick={() => {
             dispatch(disconnect());
             handleChatTypeChange();
-            // history.push('/next-conversation');
             history.push('/landingafter');
           }}
         >
@@ -263,5 +211,6 @@ export default styled(Controls)`
     padding: 1.3rem;
     border-radius: 5px;
   }
+
 
 `;

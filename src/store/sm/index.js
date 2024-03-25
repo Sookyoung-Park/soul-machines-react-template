@@ -342,7 +342,7 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       case ('recognizeResults'): {
         const output = message.body.results[0];
         // undefined + session이 끝나면 출력이 된다.
-        console.log('recongizeResult : ', output);
+        // console.log('recongizeResult : ', output);
         // sometimes we get an empty message, catch and log
         if (!output) {
           console.warn('undefined output!', message.body);
@@ -578,12 +578,6 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       }
 
       case ('conversationResult'): {
-        const timestamp = new Date().toISOString();
-        const test1 = message.body.input.text;
-        const test2 = message.body.output.text;
-        console.log(`[${timestamp}] input text: ${test1}`);
-        console.log(`[${timestamp}]output text: ${test2}`);
-
         break;
       }
 
@@ -845,7 +839,7 @@ const smSlice = createSlice({
     // chatType State
     setChatTypeState: (state, { payload }) => {
       // console.log('Reducer received setUserChatTypeState with payload:', payload);
-      console.log('Reducer received setUserChatTypeState with payload');
+      // console.log('Reducer received setUserChatTypeState with payload');
       const newState = {
         ...state,
         user: {
@@ -917,7 +911,7 @@ const smSlice = createSlice({
     },
     // set apiA B C D
     setApiKeysState: (state, { payload }) => {
-      console.log('Reducer received setUserInfoState with payload:', payload);
+      // console.log('Reducer received setUserInfoState with payload:', payload);
 
       const newState = {
         ...state,
@@ -961,7 +955,7 @@ const smSlice = createSlice({
       const timestamp = lastTranscriptItem?.timestamp || new Date(startedAt);
       const timeDiff = new Date(Date.now()) - Date.parse(timestamp);
       // if over 4 minutes old (min timeout thresh. is 5), presume the user timed out
-      const presumeTimeout = timeDiff > 240000;
+      const presumeTimeout = timeDiff > 300000;
       return {
         // completely reset SM state on disconnect, except for errors
         ...initialState,

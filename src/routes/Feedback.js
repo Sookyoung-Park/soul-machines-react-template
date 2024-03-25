@@ -3,35 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  Star, StarFill, XCircle,
-} from 'react-bootstrap-icons';
+import { Star, StarFill, XCircle } from 'react-bootstrap-icons';
 import { headerHeight, landingBackgroundImage } from '../config';
-// import { updateAdjectives } from '../store/firestore_functions';
-// import { setChatTypeState } from '../store/sm';
 
 function Feedback({ className }) {
-  const { presumeTimeout, user } = useSelector(({ sm }) => ({ ...sm }));
-  const { chatType } = user.chatType;
-
-  console.log(chatType, ': saved ChatType in Feedback.js');
-
-  // const [userChatType, setUserChatType] = useState(''); // 'A B C D'
-
-  // const dispatch = useDispatch();
-
-  // const handleChatTypeChange = () => {
-  //   if (chatType === 'A') {
-  //     setUserChatType('B');
-  //     dispatch(setChatTypeState('B'));
-  //   } else if (chatType === 'B') {
-  //     setUserChatType('C');
-  //     dispatch(setChatTypeState('C'));
-  //   } else if (chatType === 'C') {
-  //     setUserChatType('D');
-  //     dispatch(setChatTypeState('D'));
-  //   }
-  // };
+  const { presumeTimeout } = useSelector(({ sm }) => ({ ...sm }));
 
   const nStars = 5;
   const [rating, setRating] = useState(-1);
@@ -86,8 +62,6 @@ function Feedback({ className }) {
       if (tagIsSelected === false) setSelectedTags([...selectedTags, t]);
       else setSelectedTags([...selectedTags.filter((v) => v !== t)]);
     }
-    // console.log('selectedTags', selectedTags);
-    // console.log('setSelectedTags', setSelectedTags);
   };
 
   const [alertModal, setAlertModal] = useState(null);
@@ -227,28 +201,6 @@ function Feedback({ className }) {
                       </form>
                     </div>
                   </div>
-                  {/* <div className="row mt-3">
-                    <div className="justify-content-end d-flex">
-                      <Link to="/" type="button"
-                      className="btn btn-outline-dark me-2">No thanks</Link>
-                      <button
-                        type="button"
-                        className="btn btn-dark"
-                        disabled={!ratingSelected}
-                        onClick={() => setSubmitted(true)}
-                      >
-                        Submit
-                      </button>
-                      <Link
-                        to="/loading"
-                        className="shadow btn primary-accent fs-3 w-100"
-                        type="button"
-                        onClick={() => handleChatTypeChange()}
-                      >
-                        Next Influencer
-                      </Link>
-                    </div>
-                  </div> */}
                 </div>
               )
           }

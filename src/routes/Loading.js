@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import {
   ArrowLeftCircleFill, ArrowRightCircleFill, BodyText,
   ChatLeftQuoteFill,
-  // MicFill,
 } from 'react-bootstrap-icons';
 import { createScene } from '../store/sm';
 import { headerHeight, landingBackgroundColor, landingBackgroundImage } from '../config';
@@ -55,19 +54,15 @@ function Loading({ className }) {
   if (chatType === 'A') {
     createSceneIfNotStarted(apiA);
     chatPrompt = chatPrompts.A;
-    // setIsLoadingMade(true);
   } else if (chatType === 'B') {
     createSceneIfNotStarted(apiB);
     chatPrompt = chatPrompts.B;
-    // setIsLoadingMade(true);
   } else if (chatType === 'C') {
     createSceneIfNotStarted(apiC);
     chatPrompt = chatPrompts.C;
-    // setIsLoadingMade(true);
   } else if (chatType === 'D') {
     createSceneIfNotStarted(apiD);
     chatPrompt = chatPrompts.D;
-    // setIsLoadingMade(true);
   }
 
   useEffect(() => {
@@ -78,11 +73,6 @@ function Loading({ className }) {
   const [page, setPage] = useState(0);
   const pages = [
     <div>
-      {/* <div className="row justify-content-center"> */}
-      {/* <div className="tutorial-icon mb-2">
-          <MicFill size={iconSize} />
-        </div> */}
-      {/* </div> */}
       <div className="row">
         <div className="d-flex align-items-center justify-content-between">
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
@@ -134,7 +124,6 @@ function Loading({ className }) {
             <ArrowLeftCircleFill size={32} />
           </button>
           <h4>
-            {/* Have Fun! */}
             Before you begin,
           </h4>
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
@@ -168,7 +157,6 @@ function Loading({ className }) {
           }
             </div>
           </div>
-          {/* Feel free to talk about a prompt you select with AI avatars. */}
         </div>
       </div>
     </div>,

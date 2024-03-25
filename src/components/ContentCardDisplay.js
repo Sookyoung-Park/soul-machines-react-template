@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
-import {
-  connect,
-  // useSelector
-} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { setActiveCards, animateCamera } from '../store/sm/index';
 import Transcript from './ContentCards/Transcript';
 import ContentCardSwitch from './ContentCardSwitch';
 import breakpoints from '../utils/breakpoints';
-// test
-// import { updateConversationLog } from '../store/firestore_functions';
 
 function ContentCardDisplay({
   activeCards,
@@ -19,9 +14,6 @@ function ContentCardDisplay({
   connected,
   inTranscript,
 }) {
-  // const { user } = useSelector(({ sm }) => ({ ...sm }));
-  // const { docID } = user.firebase;
-
   if (!activeCards) return null;
   const CardDisplay = activeCards.map((c, index) => (
     <div className="mb-2" key={JSON.stringify(c)}>

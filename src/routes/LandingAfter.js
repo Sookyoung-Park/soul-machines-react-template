@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Color from 'color';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CameraVideoFill, MicFill } from 'react-bootstrap-icons';
+import { MicFill } from 'react-bootstrap-icons';
 import breakpoints from '../utils/breakpoints';
 import { landingBackgroundColor } from '../config';
 import {
@@ -22,14 +22,13 @@ function LandingAfter({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
   const { gender, race } = user.info;
-  const { mic, camera } = useSelector(({ sm }) => sm.requestedMediaPerms);
+  const { mic } = useSelector(({ sm }) => sm.requestedMediaPerms);
   const { docID } = user.firebase;
   const { chatPrompts } = user;
   const chatPromptsArr = [chatPrompts.A, chatPrompts.B, chatPrompts.C, chatPrompts.D];
 
   const dispatch = useDispatch();
 
-  // api key condition
   const API_EA_MALE = process.env.REACT_APP_API_KEY_EA_MALE;
   const API_EA_FEMALE = process.env.REACT_APP_API_KEY_EA_FEMALE;
   const API_AF_MALE = process.env.REACT_APP_API_KEY_AF_MALE;
@@ -241,7 +240,7 @@ function LandingAfter({ className }) {
   }
 
   const [userChatType, setChatType] = useState(''); // 'A B C D'
-  // for eslint
+
   console.log(userChatType, 'for eslint');
 
   const handleChatTypeChange = () => {
@@ -320,7 +319,7 @@ function LandingAfter({ className }) {
                         onChange={() => dispatch(setRequestedMediaPerms({ mic: !mic }))}
                         checked={mic}
                       />
-                      <div className="d-block ms-2" style={{ marginLeft: '12px' }}>
+                      <div className="d-block ms-2" style={{ marginLeft: '12px', color: 'red' }}>
                         Use your microphone so that AI avatars can hear you.
                       </div>
                     </label>
@@ -328,37 +327,14 @@ function LandingAfter({ className }) {
                 </div>
               </div>
               <div className="row" style={{ marginBottom: '52px' }}>
-                <div>
-                  <div className="form-check form-switch">
-                    <label
-                      className="form-check-label d-flex align-items-center"
-                      htmlFor="cameraPermSwitch"
-                    >
-                      <input
-                        className={`shadow form-check-input video-switch switch ${
-                          camera ? 'status-checked' : 'status-unchecked'
-                        }`}
-                        type="checkbox"
-                        role="switch"
-                        id="micPermSwitch"
-                        onChange={() => dispatch(setRequestedMediaPerms({ camera: !camera }))}
-                        checked={camera}
-                      />
-                      <div className="d-block ms-2">
-                        Use your camera so that you can chat face-to-face.
-                      </div>
-                    </label>
-                  </div>
-                </div>
+                <div />
               </div>
               <div className="row" style={{ marginBottom: '48px' }}>
                 <div>
                   <div className="d-flex fs-4">
-                    <CameraVideoFill size={26} />
-                    <span className="ps-1">+</span>
                     <MicFill size={26} />
                     <div className="text-left fst-italic-bold" style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
-                      <strong>You must enable your camera and mic to start a conversation.</strong>
+                      <strong style={{ color: 'red' }}>You must enable your microphone to start a conversation.</strong>
                     </div>
                   </div>
                 </div>
@@ -375,17 +351,6 @@ function LandingAfter({ className }) {
               >
                 {chatType === 'E' ? 'Start Survey' : `Chat with AI avatar ${chatType}`}
               </Link>
-              {/* <Link
-                to="/ps1"
-                className="shadow btn primary-accent fs-3 w-100"
-                type="button"
-                onClick={() => {
-                  handleApiKeysUpdate();
-                  handleChatTypeChange();
-                }}
-              >
-                TEST TO AA
-              </Link> */}
               <div className="col" />
             </div>
           </div>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
-import Header from '../components/Header';
 import FeedbackModal from '../components/FeedbackModal';
 
 function Feedback({ className }) {
@@ -28,16 +27,6 @@ function Feedback({ className }) {
             Please feel free to start again.
             Or give us some feedback to help us improve this exciting new platform.
           </p>
-          {/* <div className="mt-2">
-            <Link className="btn primary-accent me-2" to="/loading">Start Again</Link>
-            <button
-              className="btn btn-outline-dark"
-              onClick={() => { setAlertModal(null); }}
-              type="button"
-            >
-              Provide Feedback
-            </button>
-          </div> */}
         </div>,
       );
     }
@@ -56,7 +45,7 @@ function Feedback({ className }) {
           )
           : null
       }
-      <Header />
+      {/* <Header /> */}
       <div className="container">
         <FeedbackModal onClose={() => history.push('/loading')} closeText="Chat Again" />
       </div>

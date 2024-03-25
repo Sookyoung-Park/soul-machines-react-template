@@ -14,7 +14,6 @@ import Header from '../components/Header';
 import {
   disconnectPage, disconnectRoute,
 } from '../config';
-// import TextInput from '../components/TextInput';
 import STTFeedback from '../components/STTFeedback';
 
 function DPChat({
@@ -92,21 +91,6 @@ function DPChat({
         {/* top row */}
         <div className="row">
           <Header />
-          {/* {
-            // consumers of the template can uncomment this block if they want a camera preview
-            // will need to add cameraOn to the values they get from the state
-              cameraOn
-                ? (
-                  <div className="row d-flex justify-content-end">
-                    <div className="col-auto">
-                      <div className="camera-preview">
-                        <CameraPreview />
-                      </div>
-                    </div>
-                  </div>
-                )
-                : <div />
-            } */}
         </div>
         {/* middle row */}
         <div
@@ -136,9 +120,7 @@ function DPChat({
           </div>
           {showTranscript === true || micOn === false ? (
             <div className="row justify-content-center">
-              <div className="col-md-8 col-lg-5 p-3">
-                {/* <TextInput /> */}
-              </div>
+              <div className="col-md-8 col-lg-5 p-3" />
             </div>
           ) : null}
         </div>

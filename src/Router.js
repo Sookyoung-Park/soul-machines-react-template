@@ -11,14 +11,13 @@ import {
 import { useSelector } from 'react-redux';
 import { XCircle } from 'react-bootstrap-icons';
 import DPChat from './routes/DPChat';
-import DPChat2 from './routes/DPChat2';
+// import DPChat2 from './routes/DPChat2';
 import LandingAfter from './routes/LandingAfter';
 import Loading from './routes/Loading';
 import Feedback from './routes/FeedbackRoute';
-import ContentCardTest from './routes/ContentCardTest';
+// import ContentCardTest from './routes/ContentCardTest';
 import PreSurvey from './routes/PreSurvey';
 import PreSurvey1 from './routes/PreSurvey1';
-// import NextConversation from './routes/NextConversation';
 import PostSurvey1 from './routes/PostSurvey1';
 import PostSurvey2 from './routes/PostSurvey2';
 import PostSurvey3 from './routes/PostSurvey3';
@@ -84,15 +83,15 @@ function App() {
           </div>
         ) : null}
       <Switch>
-        <Route path="/content-card-test">
+        {/* <Route path="/content-card-test">
           <ContentCardTest />
-        </Route>
+        </Route> */}
         <Route path="/loading">
           <Loading />
         </Route>
-        <Route path="/chat">
+        {/* <Route path="/chat">
           <DPChat2 />
-        </Route>
+        </Route> */}
         <Route path="/video">
           <DPChat />
         </Route>
@@ -108,9 +107,6 @@ function App() {
         <Route path="/ps3">
           <PostSurvey3 />
         </Route>
-        {/* <Route path="/next-conversation">
-          <NextConversation />
-        </Route> */}
         <Route path="/presurvey-prompt">
           <UsageCaseSelection />
         </Route>
@@ -120,7 +116,6 @@ function App() {
         <Route path="/landingafter">
           <LandingAfter />
         </Route>
-        {/* / goes at the bottom */}
         <Route path="/">
           <PreSurvey />
         </Route>

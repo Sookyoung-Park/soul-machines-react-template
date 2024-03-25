@@ -41,7 +41,7 @@ function FeedbackModal({ className }) {
 
   const dispatch = useDispatch();
 
-  console.log(surveyProgress, ': saved sP in Feedback.js');
+  // console.log(surveyProgress, ': saved sP in Feedback.js');
 
   const [imgTitles, setImgTitles] = useState([]);
 

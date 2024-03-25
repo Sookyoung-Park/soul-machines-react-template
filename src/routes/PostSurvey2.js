@@ -47,7 +47,6 @@ const survey = new Model(json);
 function PostSurvey2({ className }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { docID } = user.firebase;
-  const { gender, race } = user.info;
 
   const [imgTitles, setImgTitles] = useState([]);
 
@@ -62,9 +61,7 @@ function PostSurvey2({ className }) {
     };
 
     fetchData(); // 데이터 가져오기 함수 호출
-  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
-
-  // console.log('xprm Tpyes', imgTitles); // 데이터 확인
+  }, []);
 
   const getImagePath = (imgTitle) => {
     switch (imgTitle) {
@@ -112,10 +109,6 @@ function PostSurvey2({ className }) {
     console.log(JSON.stringify(sender.data, null, 3));
   });
 
-  const infoString = `${race}_${gender}`;
-  console.log('info string postsurvey: ', infoString);
-  console.log('docID postsurvey', docID);
-
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   console.log(surveyCompleted, 'for eslint');
 
@@ -123,7 +116,7 @@ function PostSurvey2({ className }) {
 
   const handleNextButtonClick = () => {
     const surveyData = survey.data;
-    console.log('Survey data:', surveyData);
+    // console.log('Survey data:', surveyData);
 
     // 'Powerful CPU' 항목의 인덱스를 찾습니다.
     const indexOfA = surveyData['rank-intelligent'].indexOf('DP A');
@@ -139,19 +132,10 @@ function PostSurvey2({ className }) {
     const dpBRank = indexOfB !== -1 ? indexOfB + 1 : null;
     const dpCRank = indexOfC !== -1 ? indexOfC + 1 : null;
     const dpDRank = indexOfD !== -1 ? indexOfD + 1 : null;
-    // console.log('DP A data:', dpARank);
-    // console.log('DP B data:', dpBRank);
-    // console.log('DP C data:', dpCRank);
-    // console.log('DP D data:', dpDRank);
+
     updateIntelligenceRank(docID, dpARank, dpBRank, dpCRank, dpDRank);
     setSurveyCompleted(true);
   };
-
-  // // on complete and console print
-  // survey.onComplete.add((sender, options) => {
-  //   console.log(options, 'options');
-  //   console.log("User's rankings:", sender.data.smartphoneFeatures);
-  // });
 
   return (
     <div className={className}>
@@ -162,22 +146,18 @@ function PostSurvey2({ className }) {
               <div className="row" style={{ marginBottom: '9px', marginTop: '200px' }}>
                 <div className="row" style={{ marginBottom: '9px' }}>
                   <div className="d-flex flex-wrap">
-                    {/* imgA */}
                     <div className="column" style={{ marginRight: '20px', marginBottom: '9px' }}>
                       <img src={getImagePath(imgTitles[0])} alt={imgTitles[0]} style={{ width: '260px', height: '220px' }} />
                       <h4>DP A</h4>
                     </div>
-                    {/* imgB */}
                     <div className="column" style={{ marginRight: '20px', marginBottom: '9px' }}>
                       <img src={getImagePath(imgTitles[1])} alt={imgTitles[1]} style={{ width: '260px', height: '220px' }} />
                       <h4>DP B</h4>
                     </div>
-                    {/* imgC */}
                     <div className="column" style={{ marginRight: '20px', marginBottom: '9px' }}>
                       <img src={getImagePath(imgTitles[2])} alt={imgTitles[2]} style={{ width: '260px', height: '220px' }} />
                       <h4>DP C</h4>
                     </div>
-                    {/* imgD */}
                     <div className="column" style={{ marginRight: '20px', marginBottom: '9px' }}>
                       <img src={getImagePath(imgTitles[3])} alt={imgTitles[3]} style={{ width: '260px', height: '220px' }} />
                       <h4>DP D</h4>
