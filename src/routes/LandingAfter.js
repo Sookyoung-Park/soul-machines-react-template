@@ -284,14 +284,14 @@ function LandingAfter({ className }) {
                     <li>
                       You can chat
                       {' '}
-                      <strong>maximum 3 minutes</strong>
+                      <strong>maximum 4 minutes</strong>
                       {' '}
                       for each AI avatar.
                     </li>
                     <li>
                       You can exit the conversation
                       {' '}
-                      <strong>once 1 minutes 40 seconds have passed</strong>
+                      <strong>once 2min 30seconds have passed</strong>
                       , if you want.
                     </li>
                     <li>

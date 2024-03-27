@@ -50,12 +50,12 @@ function Controls({
   });
 
   // 2min after timeout => show ExitSession Button
-  // 1Min 40 sec = 100000
+  // 2Min 30 sec = 150000
   // test
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 1000);
+    }, 150000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -67,7 +67,7 @@ function Controls({
   };
 
   // redirect to feedback page after 3min 30sec
-  // 3min30sec = 180000
+  // 4min
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(disconnect());
@@ -77,7 +77,7 @@ function Controls({
       } else {
         history.push('/landingafter');
       }
-    }, 180000);
+    }, 240000);
 
     return () => {
       clearTimeout(timeoutId);
