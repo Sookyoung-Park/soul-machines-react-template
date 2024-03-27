@@ -55,7 +55,7 @@ function Controls({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 100000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -104,7 +104,11 @@ function Controls({
       ) : null}
       <div className="d-flex">
         <div>
-          <h5 style={{ marginTop: '45px', marginRight: '24px', color: '#ffffff' }}>{prompt}</h5>
+          <h5 style={{ marginTop: '45px', marginRight: '24px', color: '#ffffff' }}>
+            Prompt:
+            {' '}
+            {prompt}
+          </h5>
         </div>
         {showExitButton && (
         <button

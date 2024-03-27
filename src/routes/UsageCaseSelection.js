@@ -9,9 +9,14 @@ import { setChatPromptsState } from '../store/sm';
 
 function UsageCaseSelection({ className }) {
   const [isSelectionMade, setIsSelectionMade] = useState(false);
-  // https://www.indeed.com/career-advice/career-development/small-talk-topics
-  const tagItems = ['Food and Cooking', 'Pet', 'Hometown', 'Hobbies and Interests', 'Travle and Vacation', 'Family and Friends', 'Study and Careers', 'Current Events', 'The weekend',
-    'Social Media', 'Fashion and Beauty'];
+  // const tagItems = ['Food and Cooking', 'Pet', 'Hometown', 'Hobbies and Interests',
+  // 'Travle and Vacation',
+  //  'Family and Friends',
+  // 'Study and Careers', 'Current Events', 'The weekend',
+  //   'Social Media', 'Fashion and Beauty'];
+  const tagItems = ['Hobbies', 'Free Time', 'Sleep', 'Hometown', 'Vacations', 'Music', 'First Dates', 'Work',
+    'Cooing & Food', 'Motivation', 'Beauty', 'Crime', 'Family and Friends',
+    'Love', 'Goals', 'Dreams', 'Restaurants', 'Money', 'Shopping', 'Pets', 'Books', 'Sports', 'Life', 'Movies', 'Problems'];
 
   const [selectedTags, setSelectedTags] = useState([]);
 

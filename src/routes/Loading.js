@@ -174,7 +174,6 @@ function Loading({ className }) {
 
   return (
     <div className={className}>
-      {/* <Header /> */}
       <div className="container">
         <div className="row justify-content-center align-items-center">
           <div className="col-11 col-md-6 text-center mobile">
@@ -207,7 +206,7 @@ function Loading({ className }) {
                   <div>
                     <div className="progress mt-1">
                       <div
-                        className="progress-bar"
+                        className="progress-bar bg-success"
                         role="progressbar"
                         style={{ width: `${percentageLoaded}%` }}
                         aria-label={`${stateName} (${currentStep} out of ${totalSteps - 1})`}
