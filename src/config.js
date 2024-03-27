@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import noLogo from './img/no-logo.png';
-// import placeholder from './img/placeholder-headshot.png';
 import NoahHeadshot from './img/noah-headshot.png';
 
 // header will not take up vertical height when transparent, so you need to be mindful of overlap
