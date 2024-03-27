@@ -33,10 +33,11 @@ function Controls({
 
   // 2min after timeout => show ExitSession Button
   // 1Min 40 sec = 100000
+  // test
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 100);
+    }, 100000);
 
     return () => {
       clearTimeout(timeoutId);
