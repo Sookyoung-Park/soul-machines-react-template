@@ -49,7 +49,7 @@ function PreSurvey({ className }) {
 
                     <br />
                     <br />
-                    <b style={{ color: '#00693e' }}>
+                    <b style={{ color: '#f75834' }}>
                       Please use Chrome!
                     </b>
                   </p>

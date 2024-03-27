@@ -20,6 +20,24 @@ function Controls({
 }) {
   const { user } = useSelector(({ sm }) => ({ ...sm }));
   const { chatType } = user.chatType;
+  const { chatPrompts } = user;
+  console.log(chatPrompts, chatType);
+
+  let prompt;
+  if (chatType === 'A') {
+    prompt = chatPrompts.A;
+  }
+  if (chatType === 'B') {
+    prompt = chatPrompts.B;
+  }
+  if (chatType === 'C') {
+    prompt = chatPrompts.C;
+  }
+  if (chatType === 'D') {
+    prompt = chatPrompts.D;
+  }
+
+  console.log('prompt:', prompt);
 
   const [showFeedback, setShowFeedback] = useState(false);
   const [showExitButton, setShowExitButton] = useState(false);
@@ -37,7 +55,7 @@ function Controls({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 100000);
+    }, 100);
 
     return () => {
       clearTimeout(timeoutId);
@@ -85,11 +103,14 @@ function Controls({
         </div>
       ) : null}
       <div className="d-flex">
-        <div />
+        <div>
+          <h5 style={{ marginTop: '45px', marginRight: '24px', color: '#ffffff' }}>{prompt}</h5>
+        </div>
         {showExitButton && (
         <button
           type="button"
           className="btn btn-light connected-button"
+          style={{ marginTop: '36px' }}
           onClick={() => {
             dispatch(disconnect());
             handleChatTypeChange();
