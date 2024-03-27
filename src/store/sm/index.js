@@ -228,7 +228,9 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
   }
   // request permissions from user and create instance of Scene and ask for webcam/mic permissions
   const { requestedMediaPerms } = thunk.getState().sm;
-  const { mic, camera } = requestedMediaPerms;
+  // test here
+  // const { mic, camera } = requestedMediaPerms;
+  const { mic } = requestedMediaPerms;
 
   // pull out logging config from environment variables
   // we might want to set different values for dev and prod
@@ -250,7 +252,8 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
       // requested permissions
       requestedMediaDevices: {
         microphone: mic,
-        camera,
+        // test here
+        // camera,
       },
       // required permissions. we can run in a typing only mode, so none is fine
       requiredMediaDevices: {
@@ -296,7 +299,8 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
   }
 
   thunk.dispatch(actions.setRequestedMediaPerms({
-    camera,
+    // test here
+    // camera,
     mic,
     cameraDenied,
     micDenied,
@@ -305,7 +309,8 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
   // reflect mic and camera status in redux store
   thunk.dispatch(actions.setMediaDevices({
     micOn: micDenied ? false : mic,
-    cameraOn: cameraDenied ? false : camera,
+    // test here
+    // cameraOn: cameraDenied ? false : camera,
   }));
 
   /* BIND HANDLERS */

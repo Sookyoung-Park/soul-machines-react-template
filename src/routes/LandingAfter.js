@@ -319,7 +319,7 @@ function LandingAfter({ className }) {
                         onChange={() => dispatch(setRequestedMediaPerms({ mic: !mic }))}
                         checked={mic}
                       />
-                      <div className="d-block ms-2" style={{ marginLeft: '12px', color: 'red' }}>
+                      <div className="d-block ms-2" style={{ marginLeft: '12px', color: '#f75834' }}>
                         Use your microphone so that AI avatars can hear you.
                       </div>
                     </label>
@@ -334,7 +334,7 @@ function LandingAfter({ className }) {
                   <div className="d-flex fs-4">
                     <MicFill size={26} />
                     <div className="text-left fst-italic-bold" style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
-                      <strong style={{ color: 'red' }}>You must enable your microphone to start a conversation.</strong>
+                      <strong style={{ color: '#f75834' }}>You must enable your microphone to start a conversation.</strong>
                     </div>
                   </div>
                 </div>

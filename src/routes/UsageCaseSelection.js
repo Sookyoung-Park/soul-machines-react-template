@@ -124,12 +124,8 @@ export default styled(UsageCaseSelection)`
     text-overflow: ellipsis;
 
     &.rating-tag-selected {
-      background: #212529;
+      background: #00693e;
       color: #FFF;
-      &:hover {
-        background: #0e1012;
-        color: #FFF;
-      }
     }
     &:hover {
       background: #DCDCDC;

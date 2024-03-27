@@ -41,8 +41,6 @@ function FeedbackModal({ className }) {
 
   const dispatch = useDispatch();
 
-  // console.log(surveyProgress, ': saved sP in Feedback.js');
-
   const [imgTitles, setImgTitles] = useState([]);
 
   const getImagePath = (imgTitle) => {
@@ -340,7 +338,7 @@ function FeedbackModal({ className }) {
   });
 
   // allow for custom input
-  const [customField, setCustomField] = useState('');
+  // const [customField, setCustomField] = useState('');
   const tagItems = ['Predictable', 'Kind', 'Professional', 'Intelligent', 'Friendly', 'Dependant', 'Honest', 'Warm', 'Satisfying'];
 
   const handleSelectTag = (t) => {
@@ -378,12 +376,12 @@ function FeedbackModal({ className }) {
           <div>
             <div className="row" />
             <div className="row">
-              <h2 className="text-center">
+              <h3 className="text-center">
                 Can you rate your experience with Avatar
                 {' '}
                 {String(surveyProgress)}
                 ?
-              </h2>
+              </h3>
             </div>
             <div className="row" />
             <hr />
@@ -511,8 +509,7 @@ function FeedbackModal({ className }) {
               </div>
             </div>
             <div className="row">
-              <h4 style={{ marginTop: '32px' }}>Can you tell us more?</h4>
-              {/* field for custom tags, limited to 20 chars */}
+              {/* <h4 style={{ marginTop: '32px' }}>Can you tell us more?</h4>
               <div
                 className="d-flex custom-items"
                 style={{ width: '100%', height: '100px', marginTop: '10px' }}
@@ -526,18 +523,19 @@ function FeedbackModal({ className }) {
                   }}
                   value={customField}
                 />
-              </div>
+              </div> */}
               <div className="row mt-3">
                 <div className="justify-content-end d-flex">
                   <button
                     type="button"
-                    className="btn btn-dark"
+                    // className="btn btn-dark"
+                    className="shadow btn primary-accent fs-3"
                     disabled={!ratingHonestSincereSelected || !ratingPredictReactionSelected
                       || !ratingSympathizeFeelingSelected || !ratingUnderstandEmotionSelected
                       || !RatingServiceAgainSelected || !ratingGoodServiceSelected}
                     onClick={() => {
-                      setSelectedTags([...selectedTags, customField]);
-                      // setSubmitted(true);
+                      // setSelectedTags([...selectedTags, customField]);
+                      setSelectedTags([...selectedTags]);
                       const adj = [...selectedTags];
                       updateAdjectives(docID, surveyProgress, adj);
                       handleSubmit();
@@ -567,18 +565,18 @@ export default styled(FeedbackModal)`
     margin: 0;
   }
   .star {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.7rem;
+    height: 0.7rem;
     margin: .2rem;
 
     @media (min-width: ${breakpoints.sm}px) {
-      width: 2.6rem;
-      height: 2.6rem;
+      width: 2.2rem;
+      height: 2.2rem;
       margin: 0.2rem;
     }
     @media (min-width: ${breakpoints.md}px) {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 3rem;
+      height: 3rem;
       margin: 0.2rem;
     }
   }
@@ -588,7 +586,7 @@ export default styled(FeedbackModal)`
     margin-bottom: 0.6rem;
     padding: .5rem;
 
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 
     background: #FFF;
     border: 1px solid gray;
@@ -601,12 +599,8 @@ export default styled(FeedbackModal)`
     text-overflow: ellipsis;
 
     &.rating-tag-selected {
-      background: #212529;
+      background: #00693e;
       color: #FFF;
-      &:hover {
-        background: #0e1012;
-        color: #FFF;
-      }
     }
     &:hover {
       background: #DCDCDC;

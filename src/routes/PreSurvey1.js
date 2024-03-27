@@ -56,7 +56,7 @@ function PreSurvey1({ className }) {
               </div>
               <div className="row" style={{ marginBottom: '36px' }}>
                 <div>
-                  <h3 style={{ marginBottom: '32px' }}>
+                  <h3 style={{ marginBottom: '24px' }}>
                     Please choose an AI avatar
                     whose physical appearance is most similar to yours.
                   </h3>
@@ -70,7 +70,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE', 'EA')}
                         label={(
                           <div>
-                            <img src={EA_FEMALE} alt="Asian" style={{ width: '240px', height: '200px' }} />
+                            <img src={EA_FEMALE} alt="Asian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -82,7 +82,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE', 'EA')}
                         label={(
                           <div>
-                            <img src={EA_MALE} alt="Asian" style={{ width: '240px', height: '200px' }} />
+                            <img src={EA_MALE} alt="Asian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -93,7 +93,7 @@ function PreSurvey1({ className }) {
                         style={{ marginRight: '24px' }}
                         onChange={() => handleGenderRaceChange('MALE', 'AI')}
                         label={(
-                          <img src={AI_MALE} alt="Indian" style={{ width: '240px', height: '200px' }} />
+                          <img src={AI_MALE} alt="Indian" style={{ width: '220px', height: '180px' }} />
                         )}
                       />
                       <Form.Check
@@ -107,7 +107,7 @@ function PreSurvey1({ className }) {
                             <img
                               src={AI_FEMALE}
                               alt="Indian"
-                              style={{ width: '240px', height: '200px' }}
+                              style={{ width: '220px', height: '180px' }}
                             />
                           </div>
                         )}
@@ -122,7 +122,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE', 'CS')}
                         label={(
                           <div>
-                            <img src={CS_MALE} alt="Caucasian" style={{ width: '240px', height: '200px' }} />
+                            <img src={CS_MALE} alt="Caucasian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -134,7 +134,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE', 'CS')}
                         label={(
                           <div>
-                            <img src={CS_FEMALE} alt="Caucasian" style={{ width: '240px', height: '200px' }} />
+                            <img src={CS_FEMALE} alt="Caucasian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -146,7 +146,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE', 'HP')}
                         label={(
                           <div>
-                            <img src={HP_FEMALE} alt="Hispanic" style={{ width: '240px', height: '200px' }} />
+                            <img src={HP_FEMALE} alt="Hispanic" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -158,7 +158,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE', 'HP')}
                         label={(
                           <div>
-                            <img src={HP_MALE} alt="Hispanic" style={{ width: '240px', height: '200px' }} />
+                            <img src={HP_MALE} alt="Hispanic" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -172,7 +172,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE', 'AF')}
                         label={(
                           <div>
-                            <img src={AF_MALE} alt="African" style={{ width: '240px', height: '200px' }} />
+                            <img src={AF_MALE} alt="African" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -184,7 +184,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE', 'AF')}
                         label={(
                           <div>
-                            <img src={AF_FEMALE} alt="African" style={{ width: '240px', height: '200px' }} />
+                            <img src={AF_FEMALE} alt="African" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -196,7 +196,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE', 'SA')}
                         label={(
                           <div>
-                            <img src={SA_MALE} alt="SouthAsian" style={{ width: '240px', height: '200px' }} />
+                            <img src={SA_MALE} alt="SouthAsian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -208,7 +208,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE', 'SA')}
                         label={(
                           <div>
-                            <img src={SA_FEMALE} alt="SouthAsian" style={{ width: '240px', height: '200px' }} />
+                            <img src={SA_FEMALE} alt="SouthAsian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -222,7 +222,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE_2', 'CS')}
                         label={(
                           <div>
-                            <img src={CS_FEMALE_2} alt="Caucasian" style={{ width: '240px', height: '200px' }} />
+                            <img src={CS_FEMALE_2} alt="Caucasian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -234,7 +234,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE_2', 'CS')}
                         label={(
                           <div>
-                            <img src={CS_MALE_2} alt="Caucasian" style={{ width: '240px', height: '200px' }} />
+                            <img src={CS_MALE_2} alt="Caucasian" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -246,7 +246,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('FEMALE_2', 'HP')}
                         label={(
                           <div>
-                            <img src={HP_FEMALE_2} alt="Hispanic" style={{ width: '240px', height: '200px' }} />
+                            <img src={HP_FEMALE_2} alt="Hispanic" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
@@ -258,7 +258,7 @@ function PreSurvey1({ className }) {
                         onChange={() => handleGenderRaceChange('MALE_2', 'HP')}
                         label={(
                           <div>
-                            <img src={HP_MALE_2} alt="Hispanic" style={{ width: '240px', height: '200px' }} />
+                            <img src={HP_MALE_2} alt="Hispanic" style={{ width: '220px', height: '180px' }} />
                           </div>
                         )}
                       />
