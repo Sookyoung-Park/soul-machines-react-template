@@ -46,7 +46,11 @@ function UsageCaseSelection({ className }) {
         <div className="container-prompt">
           <div>
             <div className="row">
-              <h3 className="text-center">Please choose 4 prompts you would like to talk about</h3>
+              <h3 className="text-center">
+                You will have conversations with 4 different AI avatars.
+                <br />
+                Please choose 4 prompts you are interested in or would like to talk about
+              </h3>
             </div>
             <hr />
             <div className="row">
