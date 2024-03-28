@@ -29,7 +29,7 @@ const json = {
     {
       type: 'ranking',
       name: 'rank-trustworthy',
-      title: 'Please rank the trustworthy conversation from the most important to the least',
+      title: 'Please rank the AI avatars that provided trustworthy conversations from the most to the least.',
       isRequired: true,
       choices: [
         'DP A',
@@ -60,8 +60,8 @@ function PostSurvey1({ className }) {
       }
     };
 
-    fetchData(); // 데이터 가져오기 함수 호출
-  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
+    fetchData();
+  }, []);
 
   const getImagePath = (imgTitle) => {
     switch (imgTitle) {
@@ -110,7 +110,6 @@ function PostSurvey1({ className }) {
 
   const handleNextButtonClick = () => {
     const surveyData = survey.data;
-    // console.log('Survey data:', surveyData);
 
     // 'Powerful CPU' 항목의 인덱스를 찾습니다.
     const indexOfA = surveyData['rank-trustworthy'].indexOf('DP A');

@@ -29,7 +29,7 @@ const json = {
     {
       type: 'ranking',
       name: 'rank-engagement',
-      title: 'Which conversation were you engaged from the most important to the least?',
+      title: 'Please rank the AI avatars that provided engaged conversations from the most to the least.',
       isRequired: true,
       choices: [
         'DP A',
@@ -60,10 +60,8 @@ function PostSurvey3({ className }) {
       }
     };
 
-    fetchData(); // 데이터 가져오기 함수 호출
-  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행
-
-  // console.log('xprm Tpyes', imgTitles); // 데이터 확인
+    fetchData();
+  }, []);
 
   const getImagePath = (imgTitle) => {
     switch (imgTitle) {
@@ -103,8 +101,6 @@ function PostSurvey3({ className }) {
         return null;
     }
   };
-
-  // const survey = new Model(json);
 
   survey.onComplete.add((sender, options) => {
     console.log(options, 'for eslint');

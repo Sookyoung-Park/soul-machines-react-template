@@ -29,7 +29,7 @@ const json = {
     {
       type: 'ranking',
       name: 'rank-intelligent',
-      title: 'Which influncer did you feel the most intelligent from the most important to the least? ',
+      title: 'Please rank the AI avatars based on their perceived intelligence from the most to the least.',
       isRequired: false,
       choices: [
         'DP A',
