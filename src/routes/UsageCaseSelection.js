@@ -9,14 +9,11 @@ import { setChatPromptsState } from '../store/sm';
 
 function UsageCaseSelection({ className }) {
   const [isSelectionMade, setIsSelectionMade] = useState(false);
-  // const tagItems = ['Food and Cooking', 'Pet', 'Hometown', 'Hobbies and Interests',
-  // 'Travle and Vacation',
-  //  'Family and Friends',
-  // 'Study and Careers', 'Current Events', 'The weekend',
-  //   'Social Media', 'Fashion and Beauty'];
-  const tagItems = ['Hobbies', 'Free Time', 'Sleep', 'Hometown', 'Vacations', 'Music', 'First Dates', 'Work',
-    'Cooing & Food', 'Motivation', 'Beauty', 'Crime', 'Family and Friends',
-    'Love', 'Goals', 'Dreams', 'Restaurants', 'Money', 'Shopping', 'Pets', 'Books', 'Sports', 'Life', 'Movies', 'Problems'];
+
+  const tagItems = ['Art', 'Free Time & Hobbies', 'Hometown', 'Vacations', 'Music', 'First Dates', 'Work',
+    'Cooing & Food', 'Motivation', 'Fashion & Beauty', 'Science & Technology', 'Family and Friends',
+    'Dating & Marriage', 'Goals', 'Childhood', 'Restaurants', 'Money', 'Shopping', 'Animals & Pets', 'Books',
+    'Sports', 'Life', 'Movies'];
 
   const [selectedTags, setSelectedTags] = useState([]);
 
