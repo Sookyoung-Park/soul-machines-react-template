@@ -478,7 +478,7 @@ function FeedbackModal({ className }) {
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h4>AI avatar provided good service.</h4>
+                <h4>AI avatars provided accurate information and smooth conversations.</h4>
                 <p style={{ fontSize: '1.2em' }}>(1= &apos;very poor&apos; and 7= &apos;very good&apos;)</p>
               </div>
               <div className="row">
@@ -494,7 +494,7 @@ function FeedbackModal({ className }) {
             </div>
             <div className="row">
               <div style={{ marginTop: '32px' }}>
-                <h4>I would like to use the service again</h4>
+                <h4>I would like to engage in conversation with AI avatars again.</h4>
                 <p style={{ fontSize: '1.2em' }}>(1= &apos;would avoid using the service&apos; and 7= &apos;would want very much to use the service.&apos;)</p>
               </div>
               <div className="row">
@@ -509,21 +509,6 @@ function FeedbackModal({ className }) {
               </div>
             </div>
             <div className="row">
-              {/* <h4 style={{ marginTop: '32px' }}>Can you tell us more?</h4>
-              <div
-                className="d-flex custom-items"
-                style={{ width: '100%', height: '100px', marginTop: '10px' }}
-              >
-                <textarea
-                  type="text"
-                  className="form-control me-2"
-                  onChange={(e) => {
-                    const t = e.target.value;
-                    if (t.length < 265) setCustomField(t);
-                  }}
-                  value={customField}
-                />
-              </div> */}
               <div className="row mt-3">
                 <div className="justify-content-end d-flex">
                   <button
