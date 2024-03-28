@@ -50,7 +50,7 @@ function Controls({
   });
 
   // 2min after timeout => show ExitSession Button
-  // 2Min 30 sec = 150000
+  // 3min = 180000
   // test
   useEffect(() => {
     const timeoutId = setTimeout(() => {

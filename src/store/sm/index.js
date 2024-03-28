@@ -29,7 +29,8 @@ const initialState = {
     : {
       mic: true,
       micDenied: false,
-      camera: true,
+      // test today
+      camera: false,
       cameraDenied: false,
     },
   tosAccepted: false,
@@ -47,7 +48,8 @@ const initialState = {
   // default value is null, this lets us catch stuff like missing API keys
   error: startupErr,
   micOn: true,
-  cameraOn: true,
+  // test today
+  cameraOn: false,
   isOutputMuted: false,
   videoHeight: window.innerHeight,
   videoWidth: window.innerWidth,

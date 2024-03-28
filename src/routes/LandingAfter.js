@@ -291,7 +291,7 @@ function LandingAfter({ className }) {
                     <li>
                       You can exit the conversation
                       {' '}
-                      <strong>once 2min 30seconds have passed</strong>
+                      <strong>once 3 minutes have passed</strong>
                       , if you want.
                     </li>
                     <li>
