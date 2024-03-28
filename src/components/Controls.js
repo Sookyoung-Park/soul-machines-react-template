@@ -55,7 +55,7 @@ function Controls({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowExitButton(true);
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearTimeout(timeoutId);
