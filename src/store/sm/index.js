@@ -29,8 +29,7 @@ const initialState = {
     : {
       mic: true,
       micDenied: false,
-      // test today
-      camera: false,
+      camera: true,
       cameraDenied: false,
     },
   tosAccepted: false,
@@ -48,8 +47,7 @@ const initialState = {
   // default value is null, this lets us catch stuff like missing API keys
   error: startupErr,
   micOn: true,
-  // test today
-  cameraOn: false,
+  cameraOn: true,
   isOutputMuted: false,
   videoHeight: window.innerHeight,
   videoWidth: window.innerWidth,
@@ -224,7 +222,6 @@ export const setApiKeysState = (apiA, apiB, apiC, apiD) => (dispatch) => {
 
 // create a new scene
 export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thunk) => {
-  // console.log('createScene apiKey : ', apiKey);
   if (scene !== null) {
     return console.error('warning! you attempted to create a new scene, when one already exists!');
   }
@@ -287,24 +284,38 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
 
   // check to see if user has denied permissions
   // if so, proceed typing only but set mic/cameraDenied to true
-  let cameraDenied = false;
+  // test today
+  // let cameraDenied = false;
   let micDenied = false;
   try {
-    await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+    // test today2
+    await navigator.mediaDevices.getUserMedia({ audio: true });
+    // await navigator.mediaDevices.getUserMedia({ audio: false, video: true });
   } catch {
-    cameraDenied = true;
-  }
-  try {
-    await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-  } catch {
+    // test doay2
     micDenied = true;
+    // cameraDenied = true;
   }
+  // test today2
+  if (micDenied) {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch {
+      console.error('Failed to request microphone permission.');
+    }
+  }
+  // try {
+  //   await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+  // } catch {
+  //   micDenied = true;
+  // }
 
   thunk.dispatch(actions.setRequestedMediaPerms({
     // test here
     // camera,
     mic,
-    cameraDenied,
+    // test today2
+    // cameraDenied,
     micDenied,
   }));
 
@@ -565,14 +576,12 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
 
       // activation events are some kind of emotional metadata
       case ('activation'): {
-        // console.warn('activation handler not yet implemented', message);
         break;
       }
 
       // animateToNamedCamera events are triggered whenever we change the camera angle.
       // left unimplemented for now since there is only one named camera (closeUp)
       case ('animateToNamedCamera'): {
-        // console.warn('animateToNamedCamera handler not yet implemented', message);
         break;
       }
 
@@ -648,10 +657,14 @@ export const createScene = createAsyncThunk('sm/createScene', async (apiKey, thu
     // we use an external proxy for video streams
     const { userMediaStream: stream } = scene.session();
 
-    if (cameraDenied === false) thunk.dispatch(actions.setCameraState({ cameraOn: false }));
+    // test today2
+    // if (cameraDenied === false) thunk.dispatch(actions.setCameraState({ cameraOn: false }));
+
     // pass dispatch before calling setUserMediaStream so proxy can send dimensions to store
     mediaStreamProxy.passDispatch(thunk.dispatch);
-    mediaStreamProxy.setUserMediaStream(stream, cameraDenied);
+    // test today2
+    // mediaStreamProxy.setUserMediaStream(stream, cameraDenied);
+    mediaStreamProxy.setUserMediaStream(stream, true);
     mediaStreamProxy.enableToggle(scene);
 
     // fulfill promise, reducer sets state to indicate loading and connection are complete
