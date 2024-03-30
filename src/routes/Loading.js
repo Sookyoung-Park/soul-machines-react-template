@@ -203,9 +203,35 @@ function Loading({ className }) {
         );
 
       case 'Fashion & Beauty':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - How important is beauty in your daily life?
+            <br />
+            - How do you define beauty, using your own words?
+            <br />
+            - Do you like shopping for new clothes?
+            <br />
+            - What kind of clothes do you usually wear?
+          </div>
+        );
+
       case 'Science & Technology':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What are some of the greatest technological achievements?
+            <br />
+            - What do you think robots should be used for?
+            <br />
+            - How will science change the world in the next 100 years?
+            <br />
+            - How have technological advances affected our life?
+          </div>
+        );
+
       case 'Family and Friends':
         return 'a';
       case 'Dating & Marriage':
