@@ -65,6 +65,177 @@ function Loading({ className }) {
     chatPrompt = chatPrompts.D;
   }
 
+  function getTextBasedOnCondition(chatprompt) {
+    switch (chatprompt) {
+      case 'Art':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you like paintings or sketching?
+            <br />
+            - Have you ever been to any famous art museums?
+            <br />
+            - Are movies a form of art?
+            <br />
+            - Why do you enjoy art?
+          </div>
+        );
+
+      case 'Free Time & Hobbies':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What are you doing this weekend?
+            <br />
+            - Who do you spend your free time with?
+            <br />
+            - What are your hobbies?
+            <br />
+            - Are there any hobbies you would like to try?
+          </div>
+        );
+
+      case 'Hometown':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you like your hometown? Why or why not?
+            <br />
+            - Does anyone famous come from your hometown?
+            <br />
+            - What is the best season in your hometown?
+            <br />
+            - If you could change one thing in your hometown, what would you change and why?
+          </div>
+        );
+
+      case 'Vacations':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Did you enjoy your last vacation? / How was your last vacation?
+            <br />
+            - How much money did you spend on your last vacation?
+            <br />
+            - Where in the world would you most like to go for your next vacation?
+            <br />
+            - What is the most exotic or strangest thing you ate on holiday?
+          </div>
+        );
+
+      case 'Music':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What kind of music do you like?
+            <br />
+            - Are you a good singer?
+            <br />
+            - Is there any kind of music that you hate?
+            <br />
+            - Who is your favorite composer?
+          </div>
+        );
+
+      case 'First Dates':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Can you tell us about your first date?
+            <br />
+            - What are some places you could go on a first date?
+            <br />
+            - Is the first impression important?
+            <br />
+            - What things would you talk about on your first date?
+          </div>
+        );
+
+      case 'Work':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - At what age do people usually begin to work in your country?
+            <br />
+            - Can you describe your current job?
+            <br />
+            - Do you like your job?
+            <br />
+            - How do you like your work?
+          </div>
+        );
+
+      case 'Cooking & Food':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Are you a good cook?
+            <br />
+            - Do you eat breakfast every day?
+            <br />
+            - What kind of food do like to eat when you are angry?
+            <br />
+            - What kind of fruit do you like the best?
+          </div>
+        );
+
+      case 'Motivation':
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - How do you define motivation?
+            <br />
+            - What are three things that motivate you?
+            <br />
+            - Is your goal specific, measurable, with a deadline?
+            <br />
+            - Is your goal specific, measurable, with a deadline?
+          </div>
+        );
+
+      case 'Fashion & Beauty':
+        return 'a';
+      case 'Science & Technology':
+        return 'a';
+      case 'Family and Friends':
+        return 'a';
+      case 'Dating & Marriage':
+        return 'a';
+      case 'Goals':
+        return 'a';
+      case 'Childhood':
+        return 'a';
+      case 'Restaurants':
+        return 'a';
+      case 'Money':
+        return 'a';
+      case 'Shopping':
+        return 'a';
+      case 'Animals & Pets':
+        return 'a';
+      case 'Books':
+        return 'a';
+      case 'Sports':
+        return 'a';
+      case 'Life':
+        return 'a';
+      case 'Movies':
+        return 'a';
+
+      default:
+        return "Default text when condition doesn't match any case";
+    }
+  }
+
   useEffect(() => {
     createSceneIfNotStarted();
   }, []);
@@ -78,7 +249,7 @@ function Loading({ className }) {
           <button className="btn-unstyled" type="button" style={{ opacity: 0, width: '44px' }}>
             {' '}
           </button>
-          <h2 style={{ color: '#00693e' }}>
+          <h2 style={{ color: '#00693e', marginBottom: '32px' }}>
             Prompt:
             {' '}
             {chatPrompt}
@@ -86,6 +257,9 @@ function Loading({ className }) {
           <button className="btn-unstyled" type="button" onClick={() => setPage(page + 1)}>
             <ArrowRightCircleFill size={32} />
           </button>
+        </div>
+        <div className="mt-0 mb-2">
+          {getTextBasedOnCondition(chatPrompt)}
         </div>
       </div>
     </div>,
