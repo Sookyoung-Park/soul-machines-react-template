@@ -199,7 +199,7 @@ function LandingAfter({ className }) {
       apiA = API_HP_FEMALE_2;
       apiB = getRandomApiKeyB(API_EA_FEMALE, API_CS_FEMALE_2, API_CS_FEMALE, 'API_EA_FEMALE', 'API_CS_FEMALE_2', 'API_CS_FEMALE');
       apiC = getRandomApiKeyC(API_AF_MALE, API_SA_MALE, API_AI_MALE, 'API_AF_MALE', 'API_SA_MALE', 'API_AI_MALE');
-      apiD = API_HP_FEMALE_2;
+      apiD = API_HP_MALE_2;
       fsA = 'API_HP_FEMALE_2';
       fsD = 'API_HP_MALE_2';
       break;
@@ -302,7 +302,56 @@ function LandingAfter({ className }) {
                   </ul>
                 </div>
               </div>
-              <div className="row" style={{ marginBottom: '16px' }}>
+              {chatType !== 'E' && (
+              <>
+                <div className="row" style={{ marginBottom: '16px' }}>
+                  <div style={{ marginTop: '24px' }}>
+                    <div className="form-check form-switch">
+                      <label
+                        className="form-check-label d-flex align-items-center"
+                        htmlFor="micPermSwitch"
+                      >
+                        <input
+                          className={`shadow form-check-input mic-switch switch ${
+                            mic ? 'status-checked' : 'status-unchecked'
+                          }`}
+                          type="checkbox"
+                          role="switch"
+                          id="micPermSwitch"
+                          onChange={() => dispatch(setRequestedMediaPerms({ mic: !mic }))}
+                          checked={mic}
+                        />
+                        <div
+                          className="d-block ms-2"
+                          style={{ marginLeft: '12px', color: '#f75834' }}
+                        >
+                          Use your microphone so that AI avatars can hear you.
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="row" style={{ marginBottom: '52px' }}>
+                  <div />
+                </div>
+                <div className="row" style={{ marginBottom: '48px' }}>
+                  <div>
+                    <div className="d-flex fs-4">
+                      <MicFill size={26} />
+                      <div
+                        className="text-left fst-italic-bold"
+                        style={{ fontSize: '1.1rem', marginLeft: '12px' }}
+                      >
+                        <strong style={{ color: '#f75834' }}>
+                          You must enable your microphone to start a conversation.
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+              )}
+              {/* <div className="row" style={{ marginBottom: '16px' }}>
                 <div style={{ marginTop: '24px' }}>
                   <div className="form-check form-switch">
                     <label
@@ -319,7 +368,8 @@ function LandingAfter({ className }) {
                         onChange={() => dispatch(setRequestedMediaPerms({ mic: !mic }))}
                         checked={mic}
                       />
-                      <div className="d-block ms-2" style={{ marginLeft: '12px', color: '#f75834' }}>
+                      <div className="d-block ms-2"
+                      style={{ marginLeft: '12px', color: '#f75834' }}>
                         Use your microphone so that AI avatars can hear you.
                       </div>
                     </label>
@@ -333,12 +383,14 @@ function LandingAfter({ className }) {
                 <div>
                   <div className="d-flex fs-4">
                     <MicFill size={26} />
-                    <div className="text-left fst-italic-bold" style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
-                      <strong style={{ color: '#f75834' }}>You must enable your microphone to start a conversation.</strong>
+                    <div className="text-left fst-italic-bold"
+                    style={{ fontSize: '1.1rem', marginLeft: '12px' }}>
+                      <strong style={{ color: '#f75834' }}>
+                      You must enable your microphone to start a conversation.</strong>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="row" style={{ marginBottom: '24px' }} />
               <Link
                 to={chatType === 'E' ? '/ps1' : '/loading'}

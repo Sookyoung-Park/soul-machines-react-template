@@ -197,8 +197,6 @@ function Loading({ className }) {
             - What are three things that motivate you?
             <br />
             - Is your goal specific, measurable, with a deadline?
-            <br />
-            - Is your goal specific, measurable, with a deadline?
           </div>
         );
 
@@ -233,29 +231,182 @@ function Loading({ className }) {
         );
 
       case 'Family and Friends':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you like your family? Why or why not?
+            <br />
+            - Do you look more like your mother or your father?
+            <br />
+            - Can you describe one of your closest friends.
+            <br />
+            - What qualities do you think are important in a friend?
+          </div>
+        );
+
       case 'Dating & Marriage':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Describe a perfect date.
+            <br />
+            - Do you think it is better to be single or to be married?
+            <br />
+            - Is there a such thing as a perfect relationship for you?
+          </div>
+        );
+
       case 'Goals':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What is your biggest goal in life?
+            <br />
+            - How do you plan to achieve that goal?
+            <br />
+            - Do you think people have fewer goals as they get older?
+            <br />
+            - Is it important to set goals?
+          </div>
+        );
+
       case 'Childhood':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What did you like to do when you were a child?
+            <br />
+            - Where were you born?
+            <br />
+            - What were some embarrassing situations when you were a child?
+            <br />
+            - What was your favorite toy when you were a child?
+          </div>
+        );
+
       case 'Restaurants':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - How often do you eat out?
+            <br />
+            - What is the worst experience you ever had at a restaurant?
+            <br />
+            - What types of take out food do you enjoy eating?
+            <br />
+            - Have you ever worked in a restaurant?
+          </div>
+        );
+
       case 'Money':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - About how much do you usually spend each day?
+            <br />
+            - Are you good at saving money?
+            <br />
+            - Do you have a credit card?
+            <br />
+            - Do you think that money can buy love?
+          </div>
+        );
+
       case 'Shopping':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you enjoy shopping?
+            <br />
+            - Do you ever buy second-hand things?
+            <br />
+            - How often do you go shopping?
+            <br />
+            - What is the most expensive thing you have ever bought?
+          </div>
+        );
+
       case 'Animals & Pets':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you have a pet? If not, why?
+            <br />
+            - Have you ever ridden a horse?
+            <br />
+            - What is the largest animal you have ever seen?
+            <br />
+            - What is your favorite animal?
+          </div>
+        );
+
       case 'Books':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Who is your favorite author?
+            <br />
+            - What is your favorite genre?
+            <br />
+            - How often do you go to the library?
+            <br />
+            - What is your favorite time of day for reading?
+          </div>
+        );
+
       case 'Sports':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - Do you play any sports?
+            <br />
+            - Do you like to exercise?
+            <br />
+            - What is your favorite summer sport?
+            <br />
+            - How are sports beneficial to you?
+          </div>
+        );
+
       case 'Life':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What can you remember about elementary school?
+            <br />
+            - What is your best memory of childhood?
+            <br />
+            - What was your first job?
+            <br />
+            - What is the motto of your life?
+          </div>
+        );
+
       case 'Movies':
-        return 'a';
+        return (
+          <div>
+            <strong>You can use these discussion topic if you want!</strong>
+            <br />
+            - What is your all-time favorite movie?
+            <br />
+            - Do you like to watch horror movies?
+            <br />
+            - How often do you go to movies?
+            <br />
+            - Who is your favorite actor or actress?
+          </div>
+        );
 
       default:
         return "Default text when condition doesn't match any case";
