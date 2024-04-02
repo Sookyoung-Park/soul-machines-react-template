@@ -158,7 +158,7 @@ function LandingAfter({ className }) {
     case '_CS_FEMALE':
       apiA = API_CS_FEMALE;
       apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
+      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
       apiD = API_CS_MALE;
       fsA = 'API_CS_FEMALE';
       fsD = 'API_CS_MALE';
@@ -166,14 +166,14 @@ function LandingAfter({ className }) {
     case '_CS_FEMALE_2':
       apiA = API_CS_FEMALE_2;
       apiB = getRandomApiKeyB(API_EA_FEMALE, API_AF_FEMALE, API_AI_FEMALE, 'API_EA_FEMALE', 'API_AF_FEMALE', 'API_AI_FEMALE');
-      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_AF_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
+      apiC = getRandomApiKeyC(API_SA_MALE, API_HP_MALE, API_HP_MALE_2, 'API_SA_MALE', 'API_HP_MALE', 'API_HP_MALE_2');
       apiD = API_CS_MALE_2;
       fsA = 'API_CS_FEMALE_2';
       fsD = 'API_CS_MALE_2';
       break;
     case '_HP_MALE':
       apiA = API_HP_MALE;
-      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE_2, API_CS_MALE, 'API_EA_MALE', 'API_AF_MALE', 'API_CS_MALE_2', 'API_CS_MALE');
+      apiB = getRandomApiKeyB(API_EA_MALE, API_CS_MALE_2, API_CS_MALE, 'API_EA_MALE', 'API_CS_MALE_2', 'API_CS_MALE');
       apiC = getRandomApiKeyC(API_AF_FEMALE, API_SA_FEMALE, API_AI_FEMALE, 'API_AF_FEMALE', 'API_SA_FEMALE', 'API_AI_FEMALE');
       apiD = API_HP_FEMALE;
       fsA = 'API_HP_MALE';
